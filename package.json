@@ -1,0 +1,39 @@
+{
+  "name": "gatsby-starter-default",
+  "description": "Gatsby default starter",
+  "version": "1.0.0",
+  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "dependencies": {
+    "autoprefixer": "8.6.5",
+    "bootstrap": "^4.1.1",
+    "gatsby": "next",
+    "gatsby-plugin-postcss-sass": "1.0.22",
+    "gatsby-plugin-react-helmet": "next",
+    "gatsby-plugin-sass": "2.0.0-beta.5",
+    "gatsby-source-wordpress": "^2.0.93",
+    "get-browser-language": "1.0.0",
+    "lodash": "4.17.10",
+    "node-sass": "4.9.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-helmet": "^5.2.0"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "dev": "gatsby develop",
+    "format": "prettier --write 'src/**/*.js'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "prettier": "^1.12.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+  }
+}

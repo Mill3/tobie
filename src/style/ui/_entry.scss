@@ -1,0 +1,114 @@
+@mixin entry-base() {
+
+  a {
+    position: relative;
+    background-image: linear-gradient(transparent 96%, $gray-500 0px);
+    transition: all 1s;
+    &:after {
+      content: '';
+      width: 100%;
+      height: calc(4%);
+      background: $black;
+      position: absolute;
+      left: 0;
+      top: 96%;
+      z-index: 2;
+      transform-origin: left center;
+      transform: scaleX(0);
+      transition: all 0.22s;
+    }
+    &:hover {
+      color: $black;
+      &:after {
+        // height: 3px;
+        transform: scaleX(1);
+      }
+    }
+  }
+
+  // paragraphs
+  p {
+    font-size: $font-size-text;
+    line-height: $line-height-text;
+  }
+
+  b, strong {
+    font-weight: 700;
+  }
+
+  // lists
+  ul, ol {
+    font-size: $font-size-text;
+    padding-left: 1.15rem;
+    margin: $spacer 0 $spacer 0;
+    // list-style: none;
+    li {
+      margin-bottom: $spacer-sm;
+    }
+  }
+}
+
+/// basic style for content entry (p, h1, etc)
+///
+/// @name .entry
+///
+/// @group entry
+
+
+.entry {
+
+  // titles
+  h2, h3, h4, h5, h6 {
+    font-weight: 500;
+    margin: $spacer-md 0 $spacer 0;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  // remove blue line
+  h4, h5, h6 {
+    &:after {
+      display: none;
+    }
+  }
+
+  // paragraphs
+  @include entry-base();
+
+  blockquote {
+    h1 {
+      font-size: 48px;
+    }
+    p, h2, h3, h4, h5 {
+      font-weight: 300;
+      margin-bottom: $spacer-sm;
+    }
+  }
+
+  blockquote + h2,
+  blockquote + h3,
+  blockquote + h4 {
+    color: $gray-500;
+  }
+
+  img {
+    @include img-fluid;
+    margin-top: $spacer;
+    margin-bottom: $spacer-md;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .embed-responsive {
+    margin-top: $spacer-md;
+    margin-bottom: $spacer-md;
+    @include media-breakpoint-up(lg) {
+      margin-left: -5vw;
+      margin-right: -5vw;
+      width: calc(100% + 10vw);
+    }
+  }
+
+}

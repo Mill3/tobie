@@ -1,0 +1,63 @@
+.sans-serif,
+.is-sans-serif {
+  font-family: $font-family-sans-serif !important;
+}
+
+// .serif,
+// .is-serif {
+//   font-family: $font-family-serif !important;
+// }
+
+.is-monospace {
+  font-family: $font-family-monospace !important;
+}
+
+.is-uppercase {
+  text-transform: uppercase;
+}
+
+.is-capitalize {
+  text-transform: capitalize;
+}
+
+.is-text-left {
+  text-align: left;
+}
+
+.is-text-center, .center {
+  text-align: center;
+}
+
+.is-text-right {
+  text-align: right;
+}
+
+.is-highlighted {
+  background-color: transparentize($yellow, 0.75);
+}
+
+.is-underlined {
+  text-decoration: underline;
+}
+
+.is-normal {
+  font-weight: 400 !important;
+}
+
+.is-demi-bold,
+.is-semi-bold {
+  font-weight: 500 !important;
+}
+
+.is-bold {
+  font-weight: 700 !important;
+}
+
+.is-extra-bold {
+  font-weight: 900 !important;
+}
+
+.font-size--xl {
+  font-size: $h1-font-size * 2;
+  line-height: 1;
+}

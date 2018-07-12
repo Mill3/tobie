@@ -1,0 +1,122 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0%,2%,0) scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0%,0%,0) scale(1);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0%,-2%,0) scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0%,0%,0) scale(1);
+  }
+}
+
+@keyframes swipeFromRight {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 0 100%);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes slideFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(70%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+ 
+@keyframes slideFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-70%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+.fade-in {
+  animation-name: fadeIn;
+  animation-fill-mode: both;
+  animation-delay: 0;
+  animation-duration: 0.5s;
+}
+
+.fade-up {
+  animation-name: fadeUp;
+  animation-fill-mode: both;
+  animation-delay: 0;
+  animation-duration: 0.5s;
+}
+
+.effects {
+  // animation-fill-mode: both;
+
+  &__fade_in {
+    animation-name: fadeIn;
+    animation-fill-mode: both;
+  }
+
+  &__fade_up {
+    animation-timing-function: $easeInOutCubic;
+    animation-name: fadeUp;
+    animation-fill-mode: both;
+    will-change: opacity transform;
+  }
+
+  &__fade_down {
+    animation-timing-function: $easeInOutCubic;
+    animation-name: fadeDown;
+    animation-fill-mode: both;
+    will-change: opacity transform;
+    transform-style: preserve-3d;
+    // backface-visibility: hidden;
+  }
+
+  &__swipe_in_from_right {
+    transform-origin: left center;
+    animation-timing-function: $easeInOutCubic;
+    animation-name: swipeFromRight;
+    animation-fill-mode: both;
+  }
+
+  &__slide_from_right {
+    animation-fill-mode: both;
+    animation-timing-function: $easeInOutCubic;
+    animation-name: slideFromRight;
+  }
+
+  &__slide_from_left {
+    animation-fill-mode: both;
+    animation-timing-function: $easeInOutCubic;
+    animation-name: slideFromLeft;
+  }
+
+}

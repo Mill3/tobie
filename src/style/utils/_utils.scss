@@ -1,0 +1,187 @@
+@import "easing";
+@import "utils-colors";
+@import "utils-font-style";
+@import "effects";
+
+// custom spacers
+
+$spacer-xs: $spacer / 3 !default;
+$spacer-sm: $spacer / 2 !default;
+$spacer-md: $spacer * 2 !default;
+$spacer-lg: $spacer * 3 !default;
+$spacer-xl: $spacer * 4 !default;
+
+//
+// Positions
+//
+
+.absolute-centered {
+  @include absolute-centered;
+}
+
+.centered-inner {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+// Misc
+// -------------------------
+
+.inner,
+.inner-relative,
+.relative-inner,
+.is-relative {
+  position: relative;
+}
+
+.auto-height {
+  height: 100%;
+}
+
+.auto-height-relative {
+  height: 100%;
+  position: relative;
+}
+
+.no-margin {
+  margin: 0 !important;
+
+  &--top {
+    margin-top: 0 !important;
+  }
+
+  &--bottom {
+    margin-bottom: 0 !important;
+  }
+}
+
+.no-padding {
+  padding: 0 !important;
+
+  &__left {
+    padding-left: 0 !important;
+  }
+
+  &__right {
+    padding-right: 0 !important;
+  }
+}
+
+.no-border {
+  border: none !important;
+  border-width: 0 !important;
+}
+
+// add extra left or right padding
+.is-left-padded {
+  padding-left: (100% / 12);
+}
+
+.is-half-left-padded {
+  padding-left: 100% / 12 / 2;
+}
+
+.is-right-padded {
+  padding-right: (100% / 12);
+}
+
+.is-half-right-padded {
+  padding-right: 100% / 12 / 2;
+}
+
+// add extra top and bottom spacing using padding
+.is-with-vertical-spacer {
+  padding-top: $grid-gutter-width * 2;
+  padding-bottom: 110px;
+}
+
+//
+// Text transformation
+//
+//
+
+
+
+.is-inlined {
+  display: inline-block;
+  > li {
+    display: inline-block;
+  }
+}
+
+.is-unstyled {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+// Floats
+// -------------------------
+
+.clearfix {
+  @include clearfix;
+}
+
+.pull-right {
+  float: right;
+}
+
+.pull-left {
+  float: left;
+}
+
+.is-pull-right {
+  margin-left: auto;
+}
+
+.is-pull-left {
+  margin-right: auto;
+}
+
+// Toggling content
+// -------------------------
+
+.hide,
+.is-hide,
+.is-hidden {
+  display: none !important;
+}
+
+.is-visibile {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+
+.is-faded {
+  opacity: 0 !important;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+
+.show {
+  display: block;
+}
+
+.is-invisible {
+  visibility: hidden;
+}
+
+.text-hide {
+  text-indent: -10000px;
+}
+
+.prevent-scroll-y {
+  overflow-y: hidden;
+}
+
+// Hide from screenreaders and browsers
+//
+// Credit: HTML5 Boilerplate
+
+.hidden {
+  display: none !important;
+}

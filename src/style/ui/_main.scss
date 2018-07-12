@@ -1,0 +1,12 @@
+
+/// main container excluding footer and header
+///
+/// @name .main
+///
+/// @group ui
+
+.main {
+  background-color: $white;
+  position: relative;
+  z-index: 2;
+}

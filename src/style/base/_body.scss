@@ -1,0 +1,37 @@
+/// body base padding, margin and extra properties
+///
+/// @name body
+///
+/// @group base
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: none;
+  -moz-osx-font-smoothing: grayscale;
+
+  // background 
+  background-color: $gray-200;
+
+  // top padding matching #siteheader
+  // padding-top: $body-top-padding;
+
+  max-width: 100vw;
+  overflow-x: hidden;
+
+  // @include media-breakpoint-down(xs) {
+  //   max-width: 100vw;
+  //   overflow-x: hidden;
+  //  }
+
+  // base font-size  on elements
+  // font-size: $font-size-text;
+}
+
+html {
+  // overflow: hidden break position sticky
+  // https://stackoverflow.com/questions/47095596/css-body-overflow-x-hidden-breaks-position-sticky
+  @include media-breakpoint-down(xs) {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+}

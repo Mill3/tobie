@@ -1,0 +1,33 @@
+
+
+// .responsive-texts {
+  
+//   h1, .h1 {
+//     @include media-breakpoint-down(sm) {
+//       font-size: $h3-font-size;
+//     }
+//   }
+
+//   h2, .h2 {
+//     @include media-breakpoint-down(sm) {
+//       font-size: $h3-font-size;
+//     }
+//     @include media-breakpoint-down(xs) {
+//       font-size: $h4-font-size;
+//     }
+//   }
+
+//   h3, .h3 {
+//     @include media-breakpoint-down(xs) {
+//       font-size: $h4-font-size;
+//     }
+//   }
+
+//   p {
+//     @include media-breakpoint-down(xs) {
+//       font-size: $font-size-text - 4px;
+//       line-height: $line-height-text - 4px;
+//     }
+//   }
+
+// }

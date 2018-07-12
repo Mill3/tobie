@@ -1,0 +1,122 @@
+/// Generate responsive height box based on a ratio value
+///
+/// @name box-maker
+///
+/// @group utils
+///
+/// @param {percentage} $percent [100%] - The ratio value
+
+@mixin box-maker($percent: false, $withGutter: false) {
+  display: block;
+  position: relative;
+  width: 100%;  
+
+  > .content, > .box__content {
+    // transition-delay: 0.25s;
+    transition-property: opacity;
+    transition-duration: 0.75s;
+    pointer-events: none;
+    will-change: opacity;
+    transform: translateZ(0);
+  }
+
+  @if $percent != 'auto' {
+    &:before {
+      content: "";
+      display: block;
+      padding-top: $percent;
+    }
+    > .content, > .box__content {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      padding: 0 !important;
+    }
+  }
+
+
+
+  @if $percent == 'auto' {
+    height: 100%;
+    > .content, > .box__content {
+      height: 100%;
+    }
+  }
+
+  @if $withGutter {
+    > .content, > .box__content {
+      left: $grid-gutter-width / 2;
+      top: $grid-gutter-width / 2;
+      width: calc(100% - #{$grid-gutter-width});
+    }
+  }
+
+  //
+  // when is using lazy loading
+  //
+  &.is-loading {
+    background: $black;
+    > .content, > .box__content {
+
+      opacity: 0;
+    }
+  }
+
+  //
+  // when is loaded
+  //
+  &.has-loaded {
+    > .content, > .box__content {
+      opacity: 1;
+    }
+  }
+
+}
+
+/// Pre made box-maker classes
+/// Use in template : .box--square, .box--postal-card, ...
+///
+/// @name box
+///
+/// @group utils
+.box {
+
+  &__none {
+    @include box-maker(false);
+  }
+
+  &__auto {
+    @include box-maker('auto');
+  }
+
+  &__default {
+    @include box-maker(100%);
+  }
+
+  &__square {
+    @include box-maker(100%);
+  }
+
+  &__half {
+    @include box-maker(35%);
+  }
+
+  &__sixteen_nine {
+    @include box-maker(54.25%);
+  }
+
+  &__super_scope {
+    @include box-maker(48%);
+  }
+
+  &__postal_card {
+    @include box-maker(66.6666%);
+  }
+
+  &__portrait {
+    @include box-maker(120%);
+  }
+}

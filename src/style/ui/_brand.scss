@@ -1,0 +1,42 @@
+
+.brand {
+  padding: $spacer 0;
+  margin: 0;
+  pointer-events: all;
+
+  @include media-breakpoint-down(xs) {
+    padding-top: $spacer-sm;
+    padding-bottom: 0;
+  }
+
+  a {
+    display: block;
+    height: 70px;
+  }
+
+  .nav-main__open & {
+    path, polygon {
+      fill: $black !important;
+    }
+    @include media-breakpoint-up(md) {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  svg {
+    // border: 1px solid red;
+    width: 180px;
+    height: auto;
+    @include media-breakpoint-down(sm) {
+      width: 100px;
+    }
+  }
+
+  &.site-header__inverted {
+    path, polygon {
+      fill: $white;
+    }
+  }
+
+}

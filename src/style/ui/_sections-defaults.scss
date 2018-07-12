@@ -1,0 +1,15 @@
+/// Single element, top header with current section label (news, work, etc)
+///
+/// @name single__header
+///
+/// @group sections
+
+.single__header {
+  padding-top: $spacer-lg - 0.20rem;
+  padding-bottom: $spacer-md;
+  text-transform: capitalize;
+  @include media-breakpoint-down(sm) {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}

@@ -1,0 +1,131 @@
+
+@mixin media-breakpoint-down-vertical($name, $breakpoints: $grid-breakpoints-verticals) {
+  $min: breakpoint-min($name, $breakpoints);
+  @debug $min;
+  @if $min {
+    @media (max-height: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+
+@mixin media-breakpoint-up-vertical($name, $breakpoints: $grid-breakpoints-verticals) {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+    @media (min-height: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+
+
+/// Mixin for adding an overlay gradient on top of content in an element
+///
+/// @name overlay-gradient-shadow
+///
+/// @group utils
+///
+/// @param {number} $opacity [0.5] - The opacity
+///
+/// @param {text} $position [relative] - Set element position type
+///
+/// @param {percentage} $height [100%] - The ratio value
+
+@mixin overlay-gradient-shadow($opacity: 0.5, $position: relative, $height: 50%) {
+  position: $position;
+
+  img {
+    position: relative;
+    z-index: 0;
+  }
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: $height;
+    z-index: 20;
+    pointer-events: none;
+    opacity: $opacity;
+    transition: opacity 500ms, height 500ms;
+    @include gradient-y(transparent, rgba(0, 0, 0, 0.85));
+  }
+}
+/// Mixin for ':hover' state on gradient, change change height or opacity
+///
+/// @name overlay-gradient-shadow-hover
+///
+/// @group utils
+///
+/// @param {number} $opacity [0.5] - The opacity
+///
+/// @param {percentage} $height [100%] - The ratio value
+@mixin overlay-gradient-shadow-hover($opacity: 0.5, $height: 50%) {
+  &:after {
+    height: $height;
+    opacity: $opacity;
+  }
+}
+
+
+/// Vertical and Horizontal align of an element
+///
+/// @name absolute-inner
+///
+/// @group utils
+@mixin absolute-centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  z-index: 100;
+}
+
+
+/// Vertical centering of
+/// content inside an element using flex-box.
+///
+/// @name vertical-inner
+///
+/// @group utils
+@mixin vertical-inner {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  // justify-content: center;
+}
+
+/// Vertical and Horizontal centering of
+/// content inside an element using flex-box.
+///
+/// @name centered-inner
+///
+/// @group utils
+@mixin centered-inner {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+
+/// Input placeholer color
+///
+/// @name placeholder
+///
+/// @group utils
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}
+}
