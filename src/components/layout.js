@@ -5,6 +5,7 @@ import { StaticQuery, graphql } from 'gatsby'
 
 // app components
 import Header from '@components/header/header'
+import Footer from '@components/footer/footer'
 
 // import base style
 import '../style/App.scss'
@@ -28,8 +29,11 @@ const Layout = ({ children, data }) => (
             { name: 'description', content: data.siteSettings.description },
           ]}
         />
-        <Header />
-        <div>{children}</div>
+        <Header/>
+        <main>
+          {children}
+        </main>
+        <Footer/>
       </>
     )}
   />

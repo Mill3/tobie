@@ -4,7 +4,9 @@ import { graphql } from 'gatsby'
 // load app components
 import Layout from '@components/layout'
 import Logo from '@components/logo/logo'
-import { workFragment } from '@components/projects'
+
+// components
+import Reel from '@components/reel/Reel'
 import Projects from '@components/projects/Projects'
 
 // styles
@@ -22,9 +24,13 @@ class Landing extends Component {
       <Layout>
         <section className={`${styles.landing}`}>          
           
-          <header className={`${styles.landing__header} mb-6`}>
+          <header className={`${styles.landing__header}`}>
             <Logo inverted={true} />
           </header>
+          
+          <div className="mb-6">
+            <Reel data={this.props.data.homeVideo} />
+          </div>
           
           {/* all projects */}
           <Projects data={this.props.data.projects} />          
@@ -39,6 +45,7 @@ export default Landing
 
 export const query = graphql`
   query IndexQuery($language_slug: String!) {
+    
     projects : allWordpressWpProjects(filter : { language_slug : { eq: $language_slug }}) {
       edges {
         node {
@@ -46,5 +53,10 @@ export const query = graphql`
         }
       }
     }
+
+    homeVideo : wordpressWpTexts(slug : { eq: "home-video" }) {
+      ...textFragment
+    }
+
   }
 `;

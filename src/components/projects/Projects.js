@@ -5,7 +5,7 @@ import ProjectPreview from './ProjectPreview'
 class Projects extends Component {
   
   list() {
-    if (this.props.data.edges) {
+    if (this.props.data && this.props.data.edges) {
       return this.props.data.edges.map((project, index) =>
         <ProjectPreview project={project.node} key={index} />
       )

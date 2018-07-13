@@ -27,4 +27,12 @@ $logo-font-size: 102px;
     color: $white;
   }
 
+  &__compact {
+    @extend .logo;
+    text-align: left;
+    h1 {
+      font-size: $h3-font-size;  
+    }
+  }
+
 }
