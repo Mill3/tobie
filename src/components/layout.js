@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 
-// import Header from './header'
+// app components
+import Header from '@components/header/header'
 
 // import base style
 import '../style/App.scss'
@@ -27,7 +28,7 @@ const Layout = ({ children, data }) => (
             { name: 'description', content: data.siteSettings.description },
           ]}
         />
-        {/* <Header siteTitle={data.site.siteMetadata.title} /> */}
+        <Header />
         <div>{children}</div>
       </>
     )}

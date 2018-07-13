@@ -1,8 +1,24 @@
-import React from 'react'
-import { Link } from 'gatsby'
+import React, { Component } from 'react'
+import { push } from 'gatsby'
+import detectLocale from '../utils/detect-locale'
 
-import Layout from '../components/layout'
+// 
+// this page is empty, should redirect to detected language landing page
+// 
 
-const IndexPage = () => (<></>)
+class IndexPage extends Component {
 
-export default IndexPage
+  // detect and redirected to proper landing
+  componentDidMount() {
+    let to = `/${detectLocale()}/`
+    push(to)
+  }
+
+  // will never render, the sadness :(
+  render() { 
+    return null
+  }
+
+}
+ 
+export default IndexPage;

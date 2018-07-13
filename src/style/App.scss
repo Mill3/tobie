@@ -1,11 +1,6 @@
 @charset "utf-8";
 
-// bootstrap utilities are needed
-@import "vendors/bootstrap/functions";
-@import "vendors/bootstrap/mixins";
-
-// forked bootstrap variables
-@import "variables";
+@import 'base';
 
 // import node modules
 // @import '~hamburgers/_sass/hamburgers/hamburgers';
@@ -21,9 +16,7 @@
 @import "vendors/bootstrap/images";
 @import "vendors/bootstrap/nav";
 
-// mixins
-// @import "mixins/box-maker";
-// @import "mixins/mixins";
+
 
 // utils
 @import "utils/easing";

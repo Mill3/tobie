@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { graphql } from 'gatsby'
 
-import Layout from './layout'
+// load app components
+import Layout from '@components/layout'
+import Logo from '@components/logo/logo'
 
 class Landing extends Component {
   
   constructor(props) {
     super(props)
-    this.state = {  }
+    this.state = {}
     console.log(this.props)
   }
 
@@ -15,6 +17,7 @@ class Landing extends Component {
     return (
       <Layout>
         <section className="container">
+          <Logo/>
           <h2>this is the landing page</h2>
         </section>
       </Layout>

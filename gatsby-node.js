@@ -2,6 +2,26 @@ let path = require('path')
 let dotenv = require('dotenv')
 
 
+exports.onCreateWebpackConfig = ({
+  stage,
+  rules,
+  loaders,
+  plugins,
+  actions,
+}) => {
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        '@components': path.resolve(__dirname, 'src/components/'),
+        '@pages': path.resolve(__dirname, 'src/pages/'),
+        '@utils': path.resolve(__dirname, 'src/utils/'),
+      },
+      modules: [path.resolve(__dirname, "src"), "node_modules"],
+    },
+  })
+}
+
+
 /**
  * Implement Gatsby's Node APIs in this file.
  *
@@ -32,11 +52,15 @@ const { createPage } = actions
 return new Promise((resolve, reject) => {
 
   const landingTemplate = path.resolve(
-    `./src/components/landing.js`
+    `./src/components/base/landing.js`
   )
 
   const postTemplate = path.resolve(
     `./src/pages/post.js`
+  )
+
+  const pageTemplate = path.resolve(
+    `./src/components/pages/page.js`
   )
 
   // const locale = "eu-US"
@@ -58,6 +82,18 @@ return new Promise((resolve, reject) => {
         }
 
         posts : allWordpressPost {
+          edges {
+            node {
+              id
+              title
+              slug
+              language_id  
+              language_slug 
+            }
+          }
+        }
+
+        pages : allWordpressPage {
           edges {
             node {
               id
@@ -124,6 +160,33 @@ return new Promise((resolve, reject) => {
             createPage({
               path: path,
               component: postTemplate,
+              context: {
+                post_id: post_id,
+                post_slug: post_slug,
+                language_slug: language_slug
+              }
+            })
+          }
+
+        })
+
+        console.log(result.data.pages);
+        
+
+        // each pages
+        result.data.pages.edges.forEach(post => {
+
+          // let id = post.node.id
+          let post_id = post.node.wordpress_id
+          let post_slug = post.node.slug
+          let post_language_id = post.node.language_id
+          let post_language_slug = post.node.language_slug
+          let path = `/${language_slug}/${post_slug}`;
+
+          if (post_language_id == language_id) {
+            createPage({
+              path: path,
+              component: pageTemplate,
               context: {
                 post_id: post_id,
                 post_slug: post_slug,
