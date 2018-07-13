@@ -5,19 +5,25 @@ import { graphql } from 'gatsby'
 import Layout from '@components/layout'
 import Logo from '@components/logo/logo'
 
+// styles
+import styles from './landing.module.scss'
+
 class Landing extends Component {
   
   constructor(props) {
     super(props)
     this.state = {}
-    console.log(this.props)
+    console.log(this.props, styles)
   }
 
   render() { 
     return (
       <Layout>
-        <section className="container">
-          <Logo/>
+        <section className={`${styles.landing}`}>          
+          <header className={styles.landing__header}>
+            <Logo inverted={true} />
+            {/* this is the landing header */}
+          </header>
           <h2>this is the landing page</h2>
         </section>
       </Layout>

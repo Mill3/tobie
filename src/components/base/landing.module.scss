@@ -1,0 +1,17 @@
+@import "~style/base";
+
+/// landing page
+///
+/// @name landing
+///
+/// @group landing
+
+.landing {
+  
+  &__header {
+    background: $black;
+    padding-top: 20vh;
+    padding-bottom: 20vh;
+  }
+
+}

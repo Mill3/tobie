@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+
+// styles
 import styles from './logo.module.scss'
 
 class Logo extends Component {
+
   render() { 
-    // console.log(styles);    
     return (
-      <h1 className={styles.logo}>Tobie <span>Marier</span> Robitaille</h1>
+      <h1 className={this.props.inverted ? styles.logo__inverted : styles.logo}>Tobie <span>Marier</span> Robitaille</h1>
     );
   }
 }
