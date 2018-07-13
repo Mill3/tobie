@@ -1,9 +1,9 @@
 @import "~style/base";
 
-.header {
-  // border: 1px solid red;
+.header {  
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
+  padding: $spacer;
 }

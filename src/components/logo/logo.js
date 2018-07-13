@@ -7,7 +7,10 @@ class Logo extends Component {
 
   render() { 
     return (
-      <h1 className={this.props.inverted ? styles.logo__inverted : styles.logo}>Tobie <span>Marier</span> Robitaille</h1>
+      <div className={this.props.inverted ? styles.logo__inverted : styles.logo}>
+        <h1>Tobie <span>Marier</span> Robitaille</h1>
+        <p className={styles.logo__byline}>Cinematographer</p>
+      </div>
     );
   }
 }

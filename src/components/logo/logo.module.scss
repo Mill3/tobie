@@ -2,17 +2,24 @@
 
 $logo-font-size: 102px;
 
-.logo {
-  font-size: $logo-font-size;  
-  margin: 0;
+.logo {    
   text-align: center;
+  transition: color 1s;
 
-  @include media-breakpoint-down(md) {
-    font-size: $logo-font-size/1.5;  
-  }
+  h1 {
+    font-size: $logo-font-size;  
+    margin: 0;
+    @include media-breakpoint-down(md) {
+      font-size: $logo-font-size/1.5;  
+    }
+  }  
 
   span {
     font-family: $font-family-sans-serif;
+  }
+
+  &__byline {
+    font-size: $h3-font-size;
   }
 
   &__inverted {

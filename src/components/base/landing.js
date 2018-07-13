@@ -4,6 +4,8 @@ import { graphql } from 'gatsby'
 // load app components
 import Layout from '@components/layout'
 import Logo from '@components/logo/logo'
+import { workFragment } from '@components/projects'
+import Projects from '@components/projects/Projects'
 
 // styles
 import styles from './landing.module.scss'
@@ -13,18 +15,19 @@ class Landing extends Component {
   constructor(props) {
     super(props)
     this.state = {}
-    console.log(this.props, styles)
   }
-
+  
   render() { 
     return (
       <Layout>
         <section className={`${styles.landing}`}>          
-          <header className={styles.landing__header}>
+          
+          <header className={`${styles.landing__header} mb-6`}>
             <Logo inverted={true} />
-            {/* this is the landing header */}
           </header>
-          <h2>this is the landing page</h2>
+          
+          {/* all projects */}
+          <Projects data={this.props.data.projects} />          
         </section>
       </Layout>
     );
@@ -39,10 +42,7 @@ export const query = graphql`
     projects : allWordpressWpProjects(filter : { language_slug : { eq: $language_slug }}) {
       edges {
         node {
-          id
-          title
-          slug
-          language_slug
+          ...projectFragment
         }
       }
     }

@@ -1,3 +1,6 @@
+@import "~style/base";
+@import "~style/vendors/bootstrap/nav";
+
 /// main nav modules
 ///
 /// @name .nav
@@ -5,6 +8,14 @@
 /// @group nav
 
 .nav {
-  // border: 1px solid red;
-  display: block;
+    
+  .nav-item {
+    @extend .nav-item;
+  }
+  
+  .nav-link {
+    @extend .nav-link;
+    color: $white;
+  }
+
 }

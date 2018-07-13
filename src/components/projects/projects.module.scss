@@ -1,0 +1,14 @@
+@import "~style/base";
+
+.project_preview {
+  margin-bottom: 10px;
+
+  &__preview_image {
+    // border: 1px solid red;
+  }
+
+  &__infos {
+    padding: $spacer 0;
+    // border: 1px solid red;
+  }
+}

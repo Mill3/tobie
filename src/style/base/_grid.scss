@@ -1,5 +1,22 @@
 
 
 .container-fluid {
-
+  padding-left: $container-fluid-padding;
+  padding-right: $container-fluid-padding;
+  @include media-breakpoint-down(lg) {
+    padding-left: $container-fluid-padding-lg;
+    padding-right: $container-fluid-padding-lg;
+  }
+  @include media-breakpoint-down(md) {
+    padding-left: $container-fluid-padding-md;
+    padding-right: $container-fluid-padding-md;
+  }
+  @include media-breakpoint-down(sm) {
+    padding-left: $container-fluid-padding-sm;
+    padding-right: $container-fluid-padding-sm;
+  }
+  @include media-breakpoint-down(xs) {
+    padding-left: $container-fluid-padding-xs;
+    padding-right: $container-fluid-padding-xs;
+  }
 }

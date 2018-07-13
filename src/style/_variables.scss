@@ -4,6 +4,13 @@
 // consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
 
 
+$container-fluid-padding: 90px;
+$container-fluid-padding-xl: $container-fluid-padding;
+$container-fluid-padding-lg: $container-fluid-padding;
+$container-fluid-padding-md: 45px;
+$container-fluid-padding-sm: 35px;
+$container-fluid-padding-xs: 10px;
+
 //
 // Color system
 //
@@ -123,8 +130,19 @@ $spacers: map-merge((
   2: ($spacer * .5),
   3: $spacer,
   4: ($spacer * 1.5),
-  5: ($spacer * 3)
+  5: ($spacer * 3),
+  6: ($spacer * 4),
+  7: ($spacer * 5),
+  8: ($spacer * 6),
+  9: ($spacer * 7),
+  10: ($spacer * 8),
 ), $spacers);
+
+$spacer-xs : $spacer * 0.25;
+$spacer-sm : $spacer * 0.5;
+$spacer-md : $spacer * 1.5;
+$spacer-lg : $spacer * 2;
+$spacer-xl : $spacer * 3;
 
 // This variable affects the `.h-*` and `.w-*` classes.
 $sizes: () !default;
@@ -248,8 +266,8 @@ $font-weight-bold:            700 !default;
 $font-weight-base:            $font-weight-normal !default;
 $line-height-base:            1.5 !default;
 
-$h1-font-size:                $font-size-base * 2.5 !default;
-$h2-font-size:                $font-size-base * 2 !default;
+$h1-font-size:                64px !default;
+$h2-font-size:                42px !default;
 $h3-font-size:                $font-size-base * 1.75 !default;
 $h4-font-size:                $font-size-base * 1.5 !default;
 $h5-font-size:                $font-size-base * 1.25 !default;
