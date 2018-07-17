@@ -16,6 +16,7 @@ class ReelPlayer extends Component {
       labelText: 'Play reel',
       src: this.props.video_preview_src,
       muted: true,
+      playing: false,
       preview: true,
       openModal: false,
       positionStyle: {
@@ -23,6 +24,7 @@ class ReelPlayer extends Component {
         top: 0,
       }
     }
+    this.startVideo = this.startVideo.bind(this)
   }
 
   componentDidMount() {
@@ -35,7 +37,7 @@ class ReelPlayer extends Component {
         if (event.type == 'mousedown') {
           this.handleMouseDown(event)
         }
-      }
+      }     
     }
   }
 
@@ -71,23 +73,13 @@ class ReelPlayer extends Component {
     })
   }
 
-  // startModalVideo(event) {
-  //   // console.log(this.refs.externalPlayer);
-  //   // this.refs.externalPlayer.props.playing = true;
-  //   setTimeout(()=> {
-  //     // this.refs.externalPlayer.player.player.setVolume(1);
-  //     console.log(this.refs.externalPlayer.player.player);
-  //     this.refs.externalPlayer.player.player.seekTo(1)
-  //     // this.refs.externalPlayer.player.player.play()
-
-  //     this.setState({
-  //       playing: true
-  //       // openModal: true
-  //     })
-      
-  //     // this.refs.externalPlayer.player.player.play()
-  //   }, 1000)
-  // }
+  startVideo() {    
+    if (this.refs.externalPlayer) {
+      this.setState({
+        playing: true
+      })
+    }
+  }
 
   render() { 
     return (
@@ -98,9 +90,9 @@ class ReelPlayer extends Component {
             url={this.props.video_embed}
             width='100%'
             height='100%'
-            muted={this.state.playing}
-            volume={1}
+            autoPlay={true}
             playing={this.state.playing}
+            onStart={() => this.startVideo()}
           />
           <button onClick={(e) => this.closeModal()}>Close modal</button>
         </SiteModal>

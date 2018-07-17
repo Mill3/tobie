@@ -12,16 +12,19 @@ class ProjectSingle extends Component {
     super(props);
     this.state = {
       playing: false,
-      isModal: false
+      muted: true,
+      volume: 0
     }
     // console.log(this.props.data);
+    this.isModal = false
+    this.startVideo = this.startVideo.bind(this)
     this.handleBack = this.handleBack.bind(this)
   }
 
   componentDidMount() {
-    this.setState({
-      playing: true
-    })
+    setTimeout(()=> {
+      this.startVideo() 
+    }, 1000)
   }
 
   handleBack(event, isModal = false) {
@@ -34,8 +37,16 @@ class ProjectSingle extends Component {
     }
   }
 
+  startVideo() {    
+    if (this.refs.externalPlayer && this.isModal) {     
+      this.setState({
+        playing: true
+      })
+    }
+  }
+
   render() { 
-    let isModal = false
+    // let isModal = false
     // We don't want to show the modal if a user navigates
     // directly to a post so if this code is running on Gatsby's
     // initial render then we don't show the modal, otherwise we
@@ -44,11 +55,11 @@ class ProjectSingle extends Component {
       typeof window !== `undefined` &&
       window.___GATSBYGRAM_INITIAL_RENDER_COMPLETE
     ) {
-      isModal = true
+      this.isModal = true
     }
     
     return (
-      <Layout location={this.props.location} isModal={isModal}>
+      <Layout location={this.props.location} isModal={this.isModal}>
         <article className={styles.project_single}>
           <h2>{this.props.data.project.title}</h2>
           { this.props.data.project.acf.video_embed &&
@@ -58,13 +69,12 @@ class ProjectSingle extends Component {
               width='100%'
               height='100%'
               autoPlay={true}
-              muted={true}
-              volume={1}
-              playing={true}
-              controls={true}
+              muted={this.state.muted}
+              volume={this.state.volume}
+              playing={this.state.playing}
             />
           }
-          <a href="/" onClick={(e) => this.handleBack(e, isModal)}>X</a>
+          <a href="/" onClick={(e) => this.handleBack(e, this.isModal)}>X</a>
         </article>
       </Layout>
     );

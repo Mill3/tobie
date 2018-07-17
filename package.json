@@ -17,10 +17,12 @@
     "node-sass": "4.9.2",
     "react": "^16.4.1",
     "react-cursor-position": "2.5.0",
+    "react-cx": "0.1.12",
     "react-dom": "^16.4.1",
     "react-helmet": "^5.2.0",
     "react-modal": "3.5.1",
     "react-player": "1.6.4",
+    "react-redux": "5.0.7",
     "react-reveal": "1.2.2",
     "video-react": "0.13.0"
   },

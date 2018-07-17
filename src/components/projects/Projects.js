@@ -7,12 +7,13 @@ class Projects extends Component {
   list() {
     if (this.props.data && this.props.data.edges) {
       return this.props.data.edges.map((project, index) =>
-        <ProjectPreview project={project.node} key={index} />
+        <ProjectPreview project={project.node} key={index} animate={this.props.animate} />
       )
     }
   }
 
   render() { 
+    console.log(this.props)
     return (
       <section className={`container-fluid`}>
         <div className="row">

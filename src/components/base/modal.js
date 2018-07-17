@@ -7,13 +7,6 @@ import styles from './modal.module.scss'
 Modal.setAppElement(`#___gatsby`)
 
 class SiteModal extends Component {
-  
-  constructor(props) {
-    super(props)
-    this.state = {  }
-    console.log(this.props);
-    
-  }
 
   render() {
     return (

@@ -6,12 +6,40 @@
 ///
 /// @group base
 
+$header-height: 55vh;
+
+@keyframes headerAnimation {
+  from { 
+    height: 100vh;
+    background: $white;
+  }
+  to { 
+    height: $header-height;
+    background: $black;
+  }
+}
+
 .landing {
+  display: block;
   
   &__header {
     background: $black;
-    padding-top: 20vh;
-    padding-bottom: 20vh;
+    color: $white;
+    height: $header-height;
+    @include vertical-inner;
+  }
+
+  &__withIntro {
+    @extend .landing;
+    
+    .landing__header {
+      animation-name: headerAnimation;
+      animation-duration: 2s;
+      animation-delay: 2s;
+      animation-fill-mode: backwards;
+    }
+
   }
 
 }
+
