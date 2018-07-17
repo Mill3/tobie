@@ -6,11 +6,7 @@ import detectLocale, { redirect } from './src/utils/detect-locale'
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
 
-// export const onRouteUpdate = ({ location }) => {  
-
-//   if (location.pathname === '/') {
-//     let to = `/${detectLocale()}/`
-//     redirect(to)
-//   }
-  
-// }
+export const onInitialClientRender = () => {  
+  console.warn('browser rendering')
+  window.___GATSBYGRAM_INITIAL_RENDER_COMPLETE = true
+}

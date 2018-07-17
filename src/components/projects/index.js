@@ -12,7 +12,7 @@ fragment projectFragment on wordpress__wp_projects {
     source_url
   }
   acf {
-    dummy
+    video_embed
     images {
       id
       source_url

@@ -1,19 +1,30 @@
-import getBrowserLanguage from 'get-browser-language'
 import indexOf from 'lodash/indexOf'
+let getBrowserLanguage = null
+
+if (typeof window !== `undefined`) {
+  getBrowserLanguage = require('get-browser-language')
+}
 
 const supportedLanguages = ['en', 'fr']
 const defaultLanguage = 'en'
 
 const detectLocale = () => {
-  let languageCode = getBrowserLanguage().split('-')[0]
+  if(getBrowserLanguage) {
 
-  // check if detected code supported
-  // returns default if not found
-  if( indexOf(supportedLanguages, languageCode) > 0 ) {
-    return languageCode
+    let languageCode = getBrowserLanguage().split('-')[0]
+
+    // check if detected code supported
+    // returns default if not found
+    if( indexOf(supportedLanguages, languageCode) > 0 ) {
+      return languageCode
+    } else {
+      return defaultLanguage
+    }
+
   } else {
     return defaultLanguage
   }
+
 }
 
 export const redirect = (to) => {

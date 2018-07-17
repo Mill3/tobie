@@ -17,11 +17,13 @@ class Landing extends Component {
   constructor(props) {
     super(props)
     this.state = {}
+    console.log(this.props.data.homeVideo);
+    
   }
   
   render() { 
     return (
-      <Layout>
+      <Layout location={this.props.location}>
         <section className={`${styles.landing}`}>          
           
           <header className={`${styles.landing__header}`}>

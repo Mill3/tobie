@@ -6,6 +6,7 @@
   "dependencies": {
     "autoprefixer": "8.6.5",
     "bootstrap": "^4.1.1",
+    "classnames": "2.2.6",
     "gatsby": "next",
     "gatsby-plugin-postcss-sass": "1.0.22",
     "gatsby-plugin-react-helmet": "next",
@@ -15,8 +16,12 @@
     "lodash": "4.17.10",
     "node-sass": "4.9.2",
     "react": "^16.4.1",
+    "react-cursor-position": "2.5.0",
     "react-dom": "^16.4.1",
     "react-helmet": "^5.2.0",
+    "react-modal": "3.5.1",
+    "react-player": "1.6.4",
+    "react-reveal": "1.2.2",
     "video-react": "0.13.0"
   },
   "keywords": [
@@ -26,6 +31,7 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
+    "serve": "gatsby serve",
     "dev": "gatsby develop",
     "format": "prettier --write 'src/**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -9,6 +9,12 @@ exports.onCreateWebpackConfig = ({
   plugins,
   actions,
 }) => {
+  // if (stage === "build-html") {
+  //   config.loader("null", {
+  //     test: /get-browser-language/,
+  //     loader: "null-loader",
+  //   });
+  // }
   actions.setWebpackConfig({
     resolve: {
       alias: {
@@ -61,6 +67,10 @@ return new Promise((resolve, reject) => {
 
   const pageTemplate = path.resolve(
     `./src/components/pages/page.js`
+  )
+
+  const projectSingleTemplate = path.resolve(
+    `./src/components/projects/ProjectSingle.js`
   )
 
   // const locale = "eu-US"
@@ -121,7 +131,7 @@ return new Promise((resolve, reject) => {
     `
     ).then(result => {
 
-      console.log(result.data)
+      // console.log(result.data)
       // return
 
       if (result.errors) {
@@ -168,10 +178,7 @@ return new Promise((resolve, reject) => {
             })
           }
 
-        })
-
-        console.log(result.data.pages);
-        
+        })        
 
         // each pages
         result.data.pages.edges.forEach(post => {
@@ -209,10 +216,10 @@ return new Promise((resolve, reject) => {
           if (post_language_id == language_id) {
             createPage({
               path: path,
-              component: postTemplate,
+              component: projectSingleTemplate,
               context: {
                 post_id: post_id,
-                post_slug: post_slug,
+                slug: post_slug,
                 language_slug: language_slug
               }
             })

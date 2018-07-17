@@ -1,0 +1,47 @@
+@import "~style/base";
+
+.reel {
+  position: relative;
+  cursor: none;
+  overflow: hidden;
+  // height: 50vh;
+
+  // video {
+  //   position: absolute !important;
+  //   top: 50% !important;
+  //   left: 50% !important;
+  //   width: 100% !important;
+  //   height: 100% !important;
+  //   z-index: 1;
+  //   transform: translate(-50%,-50%);
+  //   border: 1px solid red;
+  //   // video {
+  //   //   border: 1px solid blue;
+  //   //   width: 100% !important;
+  //   //   height: 100% !important;
+  //   // }
+  // }
+
+  &__cursor {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    transform: translate(-50%,-50%);
+    color: $white;
+    font-size: $h2-font-size;
+    opacity: 0;
+    transition: opacity 0.15s;
+    width: 200px;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  &:hover {
+    .reel__cursor {
+      opacity: 1;
+    }
+  }
+
+}

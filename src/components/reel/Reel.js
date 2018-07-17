@@ -1,29 +1,20 @@
 import React, { Component } from 'react';
-import { Player } from 'video-react'
+import ReactCursorPosition from 'react-cursor-position'
+
+// 
+import ReelPlayer from './ReelPlayer'
 
 class Reel extends Component {
-  
-  componentDidMount() {
-    this.refs.player.play()
-  }
 
   render() { 
-    // console.log(this.props);    
+    // console.log(this.props.data);
     return (
-      <div>
-        {this.props.data.acf.video &&
-          <Player
-            ref="player"
-            controls={false}
-            muted={true}
-            preload={'auto'}
-            playsInline
-            fluid={true}
-            loop={true}
-            src={this.props.data.acf.video.source_url}
-          />
-        }
-      </div>
+      <ReactCursorPosition>
+        <ReelPlayer 
+          video_preview_src={this.props.data.acf.video_preview.source_url}
+          video_embed={this.props.data.acf.video_embed}
+        />
+      </ReactCursorPosition>
     );
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StaticQuery } from 'gatsby'
+import { StaticQuery, graphql } from 'gatsby'
 
 import Logo from '@components/logo/logo'
 
@@ -7,7 +7,6 @@ import styles from './footer.module.scss'
 
 const log = (data) => {
   console.log(data);
-  
 }
 
 const Footer = ({ props }) => (

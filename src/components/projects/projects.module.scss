@@ -5,10 +5,16 @@
 
   &__preview_image {
     // border: 1px solid red;
+    img {
+      width: 100%;
+    }
   }
 
   &__infos {
     padding: $spacer 0;
-    // border: 1px solid red;
   }
+}
+
+.project_single {
+  height: 80vh;
 }

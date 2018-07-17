@@ -11,7 +11,8 @@ fragment textFragment on wordpress__wp_texts {
       id
       source_url
     }
-    video {
+    video_embed
+    video_preview {
       id
       source_url
     }
