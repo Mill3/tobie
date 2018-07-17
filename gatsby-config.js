@@ -17,7 +17,7 @@ module.exports = {
     {
       resolve: "gatsby-source-wordpress",
       options: {
-        baseUrl: "localhost:9200",
+        baseUrl: "tobie-admin.mill3.studio",
         protocol: "http",
         useACF: true,
         // Set verboseOutput to true to display a verbose output on `npm run develop` or `npm run build`
