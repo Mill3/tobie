@@ -84,7 +84,7 @@ class ProjectSingle extends Component {
 
 export default ProjectSingle;
 
-export const workFragment = graphql`
+export const projectQuery = graphql`
 query projectSingle($slug: String!) {
   project : wordpressWpProjects(slug : { eq: $slug }) {
     ...projectFragment

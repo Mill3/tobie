@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+import classNames from 'classnames'
 import { StaticQuery, graphql } from 'gatsby'
 import { connect } from "react-redux"
 
@@ -12,7 +13,10 @@ import Footer from '@components/footer/footer'
 // import base style
 import '../style/App.scss'
 
-const Layout = ({ children, location, isModal }) => (
+// css module
+import styles from './layout.module.scss'
+
+const Layout = ({ children, location, isModal, inverted }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -31,9 +35,18 @@ const Layout = ({ children, location, isModal }) => (
             { name: 'description', content: data.siteSettings.description },
           ]}
         />
-        <Header/>
-        <Main location={location} children={children} isModal={isModal} />
-        <Footer/>
+        <div className={
+          classNames(
+            { 
+              [`${styles.layout}`]: !inverted,
+              [`${styles.layout__inverted}`]: inverted
+            }
+          )
+          }>
+          <Header/>
+          <Main location={location} children={children} isModal={isModal} />
+          <Footer/>
+        </div>
       </>
     )}
   />
@@ -41,12 +54,14 @@ const Layout = ({ children, location, isModal }) => (
 
 Layout.defaultProps = {
   children: PropTypes.node.isRequired,
-  isModal: false
+  isModal: false,
+  inverted: false
 }
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-  isModal: PropTypes.bool
+  isModal: PropTypes.bool,
+  inverted: PropTypes.bool
 }
 
 export default Layout

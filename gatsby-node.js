@@ -196,7 +196,7 @@ return new Promise((resolve, reject) => {
               component: pageTemplate,
               context: {
                 post_id: post_id,
-                post_slug: post_slug,
+                slug: post_slug,
                 language_slug: language_slug
               }
             })

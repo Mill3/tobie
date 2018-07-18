@@ -1,0 +1,11 @@
+@import "~style/base";
+
+.layout {
+  min-height: 100vh;
+  
+  &__inverted {
+    @extend .layout;
+    color: $white;
+    background-color: $black;
+  }
+}

@@ -24,8 +24,7 @@ export const replaceRouterComponent = ({ history }) => {
 }
 
 
-
 export const onInitialClientRender = () => {  
-  console.warn('browser rendering')
+  // console.warn('browser rendering')
   window.___GATSBYGRAM_INITIAL_RENDER_COMPLETE = true
 }
