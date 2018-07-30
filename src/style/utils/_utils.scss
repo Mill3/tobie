@@ -180,7 +180,7 @@ $spacer-xl: $spacer * 4 !default;
 
 .is-sticky {
   position: sticky;
-  top: $spacer;
+  top: $spacer-xl;
   left: 0;
 }
 

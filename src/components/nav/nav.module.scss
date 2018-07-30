@@ -11,14 +11,23 @@
     
   .nav-item {
     @extend .nav-item;
+    padding: 0 $spacer;
   }
   
   .nav-link {
-    @extend .nav-link;
+    // @extend .nav-link;
     color: $white;
+    padding: 0;
+    opacity: 0.5;
+    transition: all 0.25s;
+    border-bottom: 1px solid rgba(255,255,255,0);
+    &:hover {
+      opacity: 1;
+      border-bottom-color: rgba(255,255,255,1);
+    }
     &__active {
-      @extend .nav-link;
-      text-decoration: underline;
+      opacity: 1;
+      border-bottom-color: rgba(255,255,255,1);
     }
   }
 

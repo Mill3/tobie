@@ -8,6 +8,8 @@ import { Player, ControlBar, BigPlayButton, LoadingSpinner } from 'video-react'
 
 import SiteModal from '../base/modal'
 
+import playSVG from '../../svg/play.svg'
+
 import styles from './reel.module.scss'
 
 class ReelPlayer extends Component {
@@ -28,6 +30,7 @@ class ReelPlayer extends Component {
     }
     this.startVideo = this.startVideo.bind(this)
     this.setFullVideo = this.setFullVideo.bind(this)
+    console.log(playSVG);
     
   }
 
@@ -56,8 +59,8 @@ class ReelPlayer extends Component {
     } else if (prevProps.isActive && !this.props.isActive) {
       this.setState({
         positionStyle: {
-          left: null,
-          top: null
+          left: "50%",
+          top: "50%"
         }
       })
     }
@@ -78,7 +81,7 @@ class ReelPlayer extends Component {
       // scroll to video
       scrollToElement(ReactDOM.findDOMNode(this.refs.player), {
         duration: 1800,
-        offset: -5,
+        offset: 0,
         ease: 'inOutCirc'
       })
 
@@ -135,7 +138,10 @@ class ReelPlayer extends Component {
         }
         {this.state.preview &&
         <div className={styles.reel__overlay} onClick={(e) => this.setFullVideo(e)}>
-          <span className={styles.reel__cursor} style={this.props.detectedEnvironment.isMouseDetected ? this.state.positionStyle : null }>{this.state.labelText}</span>
+          <span className={styles.reel__cursor} style={this.props.detectedEnvironment.isMouseDetected ? this.state.positionStyle : null }>
+            <img src={playSVG} />
+          </span>
+          <h4 className={styles.reel__label}>{this.state.labelText}</h4>
         </div>
         }
         <Player

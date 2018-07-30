@@ -20,7 +20,17 @@
     width: 200px;
     text-align: center;
     pointer-events: none;
-    transform: all 0.75s;
+    transition: all 0.45s;
+  }
+
+  &__label {
+    position: absolute;
+    z-index: 10;
+    bottom: $spacer-xl;
+    left: 90px;
+    color: $white;
+    font-size: $h2-font-size;
+    font-family: $font-family-sans-serif;
   }
 
   &__overlay {
@@ -36,6 +46,7 @@
   &:hover {
     .reel__cursor {
       opacity: 1;
+      transition: inherit;
     }
   }
 
