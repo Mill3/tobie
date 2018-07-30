@@ -28,7 +28,7 @@ class Nav extends Component {
                 About & Infos
               </Link>
             </li>
-          <li className={`${styles.navItem}`}>
+          <li className={`${styles.navItem} is-hidden`}>
             <Link to={`/en/`} className={`${styles.navLink}`}>En</Link>
           </li>
         </ul>
