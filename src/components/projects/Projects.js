@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Fade from 'react-reveal/Fade'
+
+import styles from './projects.module.scss'
 
 import ProjectPreview from './ProjectPreview'
 
@@ -13,14 +16,17 @@ class Projects extends Component {
   }
 
   render() { 
-    console.log(this.props)
     return (
       <section className={`container-fluid`}>
         <div className="row">
          
           {/* sidebar */}
-          <aside className="col-12 col-md-4">
-            <h3 className="h1">Selected <span className="is-sans-serif d-block">Work</span></h3>
+          <aside className={`col-12 col-md-4 is-relative ${styles.projects_sidebar}`}>
+            <h3 className="h1 is-sticky">
+              <Fade bottom={true} distance={"15%"} delay={250}>
+                Selected <span className="is-sans-serif d-block">Work</span>
+              </Fade>
+            </h3>
           </aside>
 
           {/* all work */}

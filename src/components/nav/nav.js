@@ -10,9 +10,27 @@ class Nav extends Component {
     return (
       <nav className={`${styles.nav} d-flex`}>
         <ul className='nav ml-auto'>
-          <li className={`${styles.navItem}`}><Link to={`/${detectLocale()}/`} className={`${styles.navLink}`}>Selected Work</Link></li>
-          <li className={`${styles.navItem}`}><Link to={`/${detectLocale()}/a-propos/`} className={`${styles.navLink}`}>About & Infos</Link></li>
-          <li className={`${styles.navItem}`}><Link to={`/en/`} className={`${styles.navLink}`}>English</Link></li>
+          <li className={`${styles.navItem}`}>
+          <Link 
+              to={`/${detectLocale()}/`}
+              exact={true}
+              activeClassName={`${styles.navLink__active}`}
+              className={`${styles.navLink}`}>
+                Selected Work
+            </Link>
+          </li>
+          <li className={`${styles.navItem}`}>
+            <Link 
+              to={`/${detectLocale()}/a-propos/`}
+              exact={true}
+              activeClassName={`${styles.navLink__active}`}
+              className={`${styles.navLink}`}>
+                About & Infos
+              </Link>
+            </li>
+          <li className={`${styles.navItem}`}>
+            <Link to={`/en/`} className={`${styles.navLink}`}>En</Link>
+          </li>
         </ul>
       </nav>
     );

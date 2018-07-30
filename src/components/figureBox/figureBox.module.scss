@@ -1,0 +1,80 @@
+@import "~style/base";
+
+/// Generate responsive height box based on a ratio value
+///
+/// @name box-maker
+///
+/// @group utils
+///
+/// @param {percentage} $percent [100%] - The ratio value
+
+@mixin box-maker($percent: false, $withGutter: false) {
+  display: block;
+  position: relative;
+  width: 100%;  
+
+  &:before {
+    content: "";
+    display: block;
+    padding-top: $percent;
+  }
+
+  .content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+
+}
+
+/// Pre made box-maker classes
+/// Use in template : .box--square, .box--postal-card, ...
+///
+/// @name box
+///
+/// @group utils
+.box {
+
+  &__none {
+    @include box-maker(false);
+  }
+
+  &__auto {
+    @include box-maker('auto');
+  }
+
+  &__fullscreen {
+    @include box-maker('fullscreen');
+  }
+
+  &__default {
+    @include box-maker(100%);
+  }
+
+  &__square {
+    @include box-maker(100%);
+  }
+
+  &__half {
+    @include box-maker(35%);
+  }
+
+  &__sixteen_nine {
+    @include box-maker(54.25%);
+  }
+
+  &__super_scope {
+    @include box-maker(48%);
+  }
+
+  &__postal_card {
+    @include box-maker(66.6666%);
+  }
+
+  &__portrait {
+    @include box-maker(120%);
+  }
+}

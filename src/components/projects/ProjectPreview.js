@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Fade from 'react-reveal/Fade'
 import { Link } from 'gatsby'
 
+import FigureBox, { boxFormats } from '../figureBox/FigureBox'
+
 import styles from './projects.module.scss'
 
 class ProjectPreview extends Component {
@@ -21,7 +23,8 @@ class ProjectPreview extends Component {
       Wrapper = Fade
       attributes = {
         bottom: true,
-        distance: "15%"
+        distance: "15%",
+        delay: 350
       }
     }
     
@@ -30,9 +33,7 @@ class ProjectPreview extends Component {
         <article className={`${styles.project_preview} mb-5`}> 
           <Link to={`/fr/projects/${slug}`}>
             {(featured_media && featured_media.source_url) &&
-            <figure className={`${styles.project_preview__preview_image}`}>
-              <img src={featured_media.source_url} alt={title} className="img-fluid" />
-            </figure>
+              <FigureBox source={featured_media.source_url} format={boxFormats.sixteenByNine} />
             }
             <footer className={`${styles.project_preview__infos}`}>
               <h4 className="h2">{title}</h4>

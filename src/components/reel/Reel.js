@@ -11,8 +11,9 @@ class Reel extends Component {
     return (
       <ReactCursorPosition>
         <ReelPlayer 
-          video_preview_src={this.props.data.acf.video_preview.source_url}
-          video_embed={this.props.data.acf.video_embed}
+          video_preview_src={this.props.data.acf.video_preview ? this.props.data.acf.video_preview.source_url : null}
+          video_full_src={this.props.data.acf.video_full ? this.props.data.acf.video_full.source_url : null}
+          video_embed={this.props.data.acf.video_embed ? this.props.data.acf.video_embed : null}
         />
       </ReactCursorPosition>
     );

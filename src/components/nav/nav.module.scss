@@ -16,6 +16,12 @@
   .nav-link {
     @extend .nav-link;
     color: $white;
+    &__active {
+      @extend .nav-link;
+      text-decoration: underline;
+    }
   }
+
+  
 
 }

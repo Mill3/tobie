@@ -178,6 +178,12 @@ $spacer-xl: $spacer * 4 !default;
   overflow-y: hidden;
 }
 
+.is-sticky {
+  position: sticky;
+  top: $spacer;
+  left: 0;
+}
+
 // Hide from screenreaders and browsers
 //
 // Credit: HTML5 Boilerplate

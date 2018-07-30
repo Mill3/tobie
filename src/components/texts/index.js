@@ -16,6 +16,10 @@ fragment textFragment on wordpress__wp_texts {
       id
       source_url
     }
+    video_full {
+      id
+      source_url
+    }
   }
 }
 `

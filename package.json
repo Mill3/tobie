@@ -13,6 +13,7 @@
     "gatsby-plugin-sass": "2.0.0-beta.5",
     "gatsby-source-wordpress": "^2.0.93",
     "get-browser-language": "1.0.0",
+    "intersection-observer": "0.5.0",
     "lodash": "4.17.10",
     "node-sass": "4.9.2",
     "react": "^16.4.1",
@@ -20,10 +21,12 @@
     "react-cx": "0.1.12",
     "react-dom": "^16.4.1",
     "react-helmet": "^5.2.0",
+    "react-lazy": "1.0.3",
     "react-modal": "3.5.1",
     "react-player": "1.6.4",
     "react-redux": "5.0.7",
     "react-reveal": "1.2.2",
+    "scroll-to-element": "2.0.0",
     "video-react": "0.13.0"
   },
   "keywords": [

@@ -1,10 +1,7 @@
-let dotenv = require('dotenv');
-let autoprefixer = require('autoprefixer');
+let dotenv = require('dotenv')
+let autoprefixer = require('autoprefixer')
 
-dotenv.config();
-
-console.log(process.env.PROTOCOL, process.env.WORDPRESS_HOST);
-
+dotenv.config()
 
 module.exports = {
   siteMetadata: {

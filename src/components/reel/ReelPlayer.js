@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import scrollToElement from 'scroll-to-element'
 import ReactPlayer from 'react-player'
 import { Player, ControlBar, BigPlayButton, LoadingSpinner } from 'video-react'
 
@@ -25,6 +27,8 @@ class ReelPlayer extends Component {
       }
     }
     this.startVideo = this.startVideo.bind(this)
+    this.setFullVideo = this.setFullVideo.bind(this)
+    
   }
 
   componentDidMount() {
@@ -33,28 +37,52 @@ class ReelPlayer extends Component {
 
       // when clicking in video
       this.refs.player.handleMouseDown = (event) => {
-        // event.preventDefault()
-        if (event.type == 'mousedown') {
-          this.handleMouseDown(event)
-        }
-      }     
+        event.preventDefault()
+        return false
+      }
     }
   }
 
   componentDidUpdate(prevProps, prevState) {    
+    // console.log(this.props.isActive);
+    
     if (prevProps.position.x != this.props.position.x) {
       this.setState({
         positionStyle: {
-          left: this.props.position.x,
-          top: this.props.position.y,
+          left: this.props.isActive ? this.props.position.x : null,
+          top: this.props.isActive ? this.props.position.y : null
+        }
+      })
+    } else if (prevProps.isActive && !this.props.isActive) {
+      this.setState({
+        positionStyle: {
+          left: null,
+          top: null
         }
       })
     }
   }
 
-  handleMouseDown(event) {
+  setFullVideo(event) {
     event.preventDefault() 
-    this.openModal()
+    // this.openModal()
+    if (this.props.video_full_src && !this.props.video_embed) {
+      this.setState({
+        src: this.props.video_full_src,
+        preview: false
+      })
+      this.refs.player.load()
+      this.refs.player.play()
+      this.refs.player.muted = false
+
+      // scroll to video
+      scrollToElement(ReactDOM.findDOMNode(this.refs.player), {
+        duration: 1800,
+        offset: -5,
+        ease: 'inOutCirc'
+      })
+
+    }
   }
 
   openModal() {
@@ -83,30 +111,45 @@ class ReelPlayer extends Component {
 
   render() { 
     return (
-      <div className={styles.reel}>
-        <SiteModal isOpen={this.state.openModal}>
-          <ReactPlayer
-            ref="externalPlayer"
-            url={this.props.video_embed}
-            width='100%'
-            height='100%'
-            autoPlay={true}
-            playing={this.state.playing}
-            onStart={() => this.startVideo()}
-          />
-          <button onClick={(e) => this.closeModal()}>Close modal</button>
-        </SiteModal>
-        <span className={styles.reel__cursor} style={this.props.detectedEnvironment.isMouseDetected ? this.state.positionStyle : null }>{this.state.labelText}</span>
+      <div className={
+        classNames({
+          [`${styles.reel}`]: this.state.preview,
+          [`${styles.reel__playing}`]: !this.state.preview
+        })
+      }>
+        {/* if has video_emebed  */}
+        {this.props.video_embed &&
+          <SiteModal isOpen={this.state.openModal}>
+            <ReactPlayer
+              ref="externalPlayer"
+              url={this.props.video_embed}
+              width='100%'
+              height='100%'
+              autoPlay={true}
+              fluid={false}
+              playing={this.state.playing}
+              onStart={() => this.startVideo()}
+            />
+            <button onClick={(e) => this.closeModal()}>Close modal</button>
+          </SiteModal>
+        }
+        {this.state.preview &&
+        <div className={styles.reel__overlay} onClick={(e) => this.setFullVideo(e)}>
+          <span className={styles.reel__cursor} style={this.props.detectedEnvironment.isMouseDetected ? this.state.positionStyle : null }>{this.state.labelText}</span>
+        </div>
+        }
         <Player
           ref="player"
-          controls={false}
+          controls={!this.state.preview}
           muted={this.state.muted}
-          preload={'auto'}
           playsInline
           loop={true}
-          fluid={true}
-          src={this.state.src}
+          fluid={false}
+          width='100%'
+          height='100%'
+          className={`${styles.video_react}`}
         >
+          <source src={this.state.src} />
           <LoadingSpinner className="" />
           <BigPlayButton className="is-hidden" />
           <ControlBar autoHide={false} className={classNames({
@@ -120,7 +163,8 @@ class ReelPlayer extends Component {
 
 ReelPlayer.propTypes = {
   video_preview_src: PropTypes.string.isRequired,
-  video_embed: PropTypes.string.isRequired,
+  video_full_src: PropTypes.string,
+  video_embed: PropTypes.string
 }
  
 export default ReelPlayer;
