@@ -9,12 +9,6 @@ exports.onCreateWebpackConfig = ({
   plugins,
   actions,
 }) => {
-  // if (stage === "build-html") {
-  //   config.loader("null", {
-  //     test: /get-browser-language/,
-  //     loader: "null-loader",
-  //   });
-  // }
   actions.setWebpackConfig({
     resolve: {
       alias: {

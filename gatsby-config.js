@@ -1,6 +1,8 @@
 let dotenv = require('dotenv');
 let autoprefixer = require('autoprefixer');
 
+dotenv.config();
+
 module.exports = {
   siteMetadata: {
     title: 'Gatsby Default Starter',
@@ -17,8 +19,8 @@ module.exports = {
     {
       resolve: "gatsby-source-wordpress",
       options: {
-        baseUrl: "localhost:9200",
-        protocol: "http",
+        baseUrl: `${process.env.WORDPRESS_HOST}`,
+        protocol: `${process.env.PROTOCOL}`,
         useACF: true,
         // Set verboseOutput to true to display a verbose output on `npm run develop` or `npm run build`
         // It can help you debug specific API Endpoints problems.
@@ -27,8 +29,8 @@ module.exports = {
         auth: {
           // If auth.user and auth.pass are filled, then the source plugin will be allowed
           // to access endpoints that are protected with .htaccess.
-          htaccess_user: "admin",
-          htaccess_pass: "admin",
+          htaccess_user: `${process.env.WORDPRESS_USER}`,
+          htaccess_pass: `${process.env.WORDPRESS_PASS}`,
           htaccess_sendImmediately: false
         },
         // Search and Replace Urls across WordPress content.

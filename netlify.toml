@@ -1,0 +1,28 @@
+# Global settings applied to the whole site.
+#
+# [publish] is the directory to publish (relative to root of your repo),
+# [command] is your build command,
+# [base] is directory to change to before starting build. if you set base:
+#    that is where we will look for package.json/.nvmrc/etc not repo root!
+
+[build]
+  base    = ""
+  publish = "public/"
+  command = "export NODE_OPTIONS=--max_old_space_size=8192 && gatsby build"
+  [build.environment]
+    WORDPRESS_HOST = "tobie-admin.mill3.studio"
+    WORDPRESS_USER = "admin"
+    WORDPRESS_PASS = "admin"
+    PROTOCOL = "https"
+
+
+# # Specific branch context: Deploys from this branch
+# # will take these settings and override their
+# # current ones.
+# [context.feature]
+#   command = "make feature"
+
+[[redirects]]
+  from = "/admin"
+  to = "http://tobie-admin.mill3.studio/wp-admin/"
+  status = 301
