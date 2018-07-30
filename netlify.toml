@@ -13,7 +13,7 @@
     WORDPRESS_HOST = "tobie-admin.mill3.studio"
     WORDPRESS_USER = "admin"
     WORDPRESS_PASS = "admin"
-    PROTOCOL = "https"
+    PROTOCOL = "http"
 
 
 # # Specific branch context: Deploys from this branch

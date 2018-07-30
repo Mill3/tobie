@@ -3,6 +3,9 @@ let autoprefixer = require('autoprefixer');
 
 dotenv.config();
 
+console.log(process.env.PROTOCOL, process.env.WORDPRESS_HOST);
+
+
 module.exports = {
   siteMetadata: {
     title: 'Gatsby Default Starter',
