@@ -1,5 +1,18 @@
 @import "~style/base";
+@import "~style/ui/buttons";
 
 .page {
   padding-top: 20vh;
+
+  &__header {
+    margin-bottom: $spacer-xl;
+  }
+
+}
+
+.btn__close {
+  @extend .btn__close;
+  top: $grid-gutter-width;
+  right: $grid-gutter-width;
+  position: absolute;
 }

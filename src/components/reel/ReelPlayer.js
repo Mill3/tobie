@@ -146,7 +146,7 @@ class ReelPlayer extends React.Component {
           <span className={styles.reel__cursor} style={this.props.detectedEnvironment.isMouseDetected ? this.state.positionStyle : null }>
             <img alt="play icon" src={playSVG} />
           </span>
-          <h4 className={styles.reel__label}>{this.state.labelText}</h4>
+          <h4 className={`${styles.reel__label} d-none d-md-block`}>{this.state.labelText}</h4>
         </div>
         }
         <Player

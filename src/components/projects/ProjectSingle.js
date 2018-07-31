@@ -18,7 +18,6 @@ class ProjectSingle extends Component {
       muted: true,
       volume: 0
     }
-    console.log(styles, this.props.data);
     this.isModal = false
     this.startVideo = this.startVideo.bind(this)
     this.handleBack = this.handleBack.bind(this)
@@ -63,9 +62,9 @@ class ProjectSingle extends Component {
     
     return (
       <Layout location={this.props.location} isModal={false} hideHeader={true} inverted={true}>
-        
+
         <div className="container-fluid">
-        
+          
           <article className={`${styles.project_single}`}>         
 
               <header className={`row align-items-center ${styles.project_single__header}`}>

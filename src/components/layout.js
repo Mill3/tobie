@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import classNames from 'classnames'
 import { StaticQuery, graphql } from 'gatsby'
-import Scrollbar, { ScrollbarPlugin } from 'smooth-scrollbar';
+import Scrollbar from 'smooth-scrollbar';
 
 
 // app components
