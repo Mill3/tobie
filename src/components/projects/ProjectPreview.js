@@ -3,7 +3,8 @@ import Fade from 'react-reveal/Fade'
 import { Link } from 'gatsby'
 
 import FigureBox, { boxFormats } from '../figureBox/FigureBox'
-import Arrow from '../../svg/Arrow'
+import Play from '../../svg/Play'
+import playSVG from '../../svg/play.svg'
 
 import styles from './projects.module.scss'
 
@@ -14,6 +15,12 @@ class ProjectPreview extends Component {
     this.videoRef = React.createRef();
     this.startVideo = this.startVideo.bind(this)
     this.pauseVideo = this.pauseVideo.bind(this)
+  }
+
+  componentDidMount() {
+    this.setState({
+      title: this.props.project.title
+    })
   }
 
   startVideo() {
@@ -80,8 +87,12 @@ class ProjectPreview extends Component {
               </FigureBox>
             }
             <footer className={`${styles.project_preview__infos}`}>
-              <Arrow className={styles.project_preview__arrow} />
-              <h4 className="h2">{title}</h4>
+              <div className={styles.project_preview__arrow}>
+                <Play />
+              </div>
+              <h4 className="h2">
+                <span>{title}</span>
+              </h4>
             </footer>
           </Link>
         </article>

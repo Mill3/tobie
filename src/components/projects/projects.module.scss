@@ -19,14 +19,17 @@
 
   &__arrow {
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 0;
     opacity: 0;
     will-change: opacity transform;
     transition: opacity 0.25s ease-in 0.07s, transform 0.25s 0.05s;
-    transform: translate(-200%, -50%);
-    width: 20px;
-    height: auto;
+    transform: translate(-250%, -50%);
+    // width: 40px;
+    svg {
+      width: 18px;
+      height: auto;
+    }
   }
 
   &__video_preview {
@@ -52,7 +55,7 @@
       transform: scale(1);
     }
     .project_preview__infos {
-      padding-left: $spacer-xl;
+      padding-left: $spacer-lg;
     }
     .project_preview__arrow {
       opacity: 1;
