@@ -22,9 +22,12 @@ class Page extends React.Component {
       <Layout inverted={true}>
         <section className={`container-fluid ${styles.page}`}>
 
-          <h1>{title}</h1>
-          
-          <div className="entry" dangerouslySetInnerHTML={{__html: content }} />
+          <div className="row">
+            <aside className="col-12 col-md-8">
+              <h1>{title}</h1>
+              <div className="entry" dangerouslySetInnerHTML={{__html: content }} />
+            </aside>
+          </div>
         
         </section>
       </Layout>

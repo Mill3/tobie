@@ -1,14 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { Link } from 'gatsby'
 
 // styles
 import styles from './logo.module.scss'
 
-class Logo extends Component {
+class Logo extends React.Component {
 
-  render() {     
+  render() {    
+
+    // wrap with Div or Link depending on props
+    let Wrapper = 'Div'
+    let attributes = {}
+
+    // Link to
+    if (this.props.link) {
+      Wrapper = Link
+      attributes = {
+        to: '/fr/'
+      }
+    }
+    
     return (
-      <div className={
+      <Wrapper {...attributes} className={
         classNames({
           [`${styles.logo__inverted}`]: this.props.inverted,
           [`${styles.logo__animated}`]: this.props.animated,
@@ -29,7 +44,7 @@ class Logo extends Component {
             Cinematographer
           </p>
         }
-      </div>
+      </Wrapper>
     );
   }
 }
@@ -38,7 +53,15 @@ Logo.propsDefault = {
   inverted: false,
   animated: false,
   byLine: true,
-  compact: false
+  compact: false,
+  link: false
+}
+
+Logo.propTypes = {
+  inverted: PropTypes.bool,
+  animated: PropTypes.bool,
+  byLine: PropTypes.bool,
+  link: PropTypes.bool
 }
  
 export default Logo;

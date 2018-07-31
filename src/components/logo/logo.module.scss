@@ -1,5 +1,6 @@
 @import "~style/base";
 
+
 /// logo
 ///
 /// @name .logo
@@ -23,6 +24,11 @@ $logo-font-size: 102px;
   margin-left: auto;
   margin-right: auto;
 
+  &:hover {
+    color: $black;
+    text-decoration: none;
+  }
+
   h1 {
     font-size: $logo-font-size;  
     margin: 0;
@@ -39,6 +45,10 @@ $logo-font-size: 102px;
   &__inverted {
     @extend .logo;
     color: $white;
+    &:hover {
+      color: $white;
+      text-decoration: none;
+    }
   }
 
   &__animated {

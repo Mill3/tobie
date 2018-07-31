@@ -32,9 +32,13 @@ class ReelPlayer extends React.Component {
     this.setFullVideo = this.setFullVideo.bind(this)    
   }
 
-  componentDidMount() {
+  componentDidMount() {    
     if (this.refs.player !== undefined) {
-      this.refs.player.play()
+      
+      // start video after some timeout
+      setTimeout(()=> {
+        this.refs.player.play()
+      }, 250);
 
       // when clicking in video
       this.refs.player.handleMouseDown = (event) => {
@@ -64,7 +68,7 @@ class ReelPlayer extends React.Component {
 
   setFullVideo(event) {
     event.preventDefault() 
-    // this.openModal()
+
     if (this.props.video_full_src && !this.props.video_embed) {
       this.setState({
         src: this.props.video_full_src,
@@ -73,6 +77,11 @@ class ReelPlayer extends React.Component {
       this.refs.player.load()
       this.refs.player.play()
       this.refs.player.muted = false
+
+      // get position
+      // let positions = ReactDOM.findDOMNode(this.refs.player).getBoundingClientRect()
+      // scroll to video
+      // window.__scrollbar.scrollTo(0, positions.top, 1000)
 
       // scroll to video
       scrollToElement(ReactDOM.findDOMNode(this.refs.player), {

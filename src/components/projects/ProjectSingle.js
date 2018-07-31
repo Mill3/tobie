@@ -7,6 +7,8 @@ import styles from './projects.module.scss'
 import Layout from '../layout'
 import Logo from '../logo/logo'
 
+import close from '../../svg/close.svg'
+
 class ProjectSingle extends Component {
   
   constructor(props) {
@@ -16,7 +18,7 @@ class ProjectSingle extends Component {
       muted: true,
       volume: 0
     }
-    // console.log(this.props.data);
+    console.log(styles, this.props.data);
     this.isModal = false
     this.startVideo = this.startVideo.bind(this)
     this.handleBack = this.handleBack.bind(this)
@@ -60,39 +62,47 @@ class ProjectSingle extends Component {
     }
     
     return (
-      <Layout location={this.props.location} isModal={this.isModal} modalTitle={this.props.data.project.title}>
-        <article className={styles.project_single}>         
-          
-          <header className={`row align-items-center ${styles.project_single__header}`}>
-            <aside className="col-3">
-              <Logo inverted={true} compact={true} />
-            </aside>
-            <aside className="col-auto ml-auto">
-              <h2>{this.props.data.project.title}</h2>
-            </aside>
-            <nav className="col-auto">
-              <a href="/" onClick={(e) => this.handleBack(e, this.isModal)}>X</a>
-            </nav>
-          </header>
+      <Layout location={this.props.location} isModal={false} hideHeader={true} inverted={true}>
+        
+        <div className="container-fluid">
+        
+          <article className={`${styles.project_single}`}>         
 
-          <div className={`row ${styles.project_single__content}`}>
-            <div className="col-12 auto-height">
-              {this.props.data.project.acf.video_embed &&
-                <ReactPlayer
-                  ref="externalPlayer"
-                  url={this.props.data.project.acf.video_embed}
-                  width='100%'
-                  height='100%'
-                  autoPlay={true}
-                  muted={this.state.muted}
-                  volume={this.state.volume}
-                  playing={this.state.playing}
-                />
-              } 
-            </div>
-          </div>
+              <header className={`row align-items-center ${styles.project_single__header}`}>
+                <aside className="col-6">
+                  <Logo inverted={true} compact={true} link={true} />
+                </aside>
+                <aside className="col-auto ml-auto">
+                  <h2>{this.props.data.project.title}</h2>
+                </aside>
+                <nav className="col-auto">
+                  <a href="/" className={styles.btn__close} onClick={(e) => this.handleBack(e, this.isModal)}>
+                    <img src={close} alt="X" />
+                  </a>
+                </nav>
+              </header>
 
-        </article>
+              <footer className={`${styles.project_single__content}`}>
+                
+                  {this.props.data.project.acf.video_embed &&
+                    <ReactPlayer
+                      ref="externalPlayer"
+                      url={this.props.data.project.acf.video_embed}
+                      width='100%'
+                      height='100%'
+                      autoPlay={true}
+                      muted={this.state.muted}
+                      volume={this.state.volume}
+                      playing={this.state.playing}
+                    />
+                  } 
+                
+              </footer>
+
+          </article>
+
+        </div>
+
       </Layout>
     );
   }

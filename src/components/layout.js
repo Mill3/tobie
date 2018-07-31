@@ -1,41 +1,61 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import classNames from 'classnames'
 import { StaticQuery, graphql } from 'gatsby'
-// import { connect } from "react-redux"
-import Scrollbar from 'smooth-scrollbar-react'
-// import Scrollbar, { ScrollbarPlugin } from 'smooth-scrollbar';
+import Scrollbar, { ScrollbarPlugin } from 'smooth-scrollbar';
 
 
 // app components
 import Main from './main'
 import Header from '@components/header/header'
 import Footer from '@components/footer/footer'
+import { isBrowser } from '@utils/browser'
 
 // import base style
 import '../style/App.scss'
 
 // favicons
 import favicon from "../img/favicon.gif";
+// import favicon from "../img/favicon-off.gif";
 
 // css module
 import styles from './layout.module.scss'
 
-// class ScrollBarRef extends ScrollbarPlugin {
-//   static pluginName = 'ScrollBarRef';
+class Wrapper extends React.Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {  }
+    this.ref = React.createRef();
+  }
 
-//   onInit() {
-//     console.log('scroll has init');    
-//   }
+  componentDidMount() {
+    if (isBrowser()) {
+      window.__scrollbar = Scrollbar.init(ReactDOM.findDOMNode(this.ref.current))
+    }
+  }
 
-//   onUpdate() {
-//     // console.log('scrollbar updated');
-//     // this._update();
-//   }
-// }
+  render() { 
+    return (
+      <div
+        ref={this.ref}
+        style={{
+          display: 'block',
+          height: '100vh'
+        }}
+      >
+        {this.props.children}
+      </div>
+    )
+  }
 
-const Layout = ({ children, location, isModal, inverted }) => (
+}
+ 
+// export  Wrapper;
+
+const Layout = ({ children, location, isModal, inverted, hideHeader }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -51,7 +71,7 @@ const Layout = ({ children, location, isModal, inverted }) => (
         <Helmet
           title={data.siteSettings.title}
           meta={[
-            { name: 'description', content: data.siteSettings.description },
+            { name: 'description', content: data.siteSettings.description }
           ]}
         >
           <link rel="apple-touch-icon" href={favicon} />
@@ -66,20 +86,10 @@ const Layout = ({ children, location, isModal, inverted }) => (
               [`${styles.layout__inverted}`]: inverted
             }
           )}
-          style={{
-            display: 'flex',
-            height: '100vh'
-          }}
-          >
-          <Scrollbar
-            damping={0.03}
-            renderByPixels={true}
-            alwaysShowTracks={false}
-          >
-            <Header/>
-            <Main location={location} children={children} isModal={isModal} />
-            <Footer/>
-          </Scrollbar>
+        >
+          <Header hidden={hideHeader} />
+          <Main location={location} children={children} isModal={isModal} />
+          <Footer/>
         </div>
       </>
     )}
@@ -89,12 +99,14 @@ const Layout = ({ children, location, isModal, inverted }) => (
 Layout.defaultProps = {
   children: PropTypes.node.isRequired,
   isModal: false,
+  hideHeader: false,
   inverted: false
 }
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   isModal: PropTypes.bool,
+  hideHeader: PropTypes.bool,
   inverted: PropTypes.bool
 }
 

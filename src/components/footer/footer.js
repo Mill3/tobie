@@ -1,5 +1,6 @@
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
+import Fade from 'react-reveal/Fade'
 
 import Logo from '@components/logo/logo'
 
@@ -18,10 +19,12 @@ const Footer = ({ props }) => (
       <footer className={`container-fluid ${styles.footer}`}>
         <div className="row">
           <aside className="col">
-            <Logo compact={true} byLine={false} />
-            {data.contact &&
-              <div className="mt-4" dangerouslySetInnerHTML={{ __html : data.contact.content }} />
-            }
+            <Fade bottom={true} delay={250}>
+              <Logo compact={true} byLine={false} />
+              {data.contact &&
+                <div className="mt-4" dangerouslySetInnerHTML={{ __html : data.contact.content }} />
+              }
+            </Fade>
           </aside>
         </div>
       </footer>
