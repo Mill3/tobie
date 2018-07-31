@@ -73,18 +73,39 @@ export default connect(
 
 
 export const query = graphql`
-  query IndexQuery($language_slug: String!) {
+  query IndexQuery {
     
-    projects : allWordpressWpProjects(filter : { language_slug : { eq: $language_slug }}) {
+    projects : allWordpressWpProjects {
       edges {
         node {
-          ...projectFragment
+          title
+          slug
+          featured_media {
+            id
+            media_type
+            source_url
+          }
+          acf {
+            video_embed
+            video_preview_hover {
+              source_url
+            }
+          }
         }
       }
     }
 
     homeVideo : wordpressWpTexts(slug : { eq: "home-video" }) {
-      ...textFragment
+      slug
+      title
+      acf {
+        text_video_preview {
+          source_url
+        }
+        text_video_full {
+          source_url
+        }
+      }
     }
 
   }

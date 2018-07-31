@@ -113,7 +113,18 @@ export default ProjectSingle;
 export const projectQuery = graphql`
 query projectSingle($slug: String!) {
   project : wordpressWpProjects(slug : { eq: $slug }) {
-    ...projectFragment
+    id
+    title
+    slug
+    language_slug
+    featured_media {
+      id
+      media_type
+      source_url
+    }
+    acf {
+      video_embed
+    }
   }
 }
 `

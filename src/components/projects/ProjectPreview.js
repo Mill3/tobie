@@ -44,7 +44,7 @@ class ProjectPreview extends Component {
     } = this.props.project
 
     let {
-      video_preview
+      video_preview_hover
     } = this.props.project.acf
 
     let Wrapper = "span"
@@ -69,18 +69,18 @@ class ProjectPreview extends Component {
           <Link to={`/fr/projects/${slug}`}>
             {(featured_media && featured_media.source_url) &&
               <FigureBox source={featured_media.source_url} format={boxFormats.sixteenByNine}>
-                {video_preview &&
+                {video_preview_hover &&
                   <div className={styles.project_preview__video_preview}>
                     <video
                       ref='video'
                       width='100%'
                       height='100%'
                       playsInline
-                      autoplay
+                      autoPlay
                       muted
                       loop
                     >
-                      <source src={video_preview.source_url} />
+                      <source src={video_preview_hover.source_url} />
                     </video>
                   </div>
                 }

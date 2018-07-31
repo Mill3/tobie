@@ -73,7 +73,7 @@ class ReelPlayer extends React.Component {
   setFullVideo(event) {
     event.preventDefault() 
 
-    if (this.props.video_full_src && !this.props.video_embed) {
+    if (this.props.video_full_src) {
       this.setState({
         src: this.props.video_full_src,
         preview: false
@@ -182,8 +182,7 @@ class ReelPlayer extends React.Component {
 
 ReelPlayer.propTypes = {
   video_preview_src: PropTypes.string.isRequired,
-  video_full_src: PropTypes.string,
-  video_embed: PropTypes.string
+  video_full_src: PropTypes.string
 }
  
 export default ReelPlayer;

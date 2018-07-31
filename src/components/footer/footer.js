@@ -12,7 +12,8 @@ const Footer = ({ props }) => (
     query={graphql`
       query FooterQuery {
         contact : wordpressWpTexts(slug : { eq: "contact" }) {
-          ...textFragment
+          title
+          content
         }
       }
     `}
