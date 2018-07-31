@@ -6,9 +6,13 @@ dotenv.config()
 module.exports = {
   siteMetadata: {
     title: 'Gatsby Default Starter',
+    siteUrl: `${process.env.SITE_URL}`,
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    {
+      resolve: 'gatsby-plugin-sitemap'
+    },
     {
       resolve: `gatsby-plugin-sass`,
       options: {
@@ -47,6 +51,8 @@ module.exports = {
         excludedRoutes: ["/*/*/comments", "/yoast/**"],
         // use a custom normalizer which is applied after the built-in ones.
         normalizer: function({ entities }) {
+          // console.log(entities);
+          
           return entities
         }
       },

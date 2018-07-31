@@ -1,5 +1,5 @@
 import React from 'react';
-import { Scrambler, Cycler } from "react-text-scrambler"
+import { Scrambler } from "react-text-scrambler"
 
 import styles from './nav.module.scss'
 
@@ -34,14 +34,16 @@ class Credits extends React.Component {
         onMouseEnter={(e) => this.mouseEnter()}
         onMouseLeave={(e) => this.mouseLeave()}
         className={`${styles.navLink} ${styles.credits}`}
-        target="_blank">
-          {this.state.hover &&
-            <Scrambler duration={750} text="Mill3" />
-          }
-          {!this.state.hover &&
-            <span>Credits</span>
-          }
-        </a>
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {this.state.hover &&
+          <Scrambler duration={750} text="Mill3" />
+        }
+        {!this.state.hover &&
+          <span>Credits</span>
+        }
+      </a>
     );
   }
 }

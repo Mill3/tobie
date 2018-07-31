@@ -4,7 +4,6 @@ import { Link } from 'gatsby'
 
 import FigureBox, { boxFormats } from '../figureBox/FigureBox'
 import Play from '../../svg/Play'
-import playSVG from '../../svg/play.svg'
 
 import styles from './projects.module.scss'
 
