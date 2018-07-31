@@ -8,16 +8,13 @@ fragment textFragment on wordpress__wp_texts {
   content
   acf {    
     image {
-      id
       source_url
     }
     video_embed
     video_preview {
-      id
       source_url
     }
     video_full {
-      id
       source_url
     }
   }

@@ -1,0 +1,77 @@
+
+
+/// basic style for content entry (p, h1, etc)
+///
+/// @name .entry
+///
+/// @group entry
+
+
+.entry {
+
+  // titles
+  h2, h3, h4, h5, h6 {
+    font-weight: 500;
+    margin: $spacer-md 0 $spacer 0;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  p {
+    font-size: $font-size-lg;
+    line-height: 1.5;
+    // @include media-breakpoint-down(xs) {
+    //   font-size: 18px;
+    //   line-height: 29px;
+    // }
+  }
+
+  b, strong {
+    font-weight: 700;
+  }
+
+  // lists
+  ul, ol {
+    font-size: $font-size-lg;
+    padding-left: 1.15rem;
+    margin: $spacer 0 $spacer 0;
+    @include media-breakpoint-down(xs) {
+      font-size: 18px;
+      line-height: 29px;
+    }
+    li {
+      margin-bottom: $spacer-sm;
+    }
+  }
+
+  a {
+    color: $white;
+  }
+
+  blockquote {
+    h1 {
+      font-size: 48px;
+    }
+    p, h2, h3, h4, h5 {
+      font-weight: 300;
+      margin-bottom: $spacer-sm;
+    }
+  }
+
+  blockquote + h2,
+  blockquote + h3,
+  blockquote + h4 {
+    color: $gray-500;
+  }
+
+  img {
+    @include img-fluid;
+    margin-top: $spacer;
+    margin-bottom: $spacer-md;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+}

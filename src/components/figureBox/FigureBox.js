@@ -72,6 +72,7 @@ class FigureBox extends Component {
     
     return (
       <TagName className={`${styles[this.props.format]} ${this.props.type} ${this.props.className} ${this.state.loadingClassName}`}>
+        {this.props.children}
         <Lazy onLoad={() => this.contentHasLoaded() } cushion={'0% 0% 200% 0%'} className={styles.content}>
           {/* <img src={this.props.source.src} sizes="(min-width: 768px) 50vw, (min-width: 1024px) 66vw, 100vw" srcSet={`${this.props.source.srcSet}`} /> */}
           {this.imageBackground()}
