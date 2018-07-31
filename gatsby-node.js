@@ -113,8 +113,6 @@ return new Promise((resolve, reject) => {
               id
               title
               slug
-              language_id  
-              language_slug
             }
           }
         }

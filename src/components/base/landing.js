@@ -87,7 +87,7 @@ export const query = graphql`
           }
           acf {
             video_embed
-            video_preview_hover {
+            hover {
               source_url
             }
           }

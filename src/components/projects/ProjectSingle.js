@@ -122,7 +122,6 @@ query projectSingle($slug: String!) {
     id
     title
     slug
-    language_slug
     featured_media {
       id
       media_type
