@@ -90,9 +90,15 @@ class ProjectSingle extends Component {
                       width='100%'
                       height='100%'
                       autoPlay={true}
-                      muted={this.state.muted}
+                      // muted={false}
                       volume={this.state.volume}
                       playing={this.state.playing}
+                      controls={true}
+                      config={{
+                        youtube: {
+                          playerVars: { showinfo: 0 }
+                        }
+                      }}
                     />
                   } 
                 
