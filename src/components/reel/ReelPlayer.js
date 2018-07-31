@@ -154,7 +154,7 @@ class ReelPlayer extends React.Component {
           <source src={this.state.src} />
           <LoadingSpinner className="" />
           <BigPlayButton className="is-hidden" />
-          <ControlBar autoHide={false} className={classNames({
+          <ControlBar autoHide={true} className={classNames({
             "is-hidden": this.state.preview
           })}/>
         </Player>
