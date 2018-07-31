@@ -41,7 +41,7 @@ class Logo extends React.Component {
             })
             
           }>
-            Cinematographer
+            CSC – Cinematographer
           </p>
         }
       </Wrapper>
