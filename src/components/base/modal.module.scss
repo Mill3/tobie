@@ -6,14 +6,26 @@
 ///
 /// @group base
 
+@keyframes modalFadeInAnimation {
+  from { 
+    opacity: 0;
+    // transform: translateY(-100%);
+  }
+  to { 
+    opacity: 1;
+    // transform: translateY(0%);
+  }
+}
+
 .modal {
   position: absolute;
-  top: 40px;
-  left: 40px;
-  right: 40px;
-  bottom: 40px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: $black;
   color: $white;
+  // opacity: 0;
 
   &__overlay {
     position: fixed;
@@ -21,11 +33,26 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.85);
+    background-color: rgba(0,0,0,0);
+    // display: none;
   }
 
   a {
     color: $white;
+  }
+
+  &__open {
+    @extend .modal;
+    animation-name: modalFadeInAnimation;
+    animation-duration: 0.25s;
+    animation-delay: 0.25s;
+    animation-fill-mode: backwards;
+  }
+
+  &__closed {
+    // @extend .modal;
+    // opacity: 0;
+    // transition: opacity 250ms ease-out 250ms;
   }
 
 }

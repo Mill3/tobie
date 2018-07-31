@@ -5,10 +5,6 @@ import Logo from '@components/logo/logo'
 
 import styles from './footer.module.scss'
 
-const log = (data) => {
-  console.log(data);
-}
-
 const Footer = ({ props }) => (
   <StaticQuery
     query={graphql`

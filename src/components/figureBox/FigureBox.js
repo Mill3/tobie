@@ -32,7 +32,7 @@ class FigureBox extends Component {
   }
 
   backgroundStyle() {
-    if (this.props.type == 'background') {
+    if (this.props.type === 'background') {
       return {
         backgroundImage: `url("${this.props.source}")`,
         backgroundSize: this.props.backgroundSize,
@@ -44,7 +44,7 @@ class FigureBox extends Component {
   }
 
   imageBackground() {
-    if (this.props.type == 'background') {
+    if (this.props.type === 'background') {
       return (
         <div style={this.backgroundStyle()} />
       )
@@ -53,9 +53,9 @@ class FigureBox extends Component {
 
 
   imageInline() {
-    if (this.props.type == 'inline') {
+    if (this.props.type === 'inline') {
       return (
-        <img src={this.props.source} className="img-fluid" />
+        <img src={this.props.source} alt={'alt'} className="img-fluid" />
       )
     }
   }

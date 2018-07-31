@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import SiteModal from './base/modal'
-import { Link, PageRenderer } from "gatsby"
+
+import styles from './layout.module.scss'
 
 class Main extends Component {
 
@@ -20,7 +21,7 @@ class Main extends Component {
     }
 
     return (
-      <main>
+      <main className={styles.main}>
         {this.props.children}
       </main>
     );

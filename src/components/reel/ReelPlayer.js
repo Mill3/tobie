@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
@@ -12,12 +12,12 @@ import playSVG from '../../svg/play.svg'
 
 import styles from './reel.module.scss'
 
-class ReelPlayer extends Component {
+class ReelPlayer extends React.Component {
   
   constructor(props) {
     super(props);
     this.state = {
-      labelText: 'Play reel',
+      labelText: 'Demo reel',
       src: this.props.video_preview_src,
       muted: true,
       playing: false,
@@ -29,9 +29,7 @@ class ReelPlayer extends Component {
       }
     }
     this.startVideo = this.startVideo.bind(this)
-    this.setFullVideo = this.setFullVideo.bind(this)
-    console.log(playSVG);
-    
+    this.setFullVideo = this.setFullVideo.bind(this)    
   }
 
   componentDidMount() {
@@ -46,10 +44,8 @@ class ReelPlayer extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {    
-    // console.log(this.props.isActive);
-    
-    if (prevProps.position.x != this.props.position.x) {
+  componentDidUpdate(prevProps, prevState) {        
+    if (prevProps.position.x !== this.props.position.x) {
       this.setState({
         positionStyle: {
           left: this.props.isActive ? this.props.position.x : null,
@@ -139,7 +135,7 @@ class ReelPlayer extends Component {
         {this.state.preview &&
         <div className={styles.reel__overlay} onClick={(e) => this.setFullVideo(e)}>
           <span className={styles.reel__cursor} style={this.props.detectedEnvironment.isMouseDetected ? this.state.positionStyle : null }>
-            <img src={playSVG} />
+            <img alt="play icon" src={playSVG} />
           </span>
           <h4 className={styles.reel__label}>{this.state.labelText}</h4>
         </div>

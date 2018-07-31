@@ -20,7 +20,7 @@
     width: 200px;
     text-align: center;
     pointer-events: none;
-    transition: all 0.45s;
+    transition: all 0.15s;
   }
 
   &__label {
@@ -46,7 +46,7 @@
   &:hover {
     .reel__cursor {
       opacity: 1;
-      transition: inherit;
+      transition: all 0.015s;
     }
   }
 

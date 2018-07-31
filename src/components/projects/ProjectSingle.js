@@ -5,6 +5,7 @@ import ReactPlayer from 'react-player'
 import styles from './projects.module.scss'
 
 import Layout from '../layout'
+import Logo from '../logo/logo'
 
 class ProjectSingle extends Component {
   
@@ -59,22 +60,38 @@ class ProjectSingle extends Component {
     }
     
     return (
-      <Layout location={this.props.location} isModal={this.isModal}>
-        <article className={styles.project_single}>
-          <h2>{this.props.data.project.title}</h2>
-          { this.props.data.project.acf.video_embed &&
-            <ReactPlayer
-              ref="externalPlayer"
-              url={this.props.data.project.acf.video_embed}
-              width='100%'
-              height='100%'
-              autoPlay={true}
-              muted={this.state.muted}
-              volume={this.state.volume}
-              playing={this.state.playing}
-            />
-          }
-          <a href="/" onClick={(e) => this.handleBack(e, this.isModal)}>X</a>
+      <Layout location={this.props.location} isModal={this.isModal} modalTitle={this.props.data.project.title}>
+        <article className={styles.project_single}>         
+          
+          <header className={`row align-items-center ${styles.project_single__header}`}>
+            <aside className="col-3">
+              <Logo inverted={true} compact={true} />
+            </aside>
+            <aside className="col-auto ml-auto">
+              <h2>{this.props.data.project.title}</h2>
+            </aside>
+            <nav className="col-auto">
+              <a href="/" onClick={(e) => this.handleBack(e, this.isModal)}>X</a>
+            </nav>
+          </header>
+
+          <div className={`row ${styles.project_single__content}`}>
+            <div className="col-12 auto-height">
+              {this.props.data.project.acf.video_embed &&
+                <ReactPlayer
+                  ref="externalPlayer"
+                  url={this.props.data.project.acf.video_embed}
+                  width='100%'
+                  height='100%'
+                  autoPlay={true}
+                  muted={this.state.muted}
+                  volume={this.state.volume}
+                  playing={this.state.playing}
+                />
+              } 
+            </div>
+          </div>
+
         </article>
       </Layout>
     );
