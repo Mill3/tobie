@@ -10,8 +10,8 @@ class IndexPage extends React.Component {
 
   // detect and redirected to proper landing
   componentDidMount() {
-    let to = `/${detectLocale()}/`
-    push(to)
+    // let to = `/${detectLocale()}/`
+    push('/fr/')
   }
 
   // will never render, the sadness :(

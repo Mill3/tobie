@@ -19,7 +19,7 @@ class Page extends React.Component {
     } = this.props.data.page
 
     return (
-      <Layout inverted={true}>
+      <Layout inverted={true} _hideHeader={true}>
         <section className={`container-fluid ${styles.page}`}>
 
           <div className="row">
