@@ -76,7 +76,7 @@ class ProjectPreview extends Component {
                       width='100%'
                       height='100%'
                       playsInline
-                      autplay
+                      autoplay
                       muted
                       loop
                     >

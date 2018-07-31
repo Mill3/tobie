@@ -72,7 +72,7 @@ class ProjectSingle extends Component {
                   <Logo inverted={true} compact={true} link={true} />
                 </aside>
                 <aside className="col-auto ml-auto">
-                  <h2>{this.props.data.project.title}</h2>
+                  <h4 className="is-sans-serif">{this.props.data.project.title}</h4>
                 </aside>
                 <nav className="col-auto">
                   <a href="/" className={styles.btn__close} onClick={(e) => this.handleBack(e, this.isModal)}>

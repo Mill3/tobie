@@ -27,26 +27,22 @@ class Page extends React.Component {
           <img src={close} alt="X" />
         </Link>
 
+        <section className={`container-fluid ${styles.page}`}>
+
+          <div className="row">
+            <aside className="col-12 col-md-8">
+              <Fade bottom={true} distance={'10%'}>
+                <header className={styles.page__header}>
+                  <h1>{title}</h1>
+                </header>
+              </Fade>
+              <Fade bottom={true} distance={'4%'} delay={250}>
+                <div className="entry" dangerouslySetInnerHTML={{__html: content }} />
+              </Fade>
+            </aside>
+          </div>
         
-
-          <section className={`container-fluid ${styles.page}`}>
-
-            <div className="row">
-              <aside className="col-12 col-md-8">
-                <Fade bottom={true} distance={'10%'}>
-                  <header className={styles.page__header}>
-                    <h1>{title}</h1>
-                  </header>
-                </Fade>
-                <Fade bottom={true} distance={'4%'} delay={250}>
-                  <div className="entry" dangerouslySetInnerHTML={{__html: content }} />
-                </Fade>
-              </aside>
-            </div>
-          
-          </section>
-
-        
+        </section>
 
       </Layout>
     );

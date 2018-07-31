@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import scrollToElement from 'scroll-to-element'
 import ReactPlayer from 'react-player'
+import Fade from 'react-reveal/Fade'
 import { Player, ControlBar, BigPlayButton, LoadingSpinner } from 'video-react'
 
 import SiteModal from '../base/modal'
@@ -17,7 +18,8 @@ class ReelPlayer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      labelText: 'Demo reel',
+      labelText: 'Demo Reel',
+      labelTextActive: 'Play Reel',
       src: this.props.video_preview_src,
       muted: true,
       playing: false,
@@ -51,6 +53,7 @@ class ReelPlayer extends React.Component {
   componentDidUpdate(prevProps, prevState) {        
     if (prevProps.position.x !== this.props.position.x) {
       this.setState({
+        labelText: 'Play Reel',
         positionStyle: {
           left: this.props.isActive ? this.props.position.x : null,
           top: this.props.isActive ? this.props.position.y : null
@@ -58,6 +61,7 @@ class ReelPlayer extends React.Component {
       })
     } else if (prevProps.isActive && !this.props.isActive) {
       this.setState({
+        labelText: 'Demo Reel',
         positionStyle: {
           left: "50%",
           top: "50%"
@@ -146,7 +150,11 @@ class ReelPlayer extends React.Component {
           <span className={styles.reel__cursor} style={this.props.detectedEnvironment.isMouseDetected ? this.state.positionStyle : null }>
             <img alt="play icon" src={playSVG} />
           </span>
-          <h4 className={`${styles.reel__label} d-none d-md-block`}>{this.state.labelText}</h4>
+          <Fade bottom delay={250}>
+            <h4 className={`${styles.reel__label} d-none d-md-block`}>
+              <span>{this.state.labelText}</span>
+            </h4>
+          </Fade>
         </div>
         }
         <Player

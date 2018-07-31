@@ -8,6 +8,7 @@
 /// @group nav
 
 .nav {
+  padding-top: $spacer;
     
   .nav-item {
     @extend .nav-item;
@@ -20,17 +21,29 @@
     padding: 0;
     opacity: 0.5;
     transition: all 0.25s;
-    border-bottom: 1px solid rgba(255,255,255,0);
+    // border-bottom: 1px solid rgba(255,255,255,0);
     &:hover {
       opacity: 1;
-      border-bottom-color: rgba(255,255,255,1);
+      // border-bottom-color: rgba(255,255,255,1);
     }
     &__active {
       opacity: 1;
-      border-bottom-color: rgba(255,255,255,1);
+      // border-bottSom-color: rgba(255,255,255,1);
     }
   }
 
+  // &__inverted {
+
+  // }
   
 
+}
+
+.credits {
+  min-width: 60px;
+  height: 22px;
+  text-align: center;
+  &:hover {
+    color: #3325F1 !important;
+  }
 }

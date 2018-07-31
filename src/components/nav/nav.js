@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'gatsby'
 
+import Credits from './credits'
 import detectLocale from '@utils/detect-locale'
 
 import styles from './nav.module.scss'
@@ -26,16 +27,24 @@ class Nav extends Component {
               activeClassName={`${styles.navLink__active}`}
               className={`${styles.navLink}`}>
                 About & Infos
-              </Link>
-            </li>
+            </Link>
+          </li>
           <li className={`${styles.navItem} is-hidden`}>
             <Link to={`/en/`} className={`${styles.navLink}`}>En</Link>
           </li>
+          {this.props.credits &&
+          <li className={`${styles.navItem}`}>
+            <Credits />
+          </li>
+          }
         </ul>
       </nav>
     );
   }
 }
- 
+
+Nav.defaultProps = {
+  credits: false
+}
 
 export default Nav;
