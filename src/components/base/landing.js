@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { graphql } from 'gatsby'
+import Fade from 'react-reveal/Fade'
 
 // load app components
 import Layout from '@components/layout'
@@ -38,11 +39,15 @@ class Landing extends Component {
           )
         }>
           <header className={`${styles.landing__header}`}>
-            <Logo 
-              byLine={true}
-              inverted={!this.props.introPlayed ? false : true}
-              animated={this.props.introPlayed ? false : true}
-            />
+            <div className="col-12">
+              <Fade>
+                <Logo 
+                  byLine={true}
+                  inverted={!this.props.introPlayed ? false : true}
+                  animated={this.props.introPlayed ? false : true}
+                />
+              </Fade>
+            </div>
           </header>
           
           <div className="mb-6">
