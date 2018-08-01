@@ -105,6 +105,10 @@ class ReelPlayer extends React.Component {
       playing: false,
       previewMode: true,
     })
+
+    this.refs.player.load()
+    this.refs.player.play()
+    this.refs.player.muted = false
   }
 
   render() { 
