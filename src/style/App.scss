@@ -4,8 +4,6 @@
 
 // import node modules
 
-// import forked vendors styles
-@import "~video-react/styles/scss/video-react";
 
 // bootstrap basics
 @import "vendors/bootstrap/utilities";
@@ -13,6 +11,9 @@
 @import "vendors/bootstrap/reboot";
 @import "vendors/bootstrap/images";
 @import "vendors/bootstrap/nav";
+
+// import forked vendors styles
+@import "vendors/video-react/video-react";
 
 // utils
 @import "utils/easing";

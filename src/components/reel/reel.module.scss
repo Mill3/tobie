@@ -1,9 +1,14 @@
 @import "~style/base";
+@import "~style/ui/buttons";
 
 .reel {
   position: relative;
   overflow: hidden;
   height: 600px;
+
+  @include media-breakpoint-down(xs) {
+    height: 250px;
+  }
 
   &__cursor {
     position: absolute;
@@ -75,4 +80,14 @@
     }
   }
 
+}
+
+
+
+.btn__close {
+  @extend .btn__close;
+  top: $grid-gutter-width;
+  right: $grid-gutter-width;
+  position: absolute;
+  z-index: 100;
 }

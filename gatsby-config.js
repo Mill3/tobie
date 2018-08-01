@@ -52,18 +52,13 @@ module.exports = {
         excludedRoutes: ["/*/*/comments", "/yoast/**"],
         // use a custom normalizer which is applied after the built-in ones.
         normalizer: function({ entities }) {
-          // console.log(entities);
-          // const projects = entities.filter(e => e.__type === `wordpress__wp_projects`)
-          // const foo = entities.filter(e => e.id === `cb7f965a-be7f-567b-b53a-913286af57f0`)
-          // console.log(projects);
-          // console.log(foo);
 
-          return entities.map((entity) => {
-          
+          return entities.map((entity) => {        
             
             // 
             // Fix bug with ACF file fields
             // 
+            
             if (typeof entity.__type !== 'undefined' && entity.acf) {
               // console.log(entity.acf);
               var keys = Object.keys(entity.acf);
@@ -80,25 +75,6 @@ module.exports = {
                   if(node[0]) entity.acf[key.slice(0, has___NODE.index)] = node[0]
                 }
               })
-
-              // entity.acf.map((field) => {
-              //   console.log(field);
-                
-              // })
-              
-              // entity
-              // entity.hover = null
-
-              // if (entity.acf.hover___NODE) {
-              //   // find node
-              //   let node = entities.filter(e => e.id === entity.acf.hover___NODE)
-                
-              //   // if node found, merge into entity
-              //   entity.hover = node[0] ? node[0] : null
-                
-              //   // delete original key
-              //   delete entity.acf.hover___NODE
-              // }
 
             }
 

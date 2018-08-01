@@ -10,6 +10,7 @@ import { Player, ControlBar, BigPlayButton, LoadingSpinner } from 'video-react'
 import SiteModal from '../base/modal'
 
 import playSVG from '../../svg/play.svg'
+import close from '../../svg/close.svg'
 
 import styles from './reel.module.scss'
 
@@ -23,14 +24,13 @@ class ReelPlayer extends React.Component {
       src: this.props.video_preview_src,
       muted: true,
       playing: false,
-      preview: true,
-      openModal: false,
+      previewMode: true,
       positionStyle: {
         left: 0,
         top: 0,
       }
     }
-    this.startVideo = this.startVideo.bind(this)
+    this.setPreviewMode = this.setPreviewMode.bind(this)
     this.setFullVideo = this.setFullVideo.bind(this)    
   }
 
@@ -76,7 +76,7 @@ class ReelPlayer extends React.Component {
     if (this.props.video_full_src) {
       this.setState({
         src: this.props.video_full_src,
-        preview: false
+        previewMode: false
       })
       this.refs.player.load()
       this.refs.player.play()
@@ -97,55 +97,40 @@ class ReelPlayer extends React.Component {
     }
   }
 
-  openModal() {
-    this.refs.player.pause()
+  setPreviewMode(event) {    
+    event.preventDefault()
     this.setState({
-      playing: true,
-      openModal: true
-    })
-  }
-
-  closeModal() {
-    this.refs.player.play()
-    this.setState({
+      src: this.props.video_preview_src,
+      muted: true,
       playing: false,
-      openModal: false
+      previewMode: true,
     })
-  }
-
-  startVideo() {    
-    if (this.refs.externalPlayer) {
-      this.setState({
-        playing: true
-      })
-    }
   }
 
   render() { 
     return (
       <div className={
         classNames({
-          [`${styles.reel}`]: this.state.preview,
-          [`${styles.reel__playing}`]: !this.state.preview
+          [`${styles.reel}`]: this.state.previewMode,
+          [`${styles.reel__playing}`]: !this.state.previewMode
         })
       }>
-        {/* if has video_emebed  */}
-        {this.props.video_embed &&
-          <SiteModal isOpen={this.state.openModal}>
-            <ReactPlayer
-              ref="externalPlayer"
-              url={this.props.video_embed}
-              width='100%'
-              height='100%'
-              autoPlay={true}
-              fluid={false}
-              playing={this.state.playing}
-              onStart={() => this.startVideo()}
-            />
-            <button onClick={(e) => this.closeModal()}>Close modal</button>
-          </SiteModal>
-        }
-        {this.state.preview &&
+
+        {/* close button */}
+        <a href="#" 
+          onClick={(e) => this.setPreviewMode(e)}
+          className={
+            classNames({
+              [`${styles.btn__close} fade-in`] : !this.state.previewMode,
+              [`is-hidden`] : this.state.previewMode,
+            })
+          }
+        >
+          <img src={close} alt="X" />
+        </a>
+
+        {/* overlay with button and labels */}
+        {this.state.previewMode &&
         <div className={styles.reel__overlay} onClick={(e) => this.setFullVideo(e)}>
           <span className={styles.reel__cursor} style={this.props.detectedEnvironment.isMouseDetected ? this.state.positionStyle : null }>
             <img alt="play icon" src={playSVG} />
@@ -157,9 +142,11 @@ class ReelPlayer extends React.Component {
           </Fade>
         </div>
         }
+
+        {/* the player */}
         <Player
           ref="player"
-          controls={!this.state.preview}
+          controls={!this.state.previewMode}
           muted={this.state.muted}
           playsInline
           loop={true}
@@ -172,9 +159,10 @@ class ReelPlayer extends React.Component {
           <LoadingSpinner className="" />
           <BigPlayButton className="is-hidden" />
           <ControlBar autoHide={true} className={classNames({
-            "is-hidden": this.state.preview
+            "is-hidden": this.state.previewMode
           })}/>
         </Player>
+
       </div>
     );
   }

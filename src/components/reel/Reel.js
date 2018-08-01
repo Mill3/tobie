@@ -7,7 +7,6 @@ import ReelPlayer from './ReelPlayer'
 class Reel extends Component {
 
   render() { 
-    console.log(this.props.data);
     return (
       <ReactCursorPosition>
         <ReelPlayer 

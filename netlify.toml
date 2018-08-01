@@ -14,7 +14,7 @@
     WORDPRESS_USER = "admin"
     WORDPRESS_PASS = "admin"
     PROTOCOL = "http"
-    SITE_URL="https://tobie.mill3.studio/"
+    SITE_URL="https://tobie.mill3.studio"
 
 
 # # Specific branch context: Deploys from this branch
