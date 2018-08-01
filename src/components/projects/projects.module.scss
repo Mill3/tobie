@@ -82,7 +82,7 @@ $headerHeight: 140px;
 
 .project_single {
   min-height: 90vh;
-  padding: 0 $grid-gutter-width/2;
+  // padding: 0 $grid-gutter-width/2;
   display: flex;
   flex-direction: column;
 
@@ -100,6 +100,13 @@ $headerHeight: 140px;
       position: absolute;
       top: 0;
       left: 0;
+    }
+  }
+
+  &__footer {
+    padding-top: $spacer-xl;
+    * {
+      color: $gray-600;
     }
   }
 

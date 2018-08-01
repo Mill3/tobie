@@ -21,6 +21,8 @@ class ProjectSingle extends Component {
     this.isModal = false
     this.startVideo = this.startVideo.bind(this)
     this.handleBack = this.handleBack.bind(this)
+    console.log(this.props.data);
+    
   }
 
   componentDidMount() {
@@ -81,7 +83,9 @@ class ProjectSingle extends Component {
                 </nav>
               </header>
 
-              <footer className={`${styles.project_single__content}`}>
+              <div className={`${styles.project_single__content} row`}>
+
+                <div className="col">
                 
                   {this.props.data.project.acf.video_embed &&
                     <ReactPlayer
@@ -92,6 +96,7 @@ class ProjectSingle extends Component {
                       autoPlay={true}
                       playing={this.state.playing}
                       controls={true}
+                      className={'col'}
                       config={{
                         youtube: {
                           playerVars: { showinfo: 0 }
@@ -99,8 +104,16 @@ class ProjectSingle extends Component {
                       }}
                     />
                   } 
+
+                </div>
                 
+              </div>
+
+              {this.props.data.project.content &&
+              <footer className={`${styles.project_single__footer} row`}>
+                <div className="entry col-12" dangerouslySetInnerHTML={{ __html: this.props.data.project.content }} />
               </footer>
+              }
 
           </article>
 
@@ -120,6 +133,7 @@ query projectSingle($slug: String!) {
     id
     title
     slug
+    content
     featured_media {
       id
       media_type
