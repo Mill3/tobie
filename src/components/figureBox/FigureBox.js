@@ -4,9 +4,9 @@ import { Lazy } from 'react-lazy'
 
 import styles from './figureBox.module.scss'
 
-// if (typeof window !== `undefined`) {
-//   const intersectionObserver = require('intersection-observer')
-// }
+if (typeof window !== `undefined`) {
+  const intersectionObserver = require('intersection-observer')
+}
 
 export const boxFormats = {
   none: 'box__none',
@@ -28,7 +28,6 @@ class FigureBox extends Component {
     this.state = {
       loadingClassName: 'is-loading'
     }
-    // console.log(styles, this.props.format, styles[this.props.format]);
   }
 
   backgroundStyle() {

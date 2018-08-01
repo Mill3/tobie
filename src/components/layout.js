@@ -4,58 +4,36 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import classNames from 'classnames'
 import { StaticQuery, graphql } from 'gatsby'
-import Scrollbar from 'smooth-scrollbar'
 
 
 // app components
 import Main from './main'
 import Header from '@components/header/header'
 import Footer from '@components/footer/footer'
-import { isBrowser } from '@utils/browser'
 
 // import base style
 import '../style/App.scss'
 
 // favicons
-import favicon from "../img/favicon.gif";
-// import favicon from "../img/favicon-off.gif";
+import faviconOn from "../img/favicon.gif";
+import faviconOff from "../img/favicon-off.gif";
 
 // css module
 import styles from './layout.module.scss'
 
-class Wrapper extends React.Component {
-  
-  constructor(props) {
-    super(props);
-    this.state = {  }
-    this.ref = React.createRef();
-  }
-
-  componentDidMount() {
-    if (isBrowser()) {
-      window.__scrollbar = Scrollbar.init(ReactDOM.findDOMNode(this.ref.current))
-    }
-  }
-
-  render() { 
-    return (
-      <div
-        ref={this.ref}
-        style={{
-          display: 'block',
-          height: '100vh'
-        }}
-      >
-        {this.props.children}
-      </div>
-    )
-  }
-
+const faviconStates = {
+  on: faviconOn,
+  off: faviconOff
 }
- 
-// export  Wrapper;
 
+let favicon = faviconStates.on
+
+// const interval = setInterval( ()=> {
+//   favicon = (favicon == faviconStates.on) ? faviconStates.off : faviconStates.on
+// }, 2000)
+  
 const Layout = ({ children, location, inverted, hideHeader }) => (
+
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
