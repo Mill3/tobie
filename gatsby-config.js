@@ -6,7 +6,7 @@ dotenv.config()
 
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Default Starter',
+    title: 'Tobie Marier Robitaille',
     siteUrl: `${process.env.SITE_URL}`,
   },
   plugins: [

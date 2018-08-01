@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { graphql } from 'gatsby'
@@ -17,11 +17,31 @@ import Projects from '@components/projects/Projects'
 import styles from './landing.module.scss'
 
 
-class Landing extends Component {
+class Landing extends React.Component {
   
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      isReady: false
+    }
+  }
+
+  componentDidMount() {
+    if (!this.props.introPlayed) {
+      
+      setTimeout( ()=> {
+        this.setState({
+          isReady: true
+        })
+      }, 500);
+      
+    } else {
+
+      this.setState({
+        isReady: true
+      })
+      
+    }
   }
 
   componentWillUnmount() {
@@ -29,6 +49,7 @@ class Landing extends Component {
   }
   
   render() { 
+    console.log("Landing triggered me during render")
     return (
       <Layout location={this.props.location}>
         <section className={
@@ -40,12 +61,13 @@ class Landing extends Component {
           )
         }>
           <header className={`${styles.landing__header}`}>
-            <Logo 
-              byLine={true}
-              inverted={!this.props.introPlayed ? false : true}
-              animated={this.props.introPlayed ? false : true}
-              fadeIn={this.props.introPlayed ? false : true}
-            />
+              <Logo 
+                byLine={true}
+                inverted={!this.props.introPlayed ? false : true}
+                animated={this.props.introPlayed ? false : true}
+                fadeIn={this.props.introPlayed ? false : true}
+                hidden={!this.state.isReady}
+              />
           </header>
           
           <div className="mb-6">

@@ -33,7 +33,8 @@ class Logo extends React.Component {
         {/* base logo line */}
         <h1 className={
           classNames({
-            [`fade-in`]: this.props.fadeIn
+            [`fade-in`]: this.props.fadeIn,
+            [`is-hidden`]: this.props.hidden
           })
         }>
           Tobie <span>Marier</span> Robitaille
