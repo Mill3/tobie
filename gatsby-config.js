@@ -1,5 +1,6 @@
 let dotenv = require('dotenv')
 let autoprefixer = require('autoprefixer')
+const _ = require(`lodash`)
 
 dotenv.config()
 
@@ -52,6 +53,58 @@ module.exports = {
         // use a custom normalizer which is applied after the built-in ones.
         normalizer: function({ entities }) {
           // console.log(entities);
+          // const projects = entities.filter(e => e.__type === `wordpress__wp_projects`)
+          // const foo = entities.filter(e => e.id === `cb7f965a-be7f-567b-b53a-913286af57f0`)
+          // console.log(projects);
+          // console.log(foo);
+
+          return entities.map((entity) => {
+          
+            
+            // 
+            // Fix bug with ACF file fields
+            // 
+            if (typeof entity.__type !== 'undefined' && entity.acf) {
+              // console.log(entity.acf);
+              var keys = Object.keys(entity.acf);
+
+              _.forEach(keys, (key) => {
+                let has___NODE = key.match(/___NODE/)                
+                if (has___NODE) {
+                  
+                  // find node
+                  let node = entities.filter(e => e.id === entity.acf[key])
+
+                  // if a node was found, attach to entry.acf object
+                  // slice '___NODE' from the original key name as the new key name 
+                  if(node[0]) entity.acf[key.slice(0, has___NODE.index)] = node[0]
+                }
+              })
+
+              // entity.acf.map((field) => {
+              //   console.log(field);
+                
+              // })
+              
+              // entity
+              // entity.hover = null
+
+              // if (entity.acf.hover___NODE) {
+              //   // find node
+              //   let node = entities.filter(e => e.id === entity.acf.hover___NODE)
+                
+              //   // if node found, merge into entity
+              //   entity.hover = node[0] ? node[0] : null
+                
+              //   // delete original key
+              //   delete entity.acf.hover___NODE
+              // }
+
+            }
+
+
+            return entity
+          })
           
           return entities
         }
