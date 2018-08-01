@@ -17,16 +17,12 @@ class ReelPlayer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      labelText: 'Demo Reel',
+      labelText: 'Play Reel',
       labelTextActive: 'Play Reel',
       src: this.props.video_preview_src,
       muted: true,
       playing: false,
-      previewMode: true,
-      positionStyle: {
-        left: 0,
-        top: 0,
-      }
+      previewMode: true
     }
     this.setPreviewMode = this.setPreviewMode.bind(this)
     this.setFullVideo = this.setFullVideo.bind(this)    
@@ -48,26 +44,6 @@ class ReelPlayer extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {        
-    if (prevProps.position.x !== this.props.position.x) {
-      this.setState({
-        labelText: 'Play Reel',
-        positionStyle: {
-          left: this.props.isActive ? this.props.position.x : null,
-          top: this.props.isActive ? this.props.position.y : null
-        }
-      })
-    } else if (prevProps.isActive && !this.props.isActive) {
-      this.setState({
-        labelText: 'Demo Reel',
-        positionStyle: {
-          left: "50%",
-          top: "50%"
-        }
-      })
-    }
-  }
-
   setFullVideo(event) {
     event.preventDefault() 
 
@@ -80,11 +56,6 @@ class ReelPlayer extends React.Component {
       this.refs.player.play()
       this.refs.player.muted = false
 
-      // get position
-      // let positions = ReactDOM.findDOMNode(this.refs.player).getBoundingClientRect()
-      // scroll to video
-      // window.__scrollbar.scrollTo(0, positions.top, 1000)
-
       // scroll to video
       scrollToElement(ReactDOM.findDOMNode(this.refs.player), {
         duration: 1800,
@@ -92,6 +63,23 @@ class ReelPlayer extends React.Component {
         ease: 'inOutCirc'
       })
 
+    }
+  }
+
+  videoTransformStyle() {
+    // console.log(this.props.proximity);
+    let baseOpacity = 1
+    let coeficient = 2.75
+    
+    return {
+      opacity: this.state.previewMode ? (baseOpacity - (this.props.proximity / coeficient)) : baseOpacity,
+      height: "100%"
+    }
+  }
+
+  lineTransformStyle() {
+    return {
+      transform: `scaleX(${this.props.proximity})`
     }
   }
 
@@ -133,38 +121,43 @@ class ReelPlayer extends React.Component {
 
         {/* overlay with button and labels */}
         {this.state.previewMode &&
-        <div className={styles.reel__overlay} onClick={(e) => this.setFullVideo(e)}>
-          <span className={styles.reel__cursor} style={this.props.detectedEnvironment.isMouseDetected ? this.state.positionStyle : null }>
-            <img alt="play icon" src={playSVG} />
-          </span>
-          <Fade bottom delay={250}>
-            <h4 className={`${styles.reel__label} d-none d-md-block`}>
-              <span>{this.state.labelText}</span>
-            </h4>
-          </Fade>
-        </div>
+          <div className={styles.reel__overlay} onClick={(e) => this.setFullVideo(e)}>
+            <div className={styles.reel__overlay__inner} >
+              {/* call to action with proximity detection */}
+              <h4 ref={this.props.proximityRef} className={`${styles.reel__label} d-none d-md-inline-block`}>
+                <Fade bottom delay={350} distance={"50%"}>
+                  <div>
+                    <img alt="play icon" src={playSVG} />
+                    <span>{this.state.labelText}</span>
+                    <hr />
+                  </div>
+                </Fade>
+              </h4> 
+            </div>
+          </div>
         }
 
         {/* the player */}
-        <Player
-          ref="player"
-          controls={!this.state.previewMode}
-          muted={this.state.muted}
-          playsInline
-          loop={true}
-          fluid={false}
-          width='100%'
-          height='100%'
-          className={`${styles.video_react}`}
-        >
-          <source src={this.state.src} />
-          <LoadingSpinner className="" />
-          <BigPlayButton className="is-hidden" />
-          <ControlBar autoHide={true} className={classNames({
-            "is-hidden": this.state.previewMode
-          })}/>
-        </Player>
-
+        <div style={this.videoTransformStyle()}>
+          <Player
+            ref="player"
+            controls={!this.state.previewMode}
+            muted={this.state.muted}
+            playsInline
+            loop={true}
+            fluid={false}
+            width='100%'
+            height='100%'
+            className={`${styles.video_react}`}
+          >
+            <source src={this.state.src} />
+            <LoadingSpinner className="is-hidden" />
+            <BigPlayButton className="is-hidden" />
+            <ControlBar autoHide={true} className={classNames({
+              "is-hidden": this.state.previewMode
+            })}/>
+          </Player>
+        </div>
       </div>
     );
   }

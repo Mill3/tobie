@@ -37,7 +37,7 @@ class Logo extends React.Component {
             [`is-hidden`]: this.props.hidden
           })
         }>
-          Tobie <span>Marier</span> Robitaille
+          Tobie <span>Marier</span> Robitaille <span className={styles.logo__title}>CSC</span>
         </h1>
         {/* byline */}
         {this.props.byLine &&
@@ -48,7 +48,7 @@ class Logo extends React.Component {
             })
             
           }>
-            CSC – Cinematographer
+            Cinematographer
           </p>
         }
       </Wrapper>
