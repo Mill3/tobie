@@ -3876,6 +3876,10 @@ follow-redirects@^1.0.0, follow-redirects@^1.3.0:
   dependencies:
     debug "^3.1.0"
 
+fontfaceobserver@^2.0.13:
+  version "2.0.13"
+  resolved "https://registry.yarnpkg.com/fontfaceobserver/-/fontfaceobserver-2.0.13.tgz#47adbb343261eda98cb44db2152196ff124d3221"
+
 for-in@^0.1.3:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-0.1.8.tgz#d8773908e31256109952b1fdb9b3fa867d2775e1"
@@ -4703,7 +4707,7 @@ hoek@4.x.x:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-4.2.1.tgz#9634502aa12c445dd5a7c5734b572bb8738aacbb"
 
-hoist-non-react-statics@^2.5.0:
+hoist-non-react-statics@^2.5.0, hoist-non-react-statics@^2.5.5:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
 
@@ -6433,6 +6437,10 @@ p-cancelable@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/p-cancelable/-/p-cancelable-0.3.0.tgz#b9e123800bcebb7ac13a479be195b507b98d30fa"
 
+p-cancelable@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/p-cancelable/-/p-cancelable-0.4.1.tgz#35f363d67d52081c8d9585e37bcceb7e0bbcb2a0"
+
 p-finally@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/p-finally/-/p-finally-1.0.0.tgz#3fbcfb15b899a44123b34b6dcc18b724336a2cae"
@@ -7313,6 +7321,15 @@ react-side-effect@^1.1.0:
 react-text-scrambler@1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/react-text-scrambler/-/react-text-scrambler-1.1.3.tgz#154ead21b3c1c70a0818143ee4d50ebb78293479"
+
+react-with-async-fonts@4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/react-with-async-fonts/-/react-with-async-fonts-4.0.2.tgz#b0036ae58f496fa1fd71ce62260c2b303dacadc4"
+  dependencies:
+    fontfaceobserver "^2.0.13"
+    hoist-non-react-statics "^2.5.5"
+    invariant "^2.2.4"
+    p-cancelable "^0.4.1"
 
 react@^16.2.0, react@^16.4.1:
   version "16.4.1"

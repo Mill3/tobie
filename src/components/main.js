@@ -1,30 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import SiteModal from './base/modal'
 
 import styles from './layout.module.scss'
 
 class Main extends Component {
 
   render() { 
-    const { location, isModal } = this.props
-    
-    if (isModal && SiteModal) {
-      return (
-        <React.Fragment>
-          {/* <PageRenderer location={{ pathname: location.pathname }} /> */}
-          <SiteModal isOpen={true} location={location}>
-            {this.props.children}
-          </SiteModal>
-        </React.Fragment>
-      )
-    }
-
     return (
       <main className={styles.main}>
         {this.props.children}
       </main>
-    );
+    )
   }
 }
 
