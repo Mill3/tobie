@@ -15,7 +15,7 @@ class IndexPage extends React.Component {
     // let to = `/${detectLocale()}/`
     setTimeout(function () {
       push('/fr/')
-    }, 500);
+    }, 1000);
   }
 
   // will never render, the sadness :(
