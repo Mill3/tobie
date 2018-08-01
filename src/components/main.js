@@ -16,12 +16,10 @@ class Main extends Component {
 
 Main.defaultProps = {
   children: null,
-  isModal: false
 };
 
 Main.propTypes = {
   children: PropTypes.object.isRequired,
-  isModal: PropTypes.bool
 };
  
 export default Main;

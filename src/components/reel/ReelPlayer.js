@@ -7,8 +7,6 @@ import ReactPlayer from 'react-player'
 import Fade from 'react-reveal/Fade'
 import { Player, ControlBar, BigPlayButton, LoadingSpinner } from 'video-react'
 
-import SiteModal from '../base/modal'
-
 import playSVG from '../../svg/play.svg'
 import close from '../../svg/close.svg'
 

@@ -55,7 +55,7 @@ class Wrapper extends React.Component {
  
 // export  Wrapper;
 
-const Layout = ({ children, location, isModal, inverted, hideHeader }) => (
+const Layout = ({ children, location, inverted, hideHeader }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -88,7 +88,7 @@ const Layout = ({ children, location, isModal, inverted, hideHeader }) => (
           )}
         >
           <Header hidden={hideHeader} />
-          <Main location={location} children={children} isModal={isModal} />
+          <Main location={location} children={children} />
           <Footer/>
         </div>
       </>
@@ -98,14 +98,12 @@ const Layout = ({ children, location, isModal, inverted, hideHeader }) => (
 
 Layout.defaultProps = {
   children: PropTypes.node.isRequired,
-  isModal: false,
   hideHeader: false,
   inverted: false
 }
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-  isModal: PropTypes.bool,
   hideHeader: PropTypes.bool,
   inverted: PropTypes.bool
 }

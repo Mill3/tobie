@@ -35,18 +35,17 @@ class Landing extends Component {
           classNames(
             { 
               [`${styles.landing}`]: this.props.introPlayed,
-              [`${styles.landing__withIntro} fade-in`]: !this.props.introPlayed
+              [`${styles.landing__withIntro}`]: !this.props.introPlayed
             }
           )
         }>
           <header className={`${styles.landing__header}`}>
-            <FontObserver franklinGothic="Franklin Gothic" canela="Canela">
             <Logo 
               byLine={true}
               inverted={!this.props.introPlayed ? false : true}
               animated={this.props.introPlayed ? false : true}
+              fadeIn={this.props.introPlayed ? false : true}
             />
-            </FontObserver>
           </header>
           
           <div className="mb-6">

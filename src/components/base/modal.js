@@ -10,7 +10,6 @@ Modal.setAppElement(`#___gatsby`)
 class SiteModal extends Component {
 
   render() {
-    console.log(styles);
     
     return (
       <Modal className={
