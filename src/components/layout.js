@@ -5,7 +5,6 @@ import Helmet from 'react-helmet'
 import classNames from 'classnames'
 import { StaticQuery, graphql } from 'gatsby'
 import Scrollbar from 'smooth-scrollbar'
-import { FontObserver } from 'react-with-async-fonts'
 
 
 // app components
@@ -80,20 +79,18 @@ const Layout = ({ children, location, isModal, inverted, hideHeader }) => (
           <link rel="icon" type="image/png" sizes="32x32" href={favicon} />
           <meta name="msapplication-TileColor" content="#000000" />
           <meta name="theme-color" content="#000000" />
-        </Helmet>
-        <FontObserver franklinGothic="Franklin Gothic" canela="Canela">
-          <div className={
-            classNames({ 
-                [`${styles.layout}`]: !inverted,
-                [`${styles.layout__inverted}`]: inverted
-              }
-            )}
-          >
-            <Header hidden={hideHeader} />
-            <Main location={location} children={children} isModal={isModal} />
-            <Footer/>
-          </div>
-        </FontObserver>
+        </Helmet>       
+        <div className={
+          classNames({ 
+              [`${styles.layout}`]: !inverted,
+              [`${styles.layout__inverted}`]: inverted
+            }
+          )}
+        >
+          <Header hidden={hideHeader} />
+          <Main location={location} children={children} isModal={isModal} />
+          <Footer/>
+        </div>
       </>
     )}
   />

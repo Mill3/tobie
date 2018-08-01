@@ -58,13 +58,13 @@ module.exports = {
             // 
             // Fix bug with ACF file fields
             // 
-            
+
             if (typeof entity.__type !== 'undefined' && entity.acf) {
               // console.log(entity.acf);
               var keys = Object.keys(entity.acf);
 
               _.forEach(keys, (key) => {
-                let has___NODE = key.match(/___NODE/)                
+                let has___NODE = key.match(/___NODE/)
                 if (has___NODE) {
                   
                   // find node

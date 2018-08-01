@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { graphql } from 'gatsby'
 import Fade from 'react-reveal/Fade'
+import { FontObserver } from 'react-with-async-fonts'
 
 // load app components
 import Layout from '@components/layout'
@@ -34,20 +35,18 @@ class Landing extends Component {
           classNames(
             { 
               [`${styles.landing}`]: this.props.introPlayed,
-              [`${styles.landing__withIntro}`]: !this.props.introPlayed
+              [`${styles.landing__withIntro} fade-in`]: !this.props.introPlayed
             }
           )
         }>
           <header className={`${styles.landing__header}`}>
-            <div className="col-12">
-              <Fade>
-                <Logo 
-                  byLine={true}
-                  inverted={!this.props.introPlayed ? false : true}
-                  animated={this.props.introPlayed ? false : true}
-                />
-              </Fade>
-            </div>
+            <FontObserver franklinGothic="Franklin Gothic" canela="Canela">
+            <Logo 
+              byLine={true}
+              inverted={!this.props.introPlayed ? false : true}
+              animated={this.props.introPlayed ? false : true}
+            />
+            </FontObserver>
           </header>
           
           <div className="mb-6">
