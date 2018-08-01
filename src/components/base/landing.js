@@ -33,14 +33,14 @@ class Landing extends React.Component {
         this.setState({
           isReady: true
         })
-      }, 500);
+      }, 100);
       
     } else {
 
       this.setState({
         isReady: true
       })
-      
+
     }
   }
 
