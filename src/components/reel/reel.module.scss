@@ -7,6 +7,7 @@
   height: 600px;
   cursor: pointer;
   background-color: $black;
+  transition: height 1.25s;
 
   @include media-breakpoint-down(xs) {
     height: 250px;

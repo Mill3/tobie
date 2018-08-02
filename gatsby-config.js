@@ -51,7 +51,7 @@ module.exports = {
         // all routes that begin with `yoast` from fetch.
         excludedRoutes: ["/*/*/comments", "/yoast/**"],
         // use a custom normalizer which is applied after the built-in ones.
-        normalizer: function({ entities }) {
+        normalizer: function({ entities }) {          
 
           return entities.map((entity) => {        
             

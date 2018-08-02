@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { push, graphql } from 'gatsby'
 import ReactPlayer from 'react-player'
+import Helmet from 'react-helmet'
 
 import styles from './projects.module.scss'
 
@@ -65,28 +66,33 @@ class ProjectSingle extends Component {
     return (
       <Layout location={this.props.location} isModal={false} hideHeader={true} inverted={true}>
 
+        <Helmet
+          title={this.props.data.project.yoast_meta ? this.props.data.project.yoast_meta.yoast_wpseo_title : this.props.data.project.title}
+          meta={[
+            { name: 'description', content: this.props.data.project.title }
+          ]}
+        />
+
         <div className="container-fluid">
           
           <article className={`${styles.project_single}`}>         
 
               <header className={`row align-items-center ${styles.project_single__header}`}>
-                <aside className="col-6">
+                <aside className="col-12 col-sm-6 mb-3">
                   <Logo inverted={true} compact={true} link={true} />
                 </aside>
-                <aside className="col-auto ml-auto">
+                <aside className="col-10 col-sm-auto ml-sm-auto">
                   <h4 className="is-sans-serif">{this.props.data.project.title}</h4>
                 </aside>
-                <nav className="col-auto">
+                <nav className="col-auto order-1">
                   <a href="/" className={styles.btn__close} onClick={(e) => this.handleBack(e, this.isModal)}>
                     <img src={close} alt="X" />
                   </a>
                 </nav>
               </header>
 
-              <div className={`${styles.project_single__content} row`}>
+              <div className={`${styles.project_single__content}`}>
 
-                <div className="col">
-                
                   {this.props.data.project.acf.video_embed &&
                     <ReactPlayer
                       ref="externalPlayer"
@@ -96,7 +102,7 @@ class ProjectSingle extends Component {
                       autoPlay={true}
                       playing={this.state.playing}
                       controls={true}
-                      className={'col'}
+                      className={''}
                       config={{
                         youtube: {
                           playerVars: { showinfo: 0 }
@@ -105,7 +111,7 @@ class ProjectSingle extends Component {
                     />
                   } 
 
-                </div>
+                
                 
               </div>
 
@@ -138,6 +144,11 @@ query projectSingle($slug: String!) {
       id
       media_type
       source_url
+    }
+    yoast_meta {
+      yoast_wpseo_title
+      yoast_wpseo_metadesc
+      yoast_wpseo_canonical
     }
     acf {
       video_embed

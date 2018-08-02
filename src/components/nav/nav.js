@@ -10,7 +10,7 @@ class Nav extends Component {
   render() {    
     return (
       <nav className={`${styles.nav} d-flex`}>
-        <ul className='nav ml-auto'>
+        <ul className='nav ml-md-auto'>
           <li className={`${styles.navItem}`}>
           <Link 
               to={`/${detectLocale()}/`}

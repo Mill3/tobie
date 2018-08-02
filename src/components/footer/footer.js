@@ -20,7 +20,7 @@ const Footer = ({ props }) => (
     render={data => (
       <footer className={`container-fluid ${styles.footer}`}>
         <div className="row align-items-end">
-          <aside className="col">
+          <aside className="col mb-4">
             <Fade bottom={true} delay={250}>
               <Logo compact={true} byLine={false} />
               {data.contact &&
@@ -28,7 +28,7 @@ const Footer = ({ props }) => (
               }
             </Fade>
           </aside>
-          <aside className="col-auto ml-auto">
+          <aside className="col-12 col-md-auto ml-md-auto">
             <Nav credits={true} />
           </aside>
         </div>

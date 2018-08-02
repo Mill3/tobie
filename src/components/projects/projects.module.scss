@@ -1,13 +1,25 @@
 @import "~style/base";
 @import "~style/ui/buttons";
 
+/// Project preview
+///
+/// @name .project_preview
+///
+/// @group projects
+
 .project_preview {
   margin-bottom: 10px;
 
   &__preview_image {
-    // border: 1px solid red;
     img {
       width: 100%;
+    }
+  }
+
+  &__title {
+    font-size: $h2-font-size;
+    @include media-breakpoint-down(xs) {
+      font-size: $h4-font-size;
     }
   }
 
@@ -25,7 +37,6 @@
     will-change: opacity transform;
     transition: opacity 0.25s ease-in 0.07s, transform 0.25s 0.05s;
     transform: translate(-250%, -50%);
-    // width: 40px;
     svg {
       width: 12px;
       height: auto;
@@ -69,31 +80,50 @@
 
 }
 
-
+/// Project list sidebar
+///
+/// @name .projects_sidebar
+///
+/// @group projects
 
 .projects_sidebar {
   position: relative;
   h3 {
     line-height: 1;
+    @include media-breakpoint-down(xs) {
+      font-size: $h2-font-size;
+    }
   }
 }
 
-$headerHeight: 140px;
+/// Project single
+///
+/// @name .project_single
+///
+/// @group projects
+
+
+$projectHeaderHeight: 140px;
 
 .project_single {
   min-height: 90vh;
-  // padding: 0 $grid-gutter-width/2;
   display: flex;
   flex-direction: column;
 
   &__header {
-    height: $headerHeight;
+    height: $projectHeaderHeight;
+    @include media-breakpoint-down(xs) {
+      height: auto;
+      padding-top: $spacer-md;
+      padding-bottom: $spacer-md;
+    }
   }
 
   &__content {
-    height: calc(100% - #{$headerHeight});
+    height: calc(100% - #{$projectHeaderHeight});
     flex-grow: 1;
     position: relative;
+    @include snap-to-side;
     iframe {
       height: 100% !important;
       width: 100% !important;
@@ -111,6 +141,13 @@ $headerHeight: 140px;
   }
 
 }
+
+/// Project single close
+///
+/// @name .btn__close
+///
+/// @group projects
+
 
 .btn__close {
   @extend .btn__close;

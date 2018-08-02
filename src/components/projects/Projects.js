@@ -21,7 +21,7 @@ class Projects extends Component {
         <div className="row">
          
           {/* sidebar */}
-          <aside className={`col-12 col-md-4 is-relative ${styles.projects_sidebar}`}>
+          <aside className={`col-12 col-md-4 mb-4 is-relative ${styles.projects_sidebar}`}>
             <h3 className="h1 is-sticky">
               <Fade bottom={true} distance={"15%"} delay={250}>
                 Selected <span className="is-sans-serif d-block">Work</span>

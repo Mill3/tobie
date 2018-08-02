@@ -1,4 +1,25 @@
 
+@mixin snap-to-side {
+  margin-left: $container-fluid-padding * -1;
+  margin-right: $container-fluid-padding * -1;
+  @include media-breakpoint-down(lg) {
+    margin-left: $container-fluid-padding-lg * -1;
+    margin-right: $container-fluid-padding-lg * -1;
+  }
+  @include media-breakpoint-down(md) {
+    margin-left: $container-fluid-padding-md * -1;
+    margin-right: $container-fluid-padding-md * -1;
+  }
+  @include media-breakpoint-down(sm) {
+    margin-left: $container-fluid-padding-sm * -1;
+    margin-right: $container-fluid-padding-sm * -1;
+  }
+  @include media-breakpoint-down(xs) {
+    margin-left: $container-fluid-padding-xs * -1;
+    margin-right: $container-fluid-padding-xs * -1;
+  }
+}
+
 @mixin media-breakpoint-down-vertical($name, $breakpoints: $grid-breakpoints-verticals) {
   $min: breakpoint-min($name, $breakpoints);
   @debug $min;

@@ -89,7 +89,7 @@ class ProjectPreview extends Component {
               <div className={styles.project_preview__arrow}>
                 <Play />
               </div>
-              <h4 className="h2">
+              <h4 className={styles.project_preview__title}>
                 <span>{title}</span>
               </h4>
             </footer>
