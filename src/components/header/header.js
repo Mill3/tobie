@@ -17,14 +17,15 @@ class Header extends React.Component {
           })
         }
       >
-        <Nav/>
+        <Nav pages={this.props.pages} />
       </header>
     );
   }
 }
 
 Header.propsDefault = {
-  hidden: false
+  hidden: false,
+  pages: null
 }
  
 export default Header;

@@ -42,6 +42,17 @@ const Layout = ({ children, location, inverted, hideHeader }) => (
           title
           description
         }
+        allPages: allWordpressPage {
+          edges {
+            node {
+              id
+              title
+              slug
+              language_id  
+              language_slug 
+            }
+          }
+        }
       }
     `}
     render={data => (
@@ -65,9 +76,9 @@ const Layout = ({ children, location, inverted, hideHeader }) => (
             }
           )}
         >
-          <Header hidden={hideHeader} />
+          <Header hidden={hideHeader} pages={data.allPages} />
           <Main location={location} children={children} />
-          <Footer/>
+          <Footer pages={data.allPages} />
         </div>
       </>
     )}

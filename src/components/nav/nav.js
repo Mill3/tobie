@@ -1,37 +1,76 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'gatsby'
 
 import Credits from './credits'
-import detectLocale from '@utils/detect-locale'
+// import { detectLocale } from '@utils/detect-locale'
 
 import styles from './nav.module.scss'
 
-class Nav extends Component {
+class Nav extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      language : 'fr'
+    }
+  }
+
+  componentDidMount() {    
+    // let language = detectLocale()
+    this.setState({
+      language: 'fr'
+    })
+  }
+
+  pages() {
+    let data = []
+    
+    if (this.props.pages && this.props.pages.edges) {
+      
+      // filter only pages for current locale
+      let localePages = this.props.pages.edges.filter(e => e.node.language_slug === this.state.language)
+      
+      // loop found pages
+      localePages.map((page, index) => {
+        data.push(
+          <li className={`${styles.navItem}`}>
+            <Link 
+              to={`/${this.state.language}/${page.node.slug}/`}
+              exact={true}
+              activeClassName={`${styles.navLink__active}`}
+              className={`${styles.navLink}`}>
+                {page.node.title}
+            </Link>
+          </li>
+        )
+      })
+    }
+
+    return data
+  }
+
   render() {    
+    
     return (
       <nav className={`${styles.nav} d-flex`}>
         <ul className='nav ml-md-auto'>
           <li className={`${styles.navItem}`}>
           <Link 
-              to={`/${detectLocale()}/`}
+              to={`/${this.state.language}/`}
               exact={true}
               activeClassName={`${styles.navLink__active}`}
               className={`${styles.navLink}`}>
                 Selected Work
             </Link>
           </li>
+          {this.pages()}
+
+          {/* language switch */}
           <li className={`${styles.navItem}`}>
-            <Link 
-              to={`/${detectLocale()}/a-propos/`}
-              exact={true}
-              activeClassName={`${styles.navLink__active}`}
-              className={`${styles.navLink}`}>
-                About & Infos
-            </Link>
-          </li>
-          <li className={`${styles.navItem} is-hidden`}>
             <Link to={`/en/`} className={`${styles.navLink}`}>En</Link>
           </li>
+
+          {/* credits */}
           {this.props.credits &&
           <li className={`${styles.navItem}`}>
             <Credits />
@@ -44,7 +83,8 @@ class Nav extends Component {
 }
 
 Nav.defaultProps = {
-  credits: false
+  credits: false,
+  pages: null
 }
 
 export default Nav;

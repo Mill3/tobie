@@ -8,12 +8,24 @@ import Logo from '@components/logo/logo'
 import styles from './footer.module.scss'
 
 const Footer = ({ props }) => (
+  
   <StaticQuery
     query={graphql`
       query FooterQuery {
         contact : wordpressWpTexts(slug : { eq: "contact" }) {
           title
           content
+        }
+        allPages: allWordpressPage {
+          edges {
+            node {
+              id
+              title
+              slug
+              language_id  
+              language_slug 
+            }
+          }
         }
       }
     `}
@@ -29,7 +41,7 @@ const Footer = ({ props }) => (
             </Fade>
           </aside>
           <aside className="col-12 col-md-auto ml-md-auto">
-            <Nav credits={true} />
+            <Nav pages={data.pages} credits={true} />
           </aside>
         </div>
       </footer>
