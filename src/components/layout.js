@@ -59,8 +59,9 @@ const Layout = ({ children, location, inverted, hideHeader }) => (
       <>
         <Helmet
           title={data.siteSettings.title}
+          // description={data.siteSettings.description}
           meta={[
-            { name: 'description', content: data.siteSettings.description }
+            { name: 'description', content: "data.siteSettings.description" }
           ]}
         >
           <link rel="apple-touch-icon" href={favicon} />

@@ -49,7 +49,6 @@ class Landing extends React.Component {
   }
   
   render() { 
-    console.log("Landing triggered me during render")
     return (
       <Layout location={this.props.location}>
         <section className={

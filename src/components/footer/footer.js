@@ -41,7 +41,7 @@ const Footer = ({ props }) => (
             </Fade>
           </aside>
           <aside className="col-12 col-md-auto ml-md-auto">
-            <Nav pages={data.pages} credits={true} />
+            <Nav pages={data.allPages} credits={true} />
           </aside>
         </div>
       </footer>
