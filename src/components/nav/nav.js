@@ -29,6 +29,8 @@ class Nav extends React.Component {
       
       // filter only pages for current locale
       let localePages = this.props.pages.edges.filter(e => e.node.language_slug === this.state.language)
+      console.log(localePages);
+      
       
       // loop found pages
       localePages.map((page, index) => {
@@ -39,7 +41,7 @@ class Nav extends React.Component {
               exact={true}
               activeClassName={`${styles.navLink__active}`}
               className={`${styles.navLink}`}>
-                {page.node.title}
+                <span dangerouslySetInnerHTML={{ __html: page.node.title }} />
             </Link>
           </li>
         )

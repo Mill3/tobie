@@ -69,7 +69,7 @@ class ProjectSingle extends Component {
         <Helmet
           title={this.props.data.project.yoast_meta ? this.props.data.project.yoast_meta.yoast_wpseo_title : this.props.data.project.title}
           meta={[
-            { name: 'description', content: this.props.data.project.title }
+            { name: 'description', content: this.props.data.project.yoast_meta ? this.props.data.project.yoast_meta.yoast_wpseo_metadesc : null }
           ]}
         />
 
