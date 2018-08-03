@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Link } from 'gatsby'
 
@@ -20,7 +21,7 @@ class Logo extends React.Component {
     if (this.props.link) {
       Wrapper = Link
       attributes = {
-        to: '/fr/'
+        to: `/${this.props.LocaleState.locale}/`
       }
     }
     
@@ -72,5 +73,14 @@ Logo.propTypes = {
   byLine: PropTypes.bool,
   link: PropTypes.bool
 }
- 
-export default Logo;
+
+const mapStateToProps = store => {
+  return {
+    LocaleState: store.LocaleState,
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(Logo)

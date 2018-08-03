@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { push, graphql } from 'gatsby'
 import ReactPlayer from 'react-player'
 import Helmet from 'react-helmet'
+import { connect } from 'react-redux'
 
 import styles from './projects.module.scss'
 
@@ -36,7 +37,7 @@ class ProjectSingle extends Component {
     if (isModal) {
       window.history.back()
     } else {
-      push('/')
+      push(`/${this.props.LocaleState.locale}/`)
     }
   }
 
@@ -108,15 +109,13 @@ class ProjectSingle extends Component {
                       }}
                     />
                   } 
-
-                
                 
               </div>
 
               {this.props.data.project.content &&
-              <footer className={`${styles.project_single__footer} row`}>
-                <div className="entry col-12" dangerouslySetInnerHTML={{ __html: this.props.data.project.content }} />
-              </footer>
+                <footer className={`${styles.project_single__footer} row`}>
+                  <div className="entry col-12" dangerouslySetInnerHTML={{ __html: this.props.data.project.content }} />
+                </footer>
               }
 
           </article>
@@ -128,8 +127,16 @@ class ProjectSingle extends Component {
   }
 }
 
+const mapStateToProps = store => {
+  return {
+    LocaleState: store.LocaleState,
+  }
+}
 
-export default ProjectSingle;
+export default connect(
+  mapStateToProps,
+  null
+)(ProjectSingle)
 
 export const projectQuery = graphql`
 query projectSingle($slug: String!) {
