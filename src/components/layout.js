@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
 import classNames from 'classnames'
 import { StaticQuery, graphql } from 'gatsby'
@@ -9,6 +10,10 @@ import { StaticQuery, graphql } from 'gatsby'
 import Main from './main'
 import Header from '@components/header/header'
 import Footer from '@components/footer/footer'
+
+import { setLocale } from '@reducers/actions'
+
+import detectLocale from '@utils/detect-locale'
 
 // import base style
 import '../style/App.scss'
@@ -30,7 +35,37 @@ let favicon = faviconStates.on
 // const interval = setInterval( ()=> {
 //   favicon = (favicon == faviconStates.on) ? faviconStates.off : faviconStates.on
 // }, 2000)
+
+class RootElement extends React.Component {
+
+  // componentWillMount() {
+  //   let detectedLocale = detectLocale()
+  //   console.log(detectedLocale, 'root monted');
+  //   setLocale(detectedLocale)
+  // }
   
+  render() { 
+    return (
+      <React.Fragment>
+        {this.props.children}
+      </React.Fragment>
+    );
+  }
+}
+
+const mapStateToProps = store => {
+  return {
+    LocaleState: store.LocaleState
+  }
+}
+
+connect(
+  mapStateToProps,
+  { setLocale }
+)(RootElement)
+
+
+   
 const Layout = ({ children, location, inverted, hideHeader }) => (
 
   <StaticQuery
@@ -55,7 +90,7 @@ const Layout = ({ children, location, inverted, hideHeader }) => (
       }
     `}
     render={data => (
-      <>
+      <RootElement>
         <Helmet
           title={data.siteSettings.title}
           // description={data.siteSettings.description}
@@ -68,7 +103,7 @@ const Layout = ({ children, location, inverted, hideHeader }) => (
           <link rel="icon" type="image/png" sizes="32x32" href={favicon} />
           <meta name="msapplication-TileColor" content="#000000" />
           <meta name="theme-color" content="#000000" />
-        </Helmet>       
+        </Helmet>    
         <div className={
           classNames({ 
               [`${styles.layout}`]: !inverted,
@@ -80,7 +115,7 @@ const Layout = ({ children, location, inverted, hideHeader }) => (
           <Main location={location} children={children} />
           <Footer pages={data.allPages} />
         </div>
-      </>
+      </RootElement>
     )}
   />
 )

@@ -1,6 +1,6 @@
 import { defaultLocale, supportedLocales } from '../utils/detect-locale'
 
-const LocaleState = (state = initialLocaleState, action) => {
+const LocaleState = (state = initialLocaleState, action) => {  
   switch (action.type) {
     case 'SET_LOCALE':
       return {
