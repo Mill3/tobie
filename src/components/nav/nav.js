@@ -27,6 +27,29 @@ class Nav extends React.Component {
     push(to)
   }
 
+  root() {
+    let data = []
+
+    supportedLocales.map((language, index) => {
+      if (language == this.props.LocaleState.locale) {
+        data.push(
+          <li key={index} className={`${styles.navItem}`}>
+            <Link 
+              to={`/${language}/`}
+              exact={true}
+              className={`${styles.navLink}`} 
+              activeClassName={`${styles.navLink__active}`}
+            >
+              <LocaleString string={'Selected Work'} />
+            </Link>
+          </li>
+        )
+      }
+    })
+
+    return data
+  }
+
   languages() {
     let data = []
 
@@ -77,15 +100,9 @@ class Nav extends React.Component {
     return (
       <nav className={`${styles.nav} d-flex`}>
         <ul className='nav ml-md-auto'>
-          <li className={`${styles.navItem}`}>
-          <Link 
-              to={`/${this.props.LocaleState.locale}/`}
-              exact={true}
-              activeClassName={`${styles.navLink__active}`}
-              className={`${styles.navLink}`}>
-                <LocaleString string={'Selected Work'} />
-            </Link>
-          </li>
+
+          {/* root url */}
+          {this.root()}
 
           {/* list all pages */}
           {this.pages()}
