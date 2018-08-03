@@ -37,7 +37,7 @@ class Page extends React.Component {
             <aside className="col-12 col-md-8">
               <Fade bottom={true} distance={'10%'}>
                 <header className={styles.page__header}>
-                  <h1>{title}</h1>
+                  <h1 dangerouslySetInnerHTML={{ __html : title }} />
                 </header>
               </Fade>
               <Fade bottom={true} distance={'4%'} delay={250}>
