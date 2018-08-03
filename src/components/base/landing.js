@@ -75,7 +75,7 @@ class Landing extends React.Component {
           </div>
           
           {/* all projects */}
-          <Projects data={this.props.data.projects} animate={!this.props.IntroState.played} />          
+          <Projects data={this.props.data.projects} locale={this.props.LocaleState.locale} animate={!this.props.IntroState.played} />          
         </section>
       </Layout>
     );

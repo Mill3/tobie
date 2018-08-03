@@ -12,7 +12,7 @@ class Projects extends Component {
   list() {
     if (this.props.data && this.props.data.edges) {
       return this.props.data.edges.map((project, index) =>
-        <ProjectPreview project={project.node} key={index} animate={this.props.animate} />
+        <ProjectPreview locale={this.props.locale} project={project.node} key={index} animate={this.props.animate} />
       )
     }
   }
@@ -27,7 +27,6 @@ class Projects extends Component {
             <h3 className="h1 is-sticky">
               <Fade bottom={true} distance={"15%"} delay={250}>
                 <LocaleString string='selected_work_block' />
-                
               </Fade>
             </h3>
           </aside>

@@ -16,7 +16,7 @@ class ProjectPreview extends Component {
     this.pauseVideo = this.pauseVideo.bind(this)
   }
 
-  componentDidMount() {
+  componentDidMount() {    
     this.setState({
       title: this.props.project.title
     })
@@ -65,7 +65,7 @@ class ProjectPreview extends Component {
           onMouseEnter={(e) => this.startVideo()}
           onMouseLeave={(e) => this.pauseVideo()}
         > 
-          <Link to={`/fr/projects/${slug}`}>
+          <Link to={`/${this.props.locale}/projects/${slug}`}>
             {(featured_media && featured_media.source_url) &&
               <FigureBox source={featured_media.source_url} format={boxFormats.sixteenByNine}>
                 {hover &&
