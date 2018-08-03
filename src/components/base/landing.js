@@ -3,11 +3,12 @@ import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { graphql } from 'gatsby'
 import Fade from 'react-reveal/Fade'
-import { FontObserver } from 'react-with-async-fonts'
 
 // load app components
 import Layout from '@components/layout'
 import Logo from '@components/logo/logo'
+
+import { hadIntro } from '@reducers/actions'
 
 // components
 import Reel from '@components/reel/Reel'
@@ -15,7 +16,6 @@ import Projects from '@components/projects/Projects'
 
 // styles
 import styles from './landing.module.scss'
-
 
 class Landing extends React.Component {
   
@@ -26,20 +26,21 @@ class Landing extends React.Component {
     }
   }
 
-  componentDidMount() {
-    if (!this.props.introPlayed) {
+  componentDidMount() { 
+       
+    if (this.props.IntroState.played) {
+
+      this.setState({
+        isReady: true
+      })
       
+    } else {
+
       setTimeout( ()=> {
         this.setState({
           isReady: true
         })
       }, 100);
-      
-    } else {
-
-      this.setState({
-        isReady: true
-      })
 
     }
   }
@@ -54,17 +55,17 @@ class Landing extends React.Component {
         <section className={
           classNames(
             { 
-              [`${styles.landing}`]: this.props.introPlayed,
-              [`${styles.landing__withIntro}`]: !this.props.introPlayed
+              [`${styles.landing}`]: this.props.IntroState.played,
+              [`${styles.landing__withIntro}`]: !this.props.IntroState.played
             }
           )
         }>
           <header className={`${styles.landing__header}`}>
               <Logo 
                 byLine={true}
-                inverted={!this.props.introPlayed ? false : true}
-                animated={this.props.introPlayed ? false : true}
-                fadeIn={this.props.introPlayed ? false : true}
+                inverted={!this.props.IntroState.played ? false : true}
+                animated={this.props.IntroState.played ? false : true}
+                fadeIn={this.props.IntroState.played ? false : true}
                 hidden={!this.state.isReady}
               />
           </header>
@@ -74,7 +75,7 @@ class Landing extends React.Component {
           </div>
           
           {/* all projects */}
-          <Projects data={this.props.data.projects} animate={!this.props.introPlayed} />          
+          <Projects data={this.props.data.projects} animate={!this.props.IntroState.played} />          
         </section>
       </Layout>
     );
@@ -82,17 +83,16 @@ class Landing extends React.Component {
 
 }
 
-const mapStateToProps = ({ introPlayed }) => {
-  return { introPlayed }
-}
-
-const mapDispatchToProps = dispatch => {
-  return { hadIntro: () => dispatch({ type: `HAD_INTRO` }) }
+const mapStateToProps = store => {
+  return {
+    IntroState: store.IntroState,
+    LocaleState: store.LocaleState,
+  }
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { hadIntro }
 )(Landing)
 
 

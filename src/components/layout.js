@@ -5,7 +5,6 @@ import Helmet from 'react-helmet'
 import classNames from 'classnames'
 import { StaticQuery, graphql } from 'gatsby'
 
-
 // app components
 import Main from './main'
 import Header from '@components/header/header'

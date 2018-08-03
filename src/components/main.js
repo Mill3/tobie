@@ -17,9 +17,5 @@ class Main extends Component {
 Main.defaultProps = {
   children: null,
 };
-
-Main.propTypes = {
-  children: PropTypes.object.isRequired,
-};
  
 export default Main;

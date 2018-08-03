@@ -1,6 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { push } from 'gatsby'
-import detectLocale from '../utils/detect-locale'
+
+import detectLocale from '@utils/detect-locale'
+import { setLocale } from '@reducers/actions'
 
 // 
 // this page is empty, should redirect to detected language landing page
@@ -12,9 +15,12 @@ class IndexPage extends React.Component {
 
   // detect and redirected to proper landing
   componentDidMount() {
-    // let to = `/${detectLocale()}/`
+    let detectedLocale = detectLocale();
+    this.props.setLocale(detectedLocale)
+  
+    let to = `/${detectedLocale}/`
     setTimeout(function () {
-      push('/fr/')
+      push(to)
     }, 250);
   }
 
@@ -25,4 +31,14 @@ class IndexPage extends React.Component {
 
 }
  
-export default IndexPage;
+const mapStateToProps = store => {
+  return {
+    LocaleState: store.LocaleState,
+    IntroState: store.IntroState
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  { setLocale }
+)(IndexPage)

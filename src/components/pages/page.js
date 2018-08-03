@@ -3,6 +3,9 @@ import { Link } from 'gatsby'
 import { graphql } from 'gatsby'
 import Fade from 'react-reveal/Fade'
 
+import { connect } from 'react-redux'
+// import { store } from '@reducers'
+
 import Layout from '@components/layout'
 
 import close from '../../svg/close.svg'
@@ -10,10 +13,11 @@ import close from '../../svg/close.svg'
 import styles from './pages.module.scss'
 
 class Page extends React.Component {
+  
   constructor(props) {
     super(props);
-    this.state = {  }
   }
+
   render() { 
     let {
       title,
@@ -23,7 +27,7 @@ class Page extends React.Component {
     return (
       <Layout inverted={true} hideHeader={true}>
 
-        <Link to="/fr/" className={styles.btn__close}>
+        <Link to={`/${this.props.LocaleState.locale}/`} className={styles.btn__close}>
           <img src={close} alt="X" />
         </Link>
 
@@ -49,7 +53,19 @@ class Page extends React.Component {
   }
 }
 
-export default Page
+// export default Page
+
+const mapStateToProps = store => {
+  return {
+    LocaleState: store.LocaleState
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(Page)
+
 
 export const pageQuery = graphql`
 query pageSingle($slug: String!) {

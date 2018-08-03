@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Link } from 'gatsby'
 
+import LocaleString from '@utils/LocaleString'
+
 // styles
 import styles from './logo.module.scss'
 
@@ -48,7 +50,7 @@ class Logo extends React.Component {
             })
             
           }>
-            Cinematographer
+            <LocaleString string='Cinematographer' />
           </p>
         }
       </Wrapper>

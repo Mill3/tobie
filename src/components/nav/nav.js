@@ -1,8 +1,11 @@
 import React from 'react';
-import { Link } from 'gatsby'
+import { Link, push } from 'gatsby'
+import { connect } from 'react-redux'
 
 import Credits from './credits'
-// import { detectLocale } from '@utils/detect-locale'
+import LocaleString from '@utils/LocaleString'
+import { detectLocale, supportedLocales } from '@utils/detect-locale'
+import { setLocale } from '@reducers/actions'
 
 import styles from './nav.module.scss'
 
@@ -10,16 +13,36 @@ class Nav extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      language : 'fr'
-    }
+    this.goToLanguage = this.goToLanguage.bind(this)
   }
 
-  componentDidMount() {    
-    // let language = detectLocale()
-    this.setState({
-      language: 'fr'
+  goToLanguage(event, locale) {
+    event.preventDefault()
+
+    // set new locale
+    this.props.setLocale(locale)
+
+    // then change path
+    let to = `/${locale}/`
+    push(to)
+  }
+
+  languages() {
+    let data = []
+
+    supportedLocales.map((language, index) => {
+      if (language !== this.props.LocaleState.locale) {
+        data.push(
+          <li key={index} className={`${styles.navItem}`}>
+            <a href={`/${language}/`} className={`${styles.navLink}`} onClick={(event) => this.goToLanguage(event, language)}>
+              {language}
+            </a>
+          </li>
+        )
+      }
     })
+
+    return data
   }
 
   pages() {
@@ -28,16 +51,14 @@ class Nav extends React.Component {
     if (this.props.pages && this.props.pages.edges) {
       
       // filter only pages for current locale
-      let localePages = this.props.pages.edges.filter(e => e.node.language_slug === this.state.language)
-      console.log(localePages);
-      
+      let localePages = this.props.pages.edges.filter(e => e.node.language_slug === this.props.LocaleState.locale)      
       
       // loop found pages
       localePages.map((page, index) => {
         data.push(
-          <li className={`${styles.navItem}`}>
+          <li key={index} className={`${styles.navItem}`}>
             <Link 
-              to={`/${this.state.language}/${page.node.slug}/`}
+              to={`/${this.props.LocaleState.locale}/${page.node.slug}/`}
               exact={true}
               activeClassName={`${styles.navLink__active}`}
               className={`${styles.navLink}`}>
@@ -58,19 +79,19 @@ class Nav extends React.Component {
         <ul className='nav ml-md-auto'>
           <li className={`${styles.navItem}`}>
           <Link 
-              to={`/${this.state.language}/`}
+              to={`/${this.props.LocaleState.locale}/`}
               exact={true}
               activeClassName={`${styles.navLink__active}`}
               className={`${styles.navLink}`}>
-                Selected Work
+                <LocaleString string={'Selected Work'} />
             </Link>
           </li>
+
+          {/* list all pages */}
           {this.pages()}
 
           {/* language switch */}
-          <li className={`${styles.navItem}`}>
-            <Link to={`/en/`} className={`${styles.navLink}`}>En</Link>
-          </li>
+          {this.languages()}
 
           {/* credits */}
           {this.props.credits &&
@@ -89,4 +110,13 @@ Nav.defaultProps = {
   pages: null
 }
 
-export default Nav;
+const mapStateToProps = store => {
+  return {
+    LocaleState: store.LocaleState
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  { setLocale }
+)(Nav)

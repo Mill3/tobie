@@ -1,7 +1,7 @@
 import { createStore } from 'redux'
 
-// stores
-import rootReducer from '../reducers'
+import reducer from '../reducers/index'
 
-// create root store for provider
-export const store = createStore(rootReducer)
+const createStoreMethod = () => createStore(reducer)
+
+export default createStoreMethod

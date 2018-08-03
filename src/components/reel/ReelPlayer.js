@@ -7,6 +7,8 @@ import ReactPlayer from 'react-player'
 import Fade from 'react-reveal/Fade'
 import { Player, ControlBar, BigPlayButton, LoadingSpinner } from 'video-react'
 
+import LocaleString from '@utils/LocaleString'
+
 import playSVG from '../../svg/play.svg'
 import close from '../../svg/close.svg'
 
@@ -17,8 +19,6 @@ class ReelPlayer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      labelText: 'Play Reel',
-      labelTextActive: 'Play Reel',
       src: this.props.video_preview_src,
       muted: true,
       playing: false,
@@ -72,7 +72,7 @@ class ReelPlayer extends React.Component {
     let coeficient = 2.75
     
     return {
-      opacity: this.state.previewMode ? (baseOpacity - (this.props.proximity / coeficient)) : baseOpacity,
+      opacity: (this.state.previewMode && this.props.proximity) ? (baseOpacity - (this.props.proximity / coeficient)) : baseOpacity,
       height: "100%"
     }
   }
@@ -128,7 +128,7 @@ class ReelPlayer extends React.Component {
                 <Fade bottom delay={350} distance={"50%"}>
                   <div>
                     <img alt="play icon" src={playSVG} />
-                    <span>{this.state.labelText}</span>
+                    <span><LocaleString string='Play Reel' /></span>
                     <hr />
                   </div>
                 </Fade>

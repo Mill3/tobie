@@ -1,16 +1,8 @@
-import { createStore as reduxCreateStore } from "redux"
+import { combineReducers } from 'redux'
+import IntroState from './intro'
+import LocaleState from './locale'
 
-const IntroState = (state, action) => {
-  if (action.type === `HAD_INTRO`) {
-    return {
-      introPlayed: true
-    }
-  }
-  return state
-}
-
-const initialIntroState = { introPlayed: false }
-
-const createStore = () => reduxCreateStore(IntroState, initialIntroState)
-
-export default createStore
+export default combineReducers({
+  IntroState,
+  LocaleState
+})

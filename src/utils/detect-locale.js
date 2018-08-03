@@ -5,32 +5,27 @@ if (typeof window !== `undefined`) {
   getBrowserLanguage = require('get-browser-language')
 }
 
-const supportedLanguages = ['en', 'fr']
-const defaultLanguage = 'en'
+export const supportedLocales = ['en', 'fr']
+export const defaultLocale = 'en'
 
 const detectLocale = () => {
-  // if(getBrowserLanguage) {
+  
+  if(getBrowserLanguage) {
 
-  //   let languageCode = getBrowserLanguage().split('-')[0]
+    let languageCode = getBrowserLanguage().split('-')[0]
 
-  //   // check if detected code supported
-  //   // returns default if not found
-  //   if( indexOf(supportedLanguages, languageCode) > 0 ) {
-  //     return languageCode
-  //   } else {
-  //     return defaultLanguage
-  //   }
+    // check if detected code supported
+    // returns default if not found
+    if( indexOf(supportedLocales, languageCode) > 0 ) {
+      return languageCode
+    } else {
+      return defaultLocale
+    }
 
-  // } else {
-  //   return defaultLanguage
-  // }
+  } else {
+    return defaultLocale
+  }
 
-  return 'fr'
-
-}
-
-export const redirect = (to) => {
-  window.history.pushState(null, null, to)
 }
 
 // module.exports = detectLocale

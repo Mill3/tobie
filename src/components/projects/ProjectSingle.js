@@ -21,9 +21,7 @@ class ProjectSingle extends Component {
     }
     this.isModal = false
     this.startVideo = this.startVideo.bind(this)
-    this.handleBack = this.handleBack.bind(this)
-    console.log(this.props.data);
-    
+    this.handleBack = this.handleBack.bind(this)    
   }
 
   componentDidMount() {

@@ -8,9 +8,9 @@ import React from 'react'
 import { Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
-import createStore from './src/reducers'
+import createStoreMethod from './src/store'
 
-const store = createStore()
+let store = createStoreMethod()
 
 export const replaceRouterComponent = ({ history }) => {
 

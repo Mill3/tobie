@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactCursorPosition from 'react-cursor-position'
 import ProximityFeedback from 'react-proximity-feedback'
 
-// 
 import ReelPlayer from './ReelPlayer'
 
 class Reel extends Component {
