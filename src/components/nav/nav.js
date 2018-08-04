@@ -27,6 +27,12 @@ class Nav extends React.Component {
     push(to)
   }
 
+  isActive = (match, location) => {
+    // console.log(match, location, 'is it ?',  match.path === location.pathname);
+    return match.url === location.pathname
+  }
+
+
   root() {
     let data = []
 
@@ -36,8 +42,8 @@ class Nav extends React.Component {
           <li key={index} className={`${styles.navItem}`}>
             <Link 
               to={`/${language}/`}
-              strict
-              // exact={true}
+              exact
+              isActive={this.isActive}
               className={`${styles.navLink}`} 
               activeClassName={`${styles.navLink__active}`}
             >
@@ -83,7 +89,7 @@ class Nav extends React.Component {
           <li key={index} className={`${styles.navItem}`}>
             <Link 
               to={`/${this.props.LocaleState.locale}/${page.node.slug}/`}
-              exact={true}
+              exact
               activeClassName={`${styles.navLink__active}`}
               className={`${styles.navLink}`}>
                 <span dangerouslySetInnerHTML={{ __html: page.node.title }} />

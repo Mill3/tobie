@@ -36,36 +36,6 @@ let favicon = faviconStates.on
 //   favicon = (favicon == faviconStates.on) ? faviconStates.off : faviconStates.on
 // }, 2000)
 
-class RootElement extends React.Component {
-
-  // componentWillMount() {
-  //   let detectedLocale = detectLocale()
-  //   console.log(detectedLocale, 'root monted');
-  //   setLocale(detectedLocale)
-  // }
-  
-  render() { 
-    return (
-      <React.Fragment>
-        {this.props.children}
-      </React.Fragment>
-    );
-  }
-}
-
-const mapStateToProps = store => {
-  return {
-    LocaleState: store.LocaleState
-  }
-}
-
-connect(
-  mapStateToProps,
-  { setLocale }
-)(RootElement)
-
-
-   
 const Layout = ({ children, location, inverted, hideHeader }) => (
 
   <StaticQuery
@@ -90,7 +60,7 @@ const Layout = ({ children, location, inverted, hideHeader }) => (
       }
     `}
     render={data => (
-      <RootElement>
+      <>
         <Helmet
           title={data.siteSettings.title}
           // description={data.siteSettings.description}
@@ -115,7 +85,7 @@ const Layout = ({ children, location, inverted, hideHeader }) => (
           <Main location={location} children={children} />
           <Footer pages={data.allPages} />
         </div>
-      </RootElement>
+      </>
     )}
   />
 )
