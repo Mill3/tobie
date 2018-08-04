@@ -43,7 +43,7 @@ class Nav extends React.Component {
             <Link 
               to={`/${language}/`}
               exact
-              isActive={this.isActive}
+              // isActive={this.isActive}
               className={`${styles.navLink}`} 
               activeClassName={`${styles.navLink__active}`}
             >
