@@ -29,7 +29,11 @@ class Nav extends React.Component {
 
   isActive = (match, location) => {
     // console.log(match, location, 'is it ?',  match.path === location.pathname);
-    return match.url === location.pathname
+    if (match && location) {
+      return match.url === location.pathname
+    } else {
+      return null
+    }
   }
 
 
