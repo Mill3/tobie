@@ -125,13 +125,24 @@ class Nav extends React.Component {
         <ul className='nav ml-md-auto'>
 
           {/* root url */}
-          {this.root()}
+          {(!this.props.credits && !this.props.social) &&
+            this.root()
+          }
 
           {/* list all pages */}
-          {this.pages()}
+          {(!this.props.credits && !this.props.social) &&
+            this.pages()
+          }
 
           {/* language switch */}
           {this.languages()}
+
+          {/* socials links */}
+          {this.props.social &&
+          <li className={`${styles.navItem}`}>
+            <a href="https://www.instagram.com/tobie_marier_robitaille/" className={`${styles.navLink}`}  target="_blank">Instagram</a>
+          </li>
+          }
 
           {/* credits */}
           {this.props.credits &&
@@ -147,6 +158,7 @@ class Nav extends React.Component {
 
 Nav.defaultProps = {
   credits: false,
+  social: false,
   pages: null
 }
 

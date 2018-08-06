@@ -13,7 +13,7 @@ class Projects extends Component {
     super(props)
     this.state = {
       filterByProjectTypeID : null,
-      animate: null
+      hasChanged: false
     }
     this.changeFilterSelection = this.changeFilterSelection.bind(this)
   }
@@ -22,10 +22,14 @@ class Projects extends Component {
     // console.log(prevProps, prevState);
     if (prevState.filterByProjectTypeID != this.state.filterByProjectTypeID) {
       this.setState({
-        animate: true
+        hasChanged: true
       })
     }
   }
+
+  // componentWillUpdate() {
+
+  // }
   
   list() {
     if (this.props.data && this.props.data.edges) {
@@ -104,9 +108,16 @@ class Projects extends Component {
 
           {/* all work */}
           <aside className="col-12 col-md-8">
-            {/* <Fade when={this.state.animate} delay={250}> */}
-            {this.list()}
-            {/* </Fade> */}
+            {this.state.hasChanged &&
+              <Fade delay={250}>
+                {this.list()}
+              </Fade>
+            }
+            {!this.state.hasChanged &&
+              <React.Fragment>
+                {this.list()}
+              </React.Fragment>
+            }
           </aside>
 
         </div>
