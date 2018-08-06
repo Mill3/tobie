@@ -10,7 +10,7 @@
   transition: height 1.25s;
 
   @include media-breakpoint-down(xs) {
-    height: 150px;
+    height: 400px;
   }
 
   &__label {

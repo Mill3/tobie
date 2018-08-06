@@ -59,7 +59,7 @@ class Nav extends React.Component {
               to={`/${language}/`}
               exact
               // isActive={this.isActive}
-              className={`${styles.navLink}`} 
+              className={`${styles.navLink} d-none d-md-block`} 
               activeClassName={`${styles.navLink__active} d-none d-md-block`}
               onClick={(e) => this.scrollToProjects(e)}
             >

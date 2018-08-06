@@ -19,7 +19,6 @@ class Credits extends React.Component {
     this.setState({
       hover: true
     })
-    // console.log(this.state);
   }
 
   mouseLeave() {
