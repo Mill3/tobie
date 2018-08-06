@@ -11,7 +11,10 @@ class Projects extends Component {
   
   list() {
     if (this.props.data && this.props.data.edges) {
-      return this.props.data.edges.map((project, index) =>
+
+      // filter by languages
+      let localeProjects = this.props.data.edges.filter(e => e.node.language_slug === this.props.locale)      
+      return localeProjects.map((project, index) =>
         <ProjectPreview locale={this.props.locale} project={project.node} key={index} animate={this.props.animate} />
       )
     }

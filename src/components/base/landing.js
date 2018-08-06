@@ -104,6 +104,7 @@ export const query = graphql`
         node {
           title
           slug
+          language_slug
           featured_media {
             id
             media_type

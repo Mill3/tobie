@@ -114,6 +114,8 @@ return new Promise((resolve, reject) => {
               id
               title
               slug
+              language_id  
+              language_slug 
             }
           }
         }
@@ -204,26 +206,26 @@ return new Promise((resolve, reject) => {
           let post_language_slug = post.node.language_slug
           let path = `/${language_slug}/projects/${post_slug}`
 
-          createPage({
-            path: path,
-            component: projectSingleTemplate,
-            context: {
-              post_id: post_id,
-              slug: post_slug
-            }
-          })
+          // createPage({
+          //   path: path,
+          //   component: projectSingleTemplate,
+          //   context: {
+          //     post_id: post_id,
+          //     slug: post_slug
+          //   }
+          // })
 
-          // if (post_language_id == language_id) {
-          //   createPage({
-          //     path: path,
-          //     component: projectSingleTemplate,
-          //     context: {
-          //       post_id: post_id,
-          //       slug: post_slug,
-          //       language_slug: language_slug
-          //     }
-          //   })
-          // }
+          if (post_language_id == language_id) {
+            createPage({
+              path: path,
+              component: projectSingleTemplate,
+              context: {
+                post_id: post_id,
+                slug: post_slug,
+                language_slug: language_slug
+              }
+            })
+          }
 
         })
         
