@@ -10,11 +10,11 @@
   publish = "public/"
   command = "export NODE_OPTIONS=--max_old_space_size=8192 && gatsby build"
   [build.environment]
-    WORDPRESS_HOST = "tobie-admin.mill3.studio"
+    WORDPRESS_HOST = "admin.tobiemarierrobitaille.com"
     WORDPRESS_USER = "admin"
     WORDPRESS_PASS = "admin"
-    PROTOCOL = "http"
-    SITE_URL="https://tobie.mill3.studio"
+    PROTOCOL = "https"
+    SITE_URL="https://admin.tobiemarierrobitaille.com"
 
 
 # # Specific branch context: Deploys from this branch
@@ -25,5 +25,5 @@
 
 [[redirects]]
   from = "/admin"
-  to = "http://tobie-admin.mill3.studio/wp-admin/"
-  status = 301
+  to = "https://admin.tobiemarierrobitaille.com/wp-admin/"
+  status = 302
