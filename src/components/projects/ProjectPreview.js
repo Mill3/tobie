@@ -24,7 +24,8 @@ class ProjectPreview extends Component {
 
   startVideo() {
     if (this.refs.video) {
-      this.refs.video.play()
+      this.refs.video.currentTime = 0;
+      this.refs.video.play(0)
     }
   }
 
