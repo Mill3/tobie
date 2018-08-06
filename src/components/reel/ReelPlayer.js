@@ -147,6 +147,7 @@ class ReelPlayer extends React.Component {
           <Player
             ref="player"
             controls={!this.state.previewMode}
+            autoPlay={true}
             muted={this.state.muted}
             playsInline
             loop={true}
