@@ -60,7 +60,7 @@ class Nav extends React.Component {
               exact
               // isActive={this.isActive}
               className={`${styles.navLink}`} 
-              activeClassName={`${styles.navLink__active}`}
+              activeClassName={`${styles.navLink__active} d-none d-md-block`}
               onClick={(e) => this.scrollToProjects(e)}
             >
               <LocaleString string={'Selected Work'} />
@@ -122,7 +122,7 @@ class Nav extends React.Component {
     
     return (
       <nav className={`${styles.nav} d-flex`}>
-        <ul className='nav ml-md-auto'>
+        <ul className='nav ml-auto'>
 
           {/* root url */}
           {(!this.props.credits && !this.props.social) &&

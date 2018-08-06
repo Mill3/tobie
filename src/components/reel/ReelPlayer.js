@@ -124,7 +124,7 @@ class ReelPlayer extends React.Component {
           <div className={styles.reel__overlay} onClick={(e) => this.setFullVideo(e)}>
             <div className={styles.reel__overlay__inner} >
               {/* call to action with proximity detection */}
-              <h4 ref={this.props.proximityRef} className={`${styles.reel__label} d-none d-md-inline-block`}>
+              <h4 ref={this.props.proximityRef} className={`${styles.reel__label}`}>
                 <Fade bottom delay={350} distance={"50%"}>
                   <div>
                     <img alt="play icon" src={playSVG} />

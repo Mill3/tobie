@@ -7,6 +7,7 @@
 /// @group base
 
 $header-height: 80vh;
+$header-height-mobile: $header-height / 1.5;
 
 @keyframes headerAnimation {
   from { 
@@ -19,6 +20,18 @@ $header-height: 80vh;
   }
 }
 
+@keyframes headerAnimationMobile {
+  from { 
+    height: 100vh;
+    background: $white;
+  }
+  to { 
+    height: $header-height / 1.5;
+    background: $black;
+  }
+}
+
+
 .landing {
   display: block;
   
@@ -27,6 +40,10 @@ $header-height: 80vh;
     color: $white;
     height: $header-height;
     @include vertical-inner;
+    @include media-breakpoint-down(xs) {
+      padding-top: 65px;
+      height: $header-height-mobile;
+    }
   }
 
   &__withIntro {
@@ -37,6 +54,9 @@ $header-height: 80vh;
       animation-duration: 2s;
       animation-delay: 2s;
       animation-fill-mode: backwards;
+      @include media-breakpoint-down(xs) {
+        animation-name: headerAnimationMobile;
+      }
     }
 
   }

@@ -10,6 +10,13 @@
 .project_preview {
   margin-bottom: 10px;
 
+  picture {
+    @include media-breakpoint-down(xs) {
+      @include snap-to-side;
+      width: 100vw;
+    }
+  }
+
   &__preview_image {
     img {
       width: 100%;
@@ -27,6 +34,7 @@
     padding: $spacer 0;
     transition: padding 0.5s;
     position: relative;
+    
   }
 
   &__arrow {
@@ -88,11 +96,15 @@
 
 .projects_sidebar {
   position: relative;
-  min-height: 120vh;
+  @include media-breakpoint-up(md) {
+    min-height: 120vh;
+  }
   h3 {
     line-height: 1;
     @include media-breakpoint-down(xs) {
       font-size: $h2-font-size;
+      text-align: center;
+      
     }
   }
 }
@@ -104,7 +116,7 @@
 /// @group projects
 
 .projects__filters {
-  // border: 1px solid red;
+  
   a {
     display: block;
     padding: $spacer-xs 0;
@@ -112,6 +124,9 @@
     &:hover {
       color: $gray-500;
       text-decoration: none;
+    }
+    @include media-breakpoint-down(xs) {
+      text-align: center;
     }
   }
 

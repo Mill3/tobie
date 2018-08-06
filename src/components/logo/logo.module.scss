@@ -36,9 +36,11 @@ $logo-font-size: 102px;
       font-size: $logo-font-size/1.25;  
     }
     @include media-breakpoint-down(xs) {
-      font-size: $logo-font-size/4;  
+      font-size: $logo-font-size/2.25;
+      line-height: 1.05;
       padding-left: $grid-gutter-width;
       padding-right: $grid-gutter-width;
+      margin-bottom: 12px;
     }
   }  
 
@@ -51,7 +53,7 @@ $logo-font-size: 102px;
     text-transform: lowercase;
     @include media-breakpoint-down(xs) {
       padding-left: 5px;
-      font-size: $h4-font-size;
+      font-size: $h6-font-size;
     }
   }
   

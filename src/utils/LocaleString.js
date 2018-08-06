@@ -16,7 +16,7 @@ const translations = {
     'Cinematographer' : 'Directeur photo',
     'Selected Work' : 'Projets sélectionnés',
     'Play Reel' : 'Jouer Démo',
-    'selected_work_block' : 'Projets <span class="is-sans-serif d-block">sélectionnés</span>',
+    'selected_work_block' : 'Projets <span class="is-sans-serif d-md-block">sélectionnés</span>',
     'Credits' : 'Crédits',
   }
 }

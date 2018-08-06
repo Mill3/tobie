@@ -6,6 +6,11 @@
 
   &__header {
     margin-bottom: $spacer-xl;
+    @include media-breakpoint-down(xs) {
+      h1 {
+        font-size: $h2-font-size;
+      }
+    }
   }
 
 }

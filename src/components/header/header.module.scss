@@ -6,7 +6,4 @@
   left: 0;
   width: 100%;
   padding: $spacer;
-  @include media-breakpoint-down(xs) {
-    padding-left: $spacer-lg;
-  }
 }
