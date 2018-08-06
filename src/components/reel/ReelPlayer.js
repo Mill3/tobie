@@ -36,8 +36,13 @@ class ReelPlayer extends React.Component {
       // }, 250);
 
       this.refs.player.video.handleCanPlayThrough = () => {
-        alert("Can play through video without stopping");
+        // alert("Can play through video without stopping");
         this.refs.player.play()
+        
+        // start video after some timeout if didn't started yet 
+        setTimeout(()=> {
+          this.refs.player.play()
+        }, 2000);
       };
       
 
