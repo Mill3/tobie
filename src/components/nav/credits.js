@@ -1,5 +1,6 @@
 import React from 'react';
 import { Scrambler } from "react-text-scrambler"
+import LocaleString from '@utils/LocaleString'
 
 import styles from './nav.module.scss'
 
@@ -41,7 +42,7 @@ class Credits extends React.Component {
           <Scrambler duration={750} text="Mill3" />
         }
         {!this.state.hover &&
-          <span>Credits</span>
+          <span><LocaleString string="Credits" /></span>
         }
       </a>
     );

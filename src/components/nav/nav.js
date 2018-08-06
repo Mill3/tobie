@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, push } from 'gatsby'
 import { connect } from 'react-redux'
+import scrollToElement from 'scroll-to-element'
 
 import Credits from './credits'
 import LocaleString from '@utils/LocaleString'
@@ -14,6 +15,7 @@ class Nav extends React.Component {
   constructor(props) {
     super(props);
     this.goToLanguage = this.goToLanguage.bind(this)
+    this.scrollToProjects = this.scrollToProjects.bind(this)
   }
 
   goToLanguage(event, locale) {
@@ -35,7 +37,16 @@ class Nav extends React.Component {
       return null
     }
   }
-
+  
+  scrollToProjects(e) {
+    // console.log('should scroll down', document.getElementById('projects-list'));
+    
+    scrollToElement(document.getElementById('projects-list'), {
+      duration: 1000,
+      offset: -50,
+      ease: 'inOutCirc'
+    })
+  }
 
   root() {
     let data = []
@@ -50,6 +61,7 @@ class Nav extends React.Component {
               // isActive={this.isActive}
               className={`${styles.navLink}`} 
               activeClassName={`${styles.navLink__active}`}
+              onClick={(e) => this.scrollToProjects(e)}
             >
               <LocaleString string={'Selected Work'} />
             </Link>

@@ -150,30 +150,32 @@ return new Promise((resolve, reject) => {
         })
         
         // each posts
-        result.data.posts.edges.forEach(post => {
+        // result.data.posts.edges.forEach(post => {
 
-          // let id = post.node.id
-          let post_id = post.node.wordpress_id
-          let post_slug = post.node.slug
-          let post_language_id = post.node.language_id
-          let post_language_slug = post.node.language_slug
-          let path = `/${language_slug}/post/${post_slug}`;
+        //   // let id = post.node.id
+        //   let post_id = post.node.wordpress_id
+        //   let post_slug = post.node.slug
+        //   let post_language_id = post.node.language_id
+        //   let post_language_slug = post.node.language_slug
+        //   let path = `/${language_slug}/post/${post_slug}`;
 
-          if (post_language_id == language_id) {
-            createPage({
-              path: path,
-              component: postTemplate,
-              context: {
-                post_id: post_id,
-                post_slug: post_slug,
-                language_slug: language_slug
-              }
-            })
-          }
+        //   if (post_language_id == language_id) {
+        //     createPage({
+        //       path: path,
+        //       component: postTemplate,
+        //       context: {
+        //         post_id: post_id,
+        //         post_slug: post_slug,
+        //         language_slug: language_slug
+        //       }
+        //     })
+        //   }
 
-        })        
+            
+        //   })
 
         // each pages
+ 
         result.data.pages.edges.forEach(post => {
 
           // let id = post.node.id
@@ -196,6 +198,7 @@ return new Promise((resolve, reject) => {
           }
 
         })
+        
 
         // each projects
         result.data.projects.edges.forEach(post => {

@@ -8,14 +8,16 @@ const translations = {
     'Cinematographer' : 'Cinematographer',
     'Selected Work' : 'Selected Work',
     'Play Reel' : 'Play Reel',
-    'selected_work_block' : 'Selected <span class="is-sans-serif d-block">Work</span>'
+    'selected_work_block' : 'Selected <span class="is-sans-serif d-block">Work</span>',
+    'Credits' : 'Credits',
   },
   'fr': {
     'All': 'Tous',
-    'Cinematographer' : 'Directeur Photo',
-    'Selected Work' : 'Projets Choisis',
+    'Cinematographer' : 'Directeur photo',
+    'Selected Work' : 'Projets',
     'Play Reel' : 'Jouer Démo',
-    'selected_work_block' : 'Projets <span class="is-sans-serif d-block">Choisis</span>'
+    'selected_work_block' : 'Projets <span class="is-sans-serif d-block">Choisis</span>',
+    'Credits' : 'Crédits',
   }
 }
 

@@ -23,9 +23,7 @@ class Landing extends React.Component {
     super(props)
     this.state = {
       isReady: false
-    }
-    console.log(this.props.data);
-    
+    }    
   }
 
   componentDidMount() { 

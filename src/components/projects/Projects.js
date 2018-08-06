@@ -12,9 +12,19 @@ class Projects extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      filterByProjectTypeID : null
+      filterByProjectTypeID : null,
+      animate: null
     }
     this.changeFilterSelection = this.changeFilterSelection.bind(this)
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // console.log(prevProps, prevState);
+    if (prevState.filterByProjectTypeID != this.state.filterByProjectTypeID) {
+      this.setState({
+        animate: true
+      })
+    }
   }
   
   list() {
@@ -23,14 +33,12 @@ class Projects extends Component {
       // filter by languages
       let localeProjects = this.props.data.edges.filter(e => e.node.language_slug === this.props.locale)      
 
-      if (this.state.filterByProjectTypeID) {
-        console.log(this.state.filterByProjectTypeID);
-        
+      if (this.state.filterByProjectTypeID) {        
         localeProjects = this.props.data.edges.filter(e => e.node.project_types[0] === this.state.filterByProjectTypeID)      
       }
 
       return localeProjects.map((project, index) =>
-        <ProjectPreview locale={this.props.locale} project={project.node} key={index} animate={this.props.animate} />
+        <ProjectPreview locale={this.props.locale} project={project.node} key={index} animate={this.props.animate || this.state.animate} />
       )
     }
   }
@@ -77,7 +85,7 @@ class Projects extends Component {
     // console.log(this.props);
     
     return (
-      <section className={`container-fluid`}>
+      <section id="projects-list" className={`container-fluid`}>
         <div className="row">
          
           {/* sidebar */}
@@ -96,7 +104,9 @@ class Projects extends Component {
 
           {/* all work */}
           <aside className="col-12 col-md-8">
+            {/* <Fade when={this.state.animate} delay={250}> */}
             {this.list()}
+            {/* </Fade> */}
           </aside>
 
         </div>
