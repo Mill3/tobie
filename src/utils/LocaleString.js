@@ -4,12 +4,14 @@ import { connect } from 'react-redux'
 
 const translations = {
   'en': {
+    'All': 'All',
     'Cinematographer' : 'Cinematographer',
     'Selected Work' : 'Selected Work',
     'Play Reel' : 'Play Reel',
     'selected_work_block' : 'Selected <span class="is-sans-serif d-block">Work</span>'
   },
   'fr': {
+    'All': 'Tous',
     'Cinematographer' : 'Directeur Photo',
     'Selected Work' : 'Projets Choisis',
     'Play Reel' : 'Jouer Démo',

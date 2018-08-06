@@ -88,12 +88,37 @@
 
 .projects_sidebar {
   position: relative;
+  min-height: 120vh;
   h3 {
     line-height: 1;
     @include media-breakpoint-down(xs) {
       font-size: $h2-font-size;
     }
   }
+}
+
+/// Project filters
+///
+/// @name .projects_filters
+///
+/// @group projects
+
+.projects__filters {
+  // border: 1px solid red;
+  a {
+    display: block;
+    padding: $spacer-xs 0;
+    // font-weight: 600;
+    &:hover {
+      color: $gray-500;
+      text-decoration: none;
+    }
+  }
+
+  &__link_active {
+    color: $gray-500;
+  }
+
 }
 
 /// Project single

@@ -24,6 +24,8 @@ class Landing extends React.Component {
     this.state = {
       isReady: false
     }
+    console.log(this.props.data);
+    
   }
 
   componentDidMount() { 
@@ -75,7 +77,7 @@ class Landing extends React.Component {
           </div>
           
           {/* all projects */}
-          <Projects data={this.props.data.projects} locale={this.props.LocaleState.locale} animate={!this.props.IntroState.played} />          
+          <Projects data={this.props.data.projects} projectTypes={this.props.data.projectTypes} locale={this.props.LocaleState.locale} animate={!this.props.IntroState.played} />          
         </section>
       </Layout>
     );
@@ -104,7 +106,9 @@ export const query = graphql`
         node {
           title
           slug
+          language_id
           language_slug
+          project_types
           featured_media {
             id
             media_type
@@ -116,6 +120,19 @@ export const query = graphql`
               source_url
             }
           }
+        }
+      }
+    }
+
+    projectTypes : allWordpressWpProjectTypes {
+      edges {
+        node {
+          id
+          wordpress_id
+          name
+          slug
+          language_id
+          language_slug
         }
       }
     }
