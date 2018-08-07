@@ -5,9 +5,11 @@ import classNames from 'classnames'
 import scrollToElement from 'scroll-to-element'
 import { Lazy } from 'react-lazy'
 import { VideoTag } from 'react-video-tag'
-// import ReactPlayer from 'react-player'
 import Fade from 'react-reveal/Fade'
-// import { Player, ControlBar, BigPlayButton, LoadingSpinner } from 'video-react'
+import {
+  isBrowser,
+  isMobile
+} from "react-device-detect";
 
 import LocaleString from '@utils/LocaleString'
 
@@ -29,23 +31,23 @@ class ReelPlayer extends React.Component {
     }
     this.setPreviewMode = this.setPreviewMode.bind(this)
     this.setFullVideo = this.setFullVideo.bind(this)
-    this.player = null
-    // console.log(this.props);
-    
   }
 
   videoHasLoaded() {
     // set player DOM element in class
-    this.player = ReactDOM.findDOMNode(this.refs.playerContainer).getElementsByTagName('video')[0]
+    // this.player = ReactDOM.findDOMNode(this.refs.playerContainer).getElementsByTagName('video')[0]
+    // this.player = this.refs.player
+
+    // console.log(this.refs.player, this.refs.player.requestFullscreen);
 
     // start video through a promise
-    var promise = this.player.play();
+    var promise = this.refs.player.play();
 
     // promise won’t be defined in browsers that don't support promisified play()
     if (promise === undefined) {
       console.log('Promisified video play() not supported');
     } else {
-      promise.then(function() {
+      promise.then(() => {
         console.log('Video playback successfully initiated, returning a promise');
       }).catch(function(error) {
         console.log('Error initiating video playback: ', error);
@@ -64,8 +66,8 @@ class ReelPlayer extends React.Component {
       previewMode: true,
     })
 
-    this.player.load()
-    this.player.play()
+    this.refs.player.load()
+    this.refs.player.play()
   }
 
   setFullVideo(event) {
@@ -80,19 +82,32 @@ class ReelPlayer extends React.Component {
         controls: true
       })
 
-      this.player.load()
-      this.player.play()
-      // this.player.requestFullscreen()
-      console.log(this.player);
+      this.refs.player.load()
+      this.refs.player.play()
+
+      // get fullscreen method
+      let videoDOM = ReactDOM.findDOMNode(this.refs.player)
+      var requestFullScreen = videoDOM.requestFullscreen || videoDOM.msRequestFullscreen || videoDOM.mozRequestFullScreen || videoDOM.webkitRequestFullscreen || videoDOM.webkitEnterFullScreen
+  
+      // aldrt(requestFullScreen)
+      // alert(requestFullScreen);
       
-
-      // scroll to video
-      scrollToElement(ReactDOM.findDOMNode(this.refs.playerContainer), {
-        duration: 1800,
-        offset: 0,
-        ease: 'inOutCirc'
-      })
-
+      // videoDOM.requestFullscreen()
+      // requestFullScreen.call(videoDOM)  
+      
+      // on mobile, toggle fullscreen
+      if (isMobile) {
+        // requestFullScreen.call(videoDOM)  
+      
+      // scroll down on desktop
+      } else {
+        // scroll to video
+        scrollToElement(ReactDOM.findDOMNode(this.refs.playerContainer), {
+          duration: 1800,
+          offset: 0,
+          ease: 'inOutCirc'
+        })
+      }
     }
   }
 
@@ -110,6 +125,16 @@ class ReelPlayer extends React.Component {
     return {
       transform: `scaleX(${this.props.proximity})`
     }
+  }
+
+  videoAttributes() {
+    let attributes = {}
+
+    if (this.state.previewMode) {
+      attributes.playsInline = true
+    }
+
+    return attributes
   }
 
   render() { 
@@ -160,16 +185,20 @@ class ReelPlayer extends React.Component {
         {/* the player */}
         <div ref="playerContainer" style={this.videoTransformStyle()} className={`${styles.reel__container}`}>
           <Lazy onLoad={() => this.videoHasLoaded()} cushion={'0% 0% 200% 0%'}>
-            <VideoTag 
-              src={this.state.src}
+            <video 
+              ref="player"
               controls={this.state.controls}
               muted={this.state.muted}
               autoPlay
-              playsInline
               loop
+              allowFullScreen
               width='100%'
               height='100%'
-            />
+              playsInline={this.state.previewMode}
+              // {...this.videoAttributes()}
+            >
+              <source src={this.state.src} />
+            </video>
           </Lazy>
         </div>
       </div>

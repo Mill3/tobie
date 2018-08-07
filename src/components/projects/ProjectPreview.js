@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import Fade from 'react-reveal/Fade'
 import { Link } from 'gatsby'
-// import { VideoTag } from 'react-video-tag'
 import {
-  BrowserView,
-  MobileView,
   isBrowser,
   isMobile
 } from "react-device-detect";
