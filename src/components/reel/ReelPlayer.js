@@ -33,6 +33,28 @@ class ReelPlayer extends React.Component {
     this.setFullVideo = this.setFullVideo.bind(this)
   }
 
+  componentDidMount() {
+    // handle exit
+    let exitHandler = () => {
+      let isFullScreen = !document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement
+      if (isFullScreen && !this.state.previewMode && isMobile) {
+        this.setPreviewMode(null)
+      }
+    }
+
+    document.addEventListener('webkitfullscreenchange', exitHandler, false);
+    document.addEventListener('mozfullscreenchange', exitHandler, false);
+    document.addEventListener('fullscreenchange', exitHandler, false);
+    document.addEventListener('MSFullscreenChange', exitHandler, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('webkitfullscreenchange');
+    document.removeEventListener('mozfullscreenchange');
+    document.removeEventListener('fullscreenchange');
+    document.removeEventListener('MSFullscreenChange');
+  }
+
   videoHasLoaded() {
     // set player DOM element in class
     // this.player = ReactDOM.findDOMNode(this.refs.playerContainer).getElementsByTagName('video')[0]
@@ -55,9 +77,8 @@ class ReelPlayer extends React.Component {
     }
   }
 
-  setPreviewMode(event) {   
-     
-    event.preventDefault()
+  setPreviewMode(event) {    
+    if(event) event.preventDefault()
     this.setState({
       src: this.props.video_preview_src,
       muted: true,
@@ -71,7 +92,7 @@ class ReelPlayer extends React.Component {
   }
 
   setFullVideo(event) {
-    event.preventDefault()     
+    if(event) event.preventDefault()
 
     if (this.props.video_full_src) {
       
@@ -97,7 +118,7 @@ class ReelPlayer extends React.Component {
       
       // on mobile, toggle fullscreen
       if (isMobile) {
-        // requestFullScreen.call(videoDOM)  
+        requestFullScreen.call(videoDOM)  
       
       // scroll down on desktop
       } else {
@@ -127,15 +148,15 @@ class ReelPlayer extends React.Component {
     }
   }
 
-  videoAttributes() {
-    let attributes = {}
+  // videoAttributes() {
+  //   let attributes = {}
 
-    if (this.state.previewMode) {
-      attributes.playsInline = true
-    }
+  //   if (this.state.previewMode) {
+  //     attributes.playsInline = true
+  //   }
 
-    return attributes
-  }
+  //   return attributes
+  // }
 
   render() { 
     return (
@@ -195,7 +216,7 @@ class ReelPlayer extends React.Component {
               width='100%'
               height='100%'
               playsInline={this.state.previewMode}
-              // {...this.videoAttributes()}
+              poster={this.props.video_poster_src}
             >
               <source src={this.state.src} />
             </video>
