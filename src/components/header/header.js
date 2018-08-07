@@ -6,7 +6,6 @@ import Nav from '@components/nav/nav'
 import styles from './header.module.scss'
 
 class Header extends React.Component {
-  // state = {  }
   render() { 
     return (
       <header

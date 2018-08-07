@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import scrollToElement from 'scroll-to-element'
 import { Lazy } from 'react-lazy'
+import { VideoTag } from 'react-video-tag'
 // import ReactPlayer from 'react-player'
 import Fade from 'react-reveal/Fade'
 // import { Player, ControlBar, BigPlayButton, LoadingSpinner } from 'video-react'
@@ -22,46 +23,21 @@ class ReelPlayer extends React.Component {
     this.state = {
       src: this.props.video_preview_src,
       muted: true,
+      controls: false,
       playing: false,
       previewMode: true
     }
     this.setPreviewMode = this.setPreviewMode.bind(this)
     this.setFullVideo = this.setFullVideo.bind(this)    
+    this.player = null
   }
 
-  // componentDidMount() {    
-  //   if (this.refs.player !== undefined) {
-      
-  //     // start video after some timeout
-  //     // setTimeout(()=> {
-  //     // }, 250);
-  //     // this.refs.player.play()
-
-  //     this.refs.player.oncanplaythrough = (event) => {
-  //       console.log("Can play through video without stopping");
-  //       this.refs.player.play()
-  //       setTimeout(()=> {
-  //         this.refs.player.play()
-  //       }, 2000);
-  //     }
-
-  //     // when clicking in video
-  //     // this.refs.player.handleMouseDown = (event) => {
-  //     //   event.preventDefault()
-  //     //   return false
-  //     // }
-  //   }
-  // }
-
   videoHasLoaded() {
-    // this.refs.player.oncanplaythrough = (event) => {
-    //   console.log("Can play through video without stopping");
-    //   this.refs.player.play()
-    //   setTimeout(()=> {
-    //     this.refs.player.play()
-    //   }, 2000);
-    // }
-    var promise = this.refs.player.play();
+    // set player DOM element in class
+    this.player = ReactDOM.findDOMNode(this.refs.playerContainer).getElementsByTagName('video')[0]
+
+    // start video through a promise
+    var promise = this.player.play();
 
     // promise won’t be defined in browsers that don't support promisified play()
     if (promise === undefined) {
@@ -75,38 +51,38 @@ class ReelPlayer extends React.Component {
     }
   }
 
-  setPreviewMode(event) {    
+  setPreviewMode(event) {   
+     
     event.preventDefault()
     this.setState({
       src: this.props.video_preview_src,
       muted: true,
+      controls: false,
       playing: false,
       previewMode: true,
     })
 
-    this.refs.player.load()
-    this.refs.player.play()
-    
-    this.refs.player.muted = true
-    this.refs.player.controls = false
+    this.player.load()
+    this.player.play()
   }
 
   setFullVideo(event) {
-    event.preventDefault() 
+    event.preventDefault()     
 
     if (this.props.video_full_src) {
+      
       this.setState({
         src: this.props.video_full_src,
-        previewMode: false
+        previewMode: false,
+        muted: false,
+        controls: true
       })
-      this.refs.player.load()
-      this.refs.player.play()
 
-      this.refs.player.muted = false
-      this.refs.player.controls = true
+      this.player.load()
+      this.player.play()
 
       // scroll to video
-      scrollToElement(ReactDOM.findDOMNode(this.refs.player), {
+      scrollToElement(ReactDOM.findDOMNode(this.refs.playerContainer), {
         duration: 1800,
         offset: 0,
         ease: 'inOutCirc'
@@ -130,8 +106,6 @@ class ReelPlayer extends React.Component {
       transform: `scaleX(${this.props.proximity})`
     }
   }
-
-  
 
   render() { 
     return (
@@ -179,19 +153,30 @@ class ReelPlayer extends React.Component {
         </div>
 
         {/* the player */}
-        <div style={this.videoTransformStyle()} className={`${styles.reel__container}`}>
+        <div ref="playerContainer" style={this.videoTransformStyle()} className={`${styles.reel__container}`}>
           <Lazy onLoad={() => this.videoHasLoaded()} cushion={'0% 0% 200% 0%'}>
-            <video
-              ref="player"
+            <VideoTag 
+              src={this.state.src}
+              controls={this.state.controls}
+              muted={this.state.muted}
+              // {...this.videoAttributes()}
               autoPlay
-              muted
               playsInline
-              loop={true}
+              loop
+              width='100%'
+              height='100%'
+            />
+            {/* <video
+              
+              muted
+              autoPlay
+              playsInline
+              loop
               width='100%'
               height='100%'
             >
               <source src={this.state.src} type="video/mp4" />
-            </video>
+            </video> */}
           </Lazy>
         </div>
       </div>

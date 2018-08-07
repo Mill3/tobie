@@ -67,7 +67,6 @@ class FigureBox extends Component {
 
   render() {
     const TagName = this.props.tagName
-    // console.log(this.props.source);
     
     return (
       <TagName className={`${styles[this.props.format]} ${this.props.type} ${this.props.className} ${this.state.loadingClassName}`}>
