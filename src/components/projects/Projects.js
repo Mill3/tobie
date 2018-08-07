@@ -53,7 +53,7 @@ class Projects extends Component {
 
       // reset link
       data.push(
-        <a href="#" onClick={(e) => this.changeFilterSelection(e, null)} className={isActive(null) ? styles.projects__filters__link_active : null}>
+        <a href="#" key={Math.random()} onClick={(e) => this.changeFilterSelection(e, null)} className={isActive(null) ? styles.projects__filters__link_active : null}>
           <LocaleString string='All' />
         </a>
       )

@@ -34,25 +34,21 @@ class ReelPlayer extends React.Component {
       // start video after some timeout
       // setTimeout(()=> {
       // }, 250);
+      // this.refs.player.play()
 
-      this.refs.player.play()
-
-      // this.refs.player.video.handleCanPlayThrough = () => {
-      //   // alert("Can play through video without stopping");
-      //   
-        
-      //   // start video after some timeout if didn't started yet 
-      //   setTimeout(()=> {
-      //     this.refs.player.play()
-      //   }, 2000);
-      // };
-      
+      this.refs.player.oncanplaythrough = (event) => {
+        console.log("Can play through video without stopping");
+        this.refs.player.play()
+        setTimeout(()=> {
+          this.refs.player.play()
+        }, 2000);
+      }
 
       // when clicking in video
-      this.refs.player.handleMouseDown = (event) => {
-        event.preventDefault()
-        return false
-      }
+      // this.refs.player.handleMouseDown = (event) => {
+      //   event.preventDefault()
+      //   return false
+      // }
     }
   }
 
@@ -97,7 +93,6 @@ class ReelPlayer extends React.Component {
   }
 
   videoTransformStyle() {
-    // console.log(this.props.proximity);
     let baseOpacity = 1
     let coeficient = 2.75
     
@@ -138,35 +133,32 @@ class ReelPlayer extends React.Component {
         </a>
 
         {/* overlay with button and labels */}
-        {/* {this.state.previewMode && */}
-          <div className={
-              classNames({
-                [`${styles.reel__overlay}`] : true,
-                ['is-faded'] : !this.state.previewMode
-              })
-            }
-            onClick={(e) => this.setFullVideo(e)}
-          >
-            <div className={styles.reel__overlay__inner} >
-              {/* call to action with proximity detection */}
-              <h4 ref={this.props.proximityRef} className={`${styles.reel__label}`}>
-                <Fade bottom delay={350} distance={"50%"}>
-                  <div>
-                    <img alt="play icon" src={playSVG} />
-                    <span><LocaleString string='Play Reel' /></span>
-                    <hr />
-                  </div>
-                </Fade>
-              </h4> 
-            </div>
+        <div className={
+            classNames({
+              [`${styles.reel__overlay}`] : true,
+              ['is-faded'] : !this.state.previewMode
+            })
+          }
+          onClick={(e) => this.setFullVideo(e)}
+        >
+          <div className={styles.reel__overlay__inner} >
+            {/* call to action with proximity detection */}
+            <h4 ref={this.props.proximityRef} className={`${styles.reel__label}`}>
+              <Fade bottom delay={350} distance={"50%"}>
+                <div>
+                  <img alt="play icon" src={playSVG} />
+                  <span><LocaleString string='Play Reel' /></span>
+                  <hr />
+                </div>
+              </Fade>
+            </h4> 
           </div>
-        {/* } */}
+        </div>
 
         {/* the player */}
         <div style={this.videoTransformStyle()} className={`${styles.reel__container}`}>
           <video
             ref="player"
-            // controls={!this.state.previewMode}
             autoPlay
             muted
             playsInline
@@ -174,7 +166,7 @@ class ReelPlayer extends React.Component {
             width='100%'
             height='100%'
           >
-            <source src={this.state.src} />
+            <source src={this.state.src} type="video/mp4" />
           </video>
         </div>
       </div>
