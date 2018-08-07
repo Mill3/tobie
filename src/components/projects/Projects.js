@@ -100,9 +100,11 @@ class Projects extends Component {
                   <LocaleString string='selected_work_block' />
                 </Fade>
               </h3>
-              <nav className={styles.projects__filters}>
-                {this.projectTypesFilter()}
-              </nav>
+              <Fade bottom={true} distance={"15%"} delay={450}>
+                <nav className={styles.projects__filters}>
+                  {this.projectTypesFilter()}
+                </nav>
+              </Fade>
             </div>
           </aside>
 
