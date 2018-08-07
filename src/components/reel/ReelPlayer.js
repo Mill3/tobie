@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import scrollToElement from 'scroll-to-element'
-import ReactPlayer from 'react-player'
+// import ReactPlayer from 'react-player'
 import Fade from 'react-reveal/Fade'
-import { Player, ControlBar, BigPlayButton, LoadingSpinner } from 'video-react'
+// import { Player, ControlBar, BigPlayButton, LoadingSpinner } from 'video-react'
 
 import LocaleString from '@utils/LocaleString'
 
@@ -35,15 +35,17 @@ class ReelPlayer extends React.Component {
       // setTimeout(()=> {
       // }, 250);
 
-      this.refs.player.video.handleCanPlayThrough = () => {
-        // alert("Can play through video without stopping");
-        this.refs.player.play()
+      this.refs.player.play()
+
+      // this.refs.player.video.handleCanPlayThrough = () => {
+      //   // alert("Can play through video without stopping");
+      //   
         
-        // start video after some timeout if didn't started yet 
-        setTimeout(()=> {
-          this.refs.player.play()
-        }, 2000);
-      };
+      //   // start video after some timeout if didn't started yet 
+      //   setTimeout(()=> {
+      //     this.refs.player.play()
+      //   }, 2000);
+      // };
       
 
       // when clicking in video
@@ -52,6 +54,20 @@ class ReelPlayer extends React.Component {
         return false
       }
     }
+  }
+
+  setPreviewMode(event) {    
+    event.preventDefault()
+    this.setState({
+      src: this.props.video_preview_src,
+      muted: true,
+      playing: false,
+      previewMode: true,
+    })
+
+    this.refs.player.load()
+    this.refs.player.play()
+    // this.refs.player.muted = true
   }
 
   setFullVideo(event) {
@@ -93,19 +109,7 @@ class ReelPlayer extends React.Component {
     }
   }
 
-  setPreviewMode(event) {    
-    event.preventDefault()
-    this.setState({
-      src: this.props.video_preview_src,
-      muted: true,
-      playing: false,
-      previewMode: true,
-    })
-
-    this.refs.player.load()
-    this.refs.player.play()
-    this.refs.player.muted = false
-  }
+  
 
   render() { 
     return (
@@ -130,8 +134,15 @@ class ReelPlayer extends React.Component {
         </a>
 
         {/* overlay with button and labels */}
-        {this.state.previewMode &&
-          <div className={styles.reel__overlay} onClick={(e) => this.setFullVideo(e)}>
+        {/* {this.state.previewMode && */}
+          <div className={
+              classNames({
+                [`${styles.reel__overlay}`] : true,
+                ['is-faded'] : !this.state.previewMode
+              })
+            }
+            onClick={(e) => this.setFullVideo(e)}
+          >
             <div className={styles.reel__overlay__inner} >
               {/* call to action with proximity detection */}
               <h4 ref={this.props.proximityRef} className={`${styles.reel__label}`}>
@@ -145,29 +156,22 @@ class ReelPlayer extends React.Component {
               </h4> 
             </div>
           </div>
-        }
+        {/* } */}
 
         {/* the player */}
-        <div style={this.videoTransformStyle()}>
-          <Player
+        <div style={this.videoTransformStyle()} className={`${styles.reel__container}`}>
+          <video
             ref="player"
             controls={!this.state.previewMode}
             autoPlay={true}
             muted={this.state.muted}
             playsInline
             loop={true}
-            fluid={false}
             width='100%'
             height='100%'
-            className={`${styles.video_react}`}
           >
             <source src={this.state.src} />
-            <LoadingSpinner className="is-hidden" />
-            <BigPlayButton className="is-hidden" />
-            <ControlBar autoHide={true} className={classNames({
-              "is-hidden": this.state.previewMode
-            })}/>
-          </Player>
+          </video>
         </div>
       </div>
     );
