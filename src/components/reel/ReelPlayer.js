@@ -28,8 +28,10 @@ class ReelPlayer extends React.Component {
       previewMode: true
     }
     this.setPreviewMode = this.setPreviewMode.bind(this)
-    this.setFullVideo = this.setFullVideo.bind(this)    
+    this.setFullVideo = this.setFullVideo.bind(this)
     this.player = null
+    // console.log(this.props);
+    
   }
 
   videoHasLoaded() {
@@ -165,6 +167,7 @@ class ReelPlayer extends React.Component {
               loop
               width='100%'
               height='100%'
+              poster={this.props.video_poster_src}
             />
             {/* <video
               

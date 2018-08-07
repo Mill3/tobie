@@ -145,6 +145,9 @@ export const query = graphql`
         text_video_full {
           source_url
         }
+        text_image {
+          source_url
+        }
       }
     }
 

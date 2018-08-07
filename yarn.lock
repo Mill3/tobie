@@ -7346,7 +7346,7 @@ react-text-scrambler@1.1.3:
 
 "react-video-tag@https://github.com/Mill3/react-video-tag":
   version "0.0.10"
-  resolved "https://github.com/Mill3/react-video-tag#8fe97f37a0578c887579c34995dd0ab64ed49d13"
+  resolved "https://github.com/Mill3/react-video-tag#c05e78fa96450c479129988d4bc2989c96975fa4"
 
 react-with-async-fonts@4.0.2:
   version "4.0.2"
