@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 import Fade from 'react-reveal/Fade'
 import { Link } from 'gatsby'
+// import { VideoTag } from 'react-video-tag'
+import {
+  BrowserView,
+  MobileView,
+  isBrowser,
+  isMobile
+} from "react-device-detect";
 
 import FigureBox, { boxFormats } from '../figureBox/FigureBox'
 import Play from '../../svg/Play'
@@ -23,14 +30,14 @@ class ProjectPreview extends Component {
   }
 
   startVideo() {
-    if (this.refs.video) {
+    if (this.refs.video && isBrowser) {
       this.refs.video.currentTime = 0;
       this.refs.video.play(0)
     }
   }
 
   pauseVideo() {
-    if (this.refs.video) {
+    if (this.refs.video && isBrowser) {
       this.refs.video.pause()
     }
   }
@@ -69,7 +76,7 @@ class ProjectPreview extends Component {
           <Link to={`/${this.props.locale}/projects/${slug}`}>
             {(featured_media && featured_media.source_url) &&
               <FigureBox source={featured_media.source_url} format={boxFormats.sixteenByNine}>
-                {hover &&
+                {(hover && isBrowser) &&
                   <div className={styles.project_preview__video_preview}>
                     <video
                       ref='video'

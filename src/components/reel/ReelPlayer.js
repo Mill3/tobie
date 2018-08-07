@@ -82,6 +82,9 @@ class ReelPlayer extends React.Component {
 
       this.player.load()
       this.player.play()
+      // this.player.requestFullscreen()
+      console.log(this.player);
+      
 
       // scroll to video
       scrollToElement(ReactDOM.findDOMNode(this.refs.playerContainer), {
@@ -161,25 +164,12 @@ class ReelPlayer extends React.Component {
               src={this.state.src}
               controls={this.state.controls}
               muted={this.state.muted}
-              // {...this.videoAttributes()}
               autoPlay
               playsInline
               loop
               width='100%'
               height='100%'
-              poster={this.props.video_poster_src}
             />
-            {/* <video
-              
-              muted
-              autoPlay
-              playsInline
-              loop
-              width='100%'
-              height='100%'
-            >
-              <source src={this.state.src} type="video/mp4" />
-            </video> */}
           </Lazy>
         </div>
       </div>

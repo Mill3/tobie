@@ -21,6 +21,7 @@
     "react": "^16.4.1",
     "react-cursor-position": "2.5.0",
     "react-cx": "0.1.12",
+    "react-device-detect": "1.5.9",
     "react-dom": "^16.4.1",
     "react-helmet": "^5.2.0",
     "react-lazy": "1.0.3",
