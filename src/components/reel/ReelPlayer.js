@@ -65,6 +65,12 @@ class ReelPlayer extends React.Component {
     // start video through a promise
     var promise = this.refs.player.play();
 
+    this.refs.player.addEventListener("webkitendfullscreen", () => {
+      if (!this.state.previewMode && isMobile) {
+        this.setPreviewMode(null)
+      }
+    }, false);
+
     // promise won’t be defined in browsers that don't support promisified play()
     if (promise === undefined) {
       console.log('Promisified video play() not supported');
@@ -109,12 +115,6 @@ class ReelPlayer extends React.Component {
       // get fullscreen method
       let videoDOM = ReactDOM.findDOMNode(this.refs.player)
       var requestFullScreen = videoDOM.requestFullscreen || videoDOM.msRequestFullscreen || videoDOM.mozRequestFullScreen || videoDOM.webkitRequestFullscreen || videoDOM.webkitEnterFullScreen
-  
-      // aldrt(requestFullScreen)
-      // alert(requestFullScreen);
-      
-      // videoDOM.requestFullscreen()
-      // requestFullScreen.call(videoDOM)  
       
       // on mobile, toggle fullscreen
       if (isMobile) {
