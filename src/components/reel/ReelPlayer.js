@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import scrollToElement from 'scroll-to-element'
+import { Lazy } from 'react-lazy'
 // import ReactPlayer from 'react-player'
 import Fade from 'react-reveal/Fade'
 // import { Player, ControlBar, BigPlayButton, LoadingSpinner } from 'video-react'
@@ -28,27 +29,37 @@ class ReelPlayer extends React.Component {
     this.setFullVideo = this.setFullVideo.bind(this)    
   }
 
-  componentDidMount() {    
-    if (this.refs.player !== undefined) {
+  // componentDidMount() {    
+  //   if (this.refs.player !== undefined) {
       
-      // start video after some timeout
-      // setTimeout(()=> {
-      // }, 250);
-      // this.refs.player.play()
+  //     // start video after some timeout
+  //     // setTimeout(()=> {
+  //     // }, 250);
+  //     // this.refs.player.play()
 
-      this.refs.player.oncanplaythrough = (event) => {
-        console.log("Can play through video without stopping");
+  //     this.refs.player.oncanplaythrough = (event) => {
+  //       console.log("Can play through video without stopping");
+  //       this.refs.player.play()
+  //       setTimeout(()=> {
+  //         this.refs.player.play()
+  //       }, 2000);
+  //     }
+
+  //     // when clicking in video
+  //     // this.refs.player.handleMouseDown = (event) => {
+  //     //   event.preventDefault()
+  //     //   return false
+  //     // }
+  //   }
+  // }
+
+  videoHasLoaded() {
+    this.refs.player.oncanplaythrough = (event) => {
+      console.log("Can play through video without stopping");
+      this.refs.player.play()
+      setTimeout(()=> {
         this.refs.player.play()
-        setTimeout(()=> {
-          this.refs.player.play()
-        }, 2000);
-      }
-
-      // when clicking in video
-      // this.refs.player.handleMouseDown = (event) => {
-      //   event.preventDefault()
-      //   return false
-      // }
+      }, 2000);
     }
   }
 
@@ -157,17 +168,19 @@ class ReelPlayer extends React.Component {
 
         {/* the player */}
         <div style={this.videoTransformStyle()} className={`${styles.reel__container}`}>
-          <video
-            ref="player"
-            autoPlay
-            muted
-            playsInline
-            loop={true}
-            width='100%'
-            height='100%'
-          >
-            <source src={this.state.src} type="video/mp4" />
-          </video>
+          <Lazy onLoad={() => this.videoHasLoaded()} cushion={'0% 0% 200% 0%'}>
+            <video
+              ref="player"
+              autoPlay
+              muted
+              playsInline
+              loop={true}
+              width='100%'
+              height='100%'
+            >
+              <source src={this.state.src} type="video/mp4" />
+            </video>
+          </Lazy>
         </div>
       </div>
     );
