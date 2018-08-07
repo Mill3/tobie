@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Fade from 'react-reveal/Fade'
+import random from 'lodash/random'
 
 import LocaleString from '@utils/LocaleString'
 
@@ -25,6 +26,10 @@ class Projects extends Component {
     //   })
     // }
   }
+
+  // componentWillUpdate() {
+  //   console.log('update coming up');
+  // }
   
   list() {
     if (this.props.data && this.props.data.edges) {
@@ -37,7 +42,7 @@ class Projects extends Component {
       }
 
       return localeProjects.map((project, index) =>
-        <ProjectPreview locale={this.props.locale} project={project.node} key={index} animate={this.props.animate || this.state.animate} />
+        <ProjectPreview locale={this.props.locale} project={project.node} key={random(0, 100000)} animate={this.props.animate || this.state.animate} index={index} />
       )
     }
   }

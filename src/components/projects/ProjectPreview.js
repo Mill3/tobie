@@ -55,7 +55,7 @@ class ProjectPreview extends Component {
       attributes = {
         bottom: true,
         distance: "15%",
-        delay: 350
+        delay: 150 * this.props.index
       }
     }
     
