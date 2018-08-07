@@ -54,12 +54,24 @@ class ReelPlayer extends React.Component {
   // }
 
   videoHasLoaded() {
-    this.refs.player.oncanplaythrough = (event) => {
-      console.log("Can play through video without stopping");
-      this.refs.player.play()
-      setTimeout(()=> {
-        this.refs.player.play()
-      }, 2000);
+    // this.refs.player.oncanplaythrough = (event) => {
+    //   console.log("Can play through video without stopping");
+    //   this.refs.player.play()
+    //   setTimeout(()=> {
+    //     this.refs.player.play()
+    //   }, 2000);
+    // }
+    var promise = this.refs.player.play();
+
+    // promise won’t be defined in browsers that don't support promisified play()
+    if (promise === undefined) {
+      console.log('Promisified video play() not supported');
+    } else {
+      promise.then(function() {
+        console.log('Video playback successfully initiated, returning a promise');
+      }).catch(function(error) {
+        console.log('Error initiating video playback: ', error);
+      });
     }
   }
 

@@ -22,23 +22,29 @@ const detectLocale = () => {
   let prefix = getPrefix()
 
   // no prefix, detect language
-  if(!prefix && getBrowserLanguage) {
+  // if(!prefix) {
 
-    let languageCode = getBrowserLanguage().split('-')[0]
+  //   let languageCode = getBrowserLanguage().split('-')[0]
 
-    // check if detected code supported
-    // returns default if not found
-    if( indexOf(supportedLocales, languageCode) > 0 ) {
-      return languageCode
-    } else {
-      return defaultLocale
-    }
+  //   // check if detected code supported
+  //   // returns default if not found
+  //   if( indexOf(supportedLocales, languageCode) > 0 ) {
+  //     return languageCode
+  //   } else {
+  //     return defaultLocale
+  //   }
 
-  // has prefix, return this
-  } else if (prefix) {
+  // // has prefix, return this
+  // } else if (prefix) {
+  //   return prefix
+
+  // // nothing else, return default
+  // } else {
+  //   return defaultLocale
+  // }
+
+  if (prefix) {
     return prefix
-
-  // nothing else, return default
   } else {
     return defaultLocale
   }
