@@ -67,7 +67,9 @@ class ReelPlayer extends React.Component {
 
     this.refs.player.load()
     this.refs.player.play()
-    // this.refs.player.muted = true
+    
+    this.refs.player.muted = true
+    this.refs.player.controls = false
   }
 
   setFullVideo(event) {
@@ -80,7 +82,9 @@ class ReelPlayer extends React.Component {
       })
       this.refs.player.load()
       this.refs.player.play()
+
       this.refs.player.muted = false
+      this.refs.player.controls = true
 
       // scroll to video
       scrollToElement(ReactDOM.findDOMNode(this.refs.player), {
@@ -162,9 +166,9 @@ class ReelPlayer extends React.Component {
         <div style={this.videoTransformStyle()} className={`${styles.reel__container}`}>
           <video
             ref="player"
-            controls={!this.state.previewMode}
-            autoPlay={true}
-            muted={this.state.muted}
+            // controls={!this.state.previewMode}
+            autoPlay
+            muted
             playsInline
             loop={true}
             width='100%'
