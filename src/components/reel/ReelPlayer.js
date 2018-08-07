@@ -49,10 +49,10 @@ class ReelPlayer extends React.Component {
   }
 
   componentWillUnmount() {
-    document.removeEventListener('webkitfullscreenchange');
-    document.removeEventListener('mozfullscreenchange');
-    document.removeEventListener('fullscreenchange');
-    document.removeEventListener('MSFullscreenChange');
+    document.removeEventListener('webkitfullscreenchange', null);
+    document.removeEventListener('mozfullscreenchange', null);
+    document.removeEventListener('fullscreenchange', null);
+    document.removeEventListener('MSFullscreenChange', null);
   }
 
   videoHasLoaded() {
