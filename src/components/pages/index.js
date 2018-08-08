@@ -15,5 +15,8 @@ fragment pageFragment on wordpress__PAGE {
     yoast_wpseo_metadesc
     yoast_wpseo_canonical
   }
+  acf {
+    show_in_nav
+  }
 }
 `

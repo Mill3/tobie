@@ -54,6 +54,9 @@ const Layout = ({ children, location, inverted, hideHeader }) => (
               slug
               language_id  
               language_slug 
+              acf {
+                show_in_nav
+              }
             }
           }
         }

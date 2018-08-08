@@ -38,9 +38,7 @@ class Nav extends React.Component {
     }
   }
   
-  scrollToProjects(e) {
-    // console.log('should scroll down', document.getElementById('projects-list'));
-    
+  scrollToProjects(e) {    
     scrollToElement(document.getElementById('projects-list'), {
       duration: 1000,
       offset: -50,
@@ -98,6 +96,9 @@ class Nav extends React.Component {
       
       // filter only pages for current locale
       let localePages = this.props.pages.edges.filter(e => e.node.language_slug === this.props.LocaleState.locale)      
+
+      // only in with option : show_in_nav
+      localePages = localePages.filter(e => e.node.acf.show_in_nav === true)            
       
       // loop found pages
       localePages.map((page, index) => {
