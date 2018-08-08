@@ -100,7 +100,7 @@ class Nav extends React.Component {
       // only in with option : show_in_nav
       localePages = localePages.filter(e => e.node.acf.show_in_nav === true)            
       
-      // loop found pages
+      // loop filtered pages
       localePages.map((page, index) => {
         data.push(
           <li key={index} className={`${styles.navItem}`}>

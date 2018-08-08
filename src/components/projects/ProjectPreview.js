@@ -44,7 +44,8 @@ class ProjectPreview extends Component {
     let {
       title,
       slug,
-      featured_media
+      featured_media,
+      project_types
     } = this.props.project
 
     let {
@@ -94,9 +95,15 @@ class ProjectPreview extends Component {
               <div className={styles.project_preview__arrow}>
                 <Play />
               </div>
-              <h4 className={styles.project_preview__title}>
-                <span>{title}</span>
-              </h4>
+              <div className="d-flex ">
+                <h4 className={styles.project_preview__title}>
+                  <span>{title}</span>
+                  
+                </h4>
+                {project_types &&
+                  <h6 className={'ml-auto align-self-center is-sans-serif is-gray'}>{project_types[0].name}</h6>
+                }
+              </div>
             </footer>
           </Link>
         </article>

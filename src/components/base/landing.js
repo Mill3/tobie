@@ -13,6 +13,7 @@ import { hadIntro } from '@reducers/actions'
 // components
 import Reel from '@components/reel/Reel'
 import Projects from '@components/projects/Projects'
+import Seo from '@utils/Seo'
 
 // styles
 import styles from './landing.module.scss'
@@ -22,12 +23,12 @@ class Landing extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isReady: false
+      isReady: false,
+      front_page: null
     }    
-    console.log(this.props.data);
     // set SEO data
     // console.log(this.props.LocaleState);
-    // this.front_page = 
+    this.front_page = this.props.data[`page_${this.props.LocaleState.locale}`]
   }
 
   componentDidMount() { 
@@ -55,6 +56,10 @@ class Landing extends React.Component {
       this.props.hadIntro()
     }, 4000); 
   }
+  
+  componentDidUpdate() {
+    this.front_page = this.props.data[`page_${this.props.LocaleState.locale}`]
+  }
 
   componentWillUnmount() {
     this.props.hadIntro()
@@ -63,6 +68,15 @@ class Landing extends React.Component {
   render() { 
     return (
       <Layout location={this.props.location}>
+
+        {this.front_page &&
+          <Seo 
+            title={this.front_page.yoast_meta ? this.front_page.yoast_meta.yoast_wpseo_title : 'Home'}
+            description={this.front_page.yoast_meta ? this.front_page.yoast_meta.yoast_wpseo_metadesc : null}
+            image={this.front_page.featured_media ? this.front_page.featured_media.source_url : null}
+          />
+        }
+
         <section className={
           classNames(
             { 
@@ -125,7 +139,11 @@ export const query = graphql`
           slug
           language_id
           language_slug
-          project_types
+          project_types {
+            term_id
+            name
+            slug
+          }
           featured_media {
             id
             media_type

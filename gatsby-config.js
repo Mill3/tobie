@@ -57,6 +57,14 @@ module.exports = {
         normalizer: function({ entities }) {          
 
           return entities.map((entity) => {        
+
+            if (typeof entity.__type === 'wordpress__wp_projects') {
+              console.log(entity);
+            }
+
+            if (typeof entity.__type === 'wordpress__wp_taxonomies') {
+              console.log(entity);
+            }
             
             // 
             // Fix bug with ACF file fields

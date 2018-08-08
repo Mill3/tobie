@@ -38,7 +38,7 @@ class Projects extends Component {
       let localeProjects = this.props.data.edges.filter(e => e.node.language_slug === this.props.locale)      
 
       if (this.state.filterByProjectTypeID) {        
-        localeProjects = this.props.data.edges.filter(e => e.node.project_types[0] === this.state.filterByProjectTypeID)      
+        localeProjects = this.props.data.edges.filter(e => e.node.project_types[0].term_id === this.state.filterByProjectTypeID)      
       }
 
       return localeProjects.map((project, index) =>
