@@ -24,9 +24,15 @@ class Landing extends React.Component {
     this.state = {
       isReady: false
     }    
+    console.log(this.props.data);
+    // set SEO data
+    // console.log(this.props.LocaleState);
+    // this.front_page = 
   }
 
   componentDidMount() { 
+
+    // pick seo data
        
     if (this.props.IntroState.played) {
 
@@ -103,6 +109,14 @@ export default connect(
 
 export const query = graphql`
   query IndexQuery {
+
+    page_en : wordpressPage(slug : { eq: "home" }) {
+      ...pageFragment
+    }
+
+    page_fr : wordpressPage(slug : { eq: "accueil" }) {
+      ...pageFragment
+    }
     
     projects : allWordpressWpProjects {
       edges {
