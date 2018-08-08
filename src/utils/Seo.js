@@ -36,16 +36,15 @@ const Seo = (props) => {
 
   return(
     <Helmet
-      defaultTitle="Wieden+Kennedy | Full Service Integrated Advertising Agency"
+      defaultTitle={`${defaultTitle()}`}
       title={title()}
-      description={description()}
-      bodyAttributes={{
-        class: props.bodyClass
-      }}
     >
+      <meta name="description" content={description()} />
+      {/* facebook */}
       <meta property="og:title" content={title()} />
       <meta property="og:description" content={description()} />
       <meta property="og:image" content={image()} />
+      {/* twitter */}
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:title" content={title()} />
       <meta name="twitter:description" content={description()} />

@@ -103,7 +103,10 @@ return new Promise((resolve, reject) => {
               title
               slug
               language_id  
-              language_slug 
+              language_slug
+              acf {
+                show_in_nav
+              }
             }
           }
         }
@@ -185,7 +188,7 @@ return new Promise((resolve, reject) => {
           let post_language_slug = post.node.language_slug
           let path = `/${language_slug}/${post_slug}`;
 
-          if (post_language_id == language_id) {
+          if ((post_language_id == language_id) && post.node.acf.show_in_nav === true) {
             createPage({
               path: path,
               component: pageTemplate,

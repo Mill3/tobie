@@ -23,17 +23,11 @@ class Landing extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isReady: false,
-      front_page: null
+      isReady: false
     }    
-    // set SEO data
-    // console.log(this.props.LocaleState);
-    this.front_page = this.props.data[`page_${this.props.LocaleState.locale}`]
   }
 
   componentDidMount() { 
-
-    // pick seo data
        
     if (this.props.IntroState.played) {
 
@@ -56,10 +50,6 @@ class Landing extends React.Component {
       this.props.hadIntro()
     }, 4000); 
   }
-  
-  componentDidUpdate() {
-    this.front_page = this.props.data[`page_${this.props.LocaleState.locale}`]
-  }
 
   componentWillUnmount() {
     this.props.hadIntro()
@@ -69,13 +59,11 @@ class Landing extends React.Component {
     return (
       <Layout location={this.props.location}>
 
-        {this.front_page &&
-          <Seo 
-            title={this.front_page.yoast_meta ? this.front_page.yoast_meta.yoast_wpseo_title : 'Home'}
-            description={this.front_page.yoast_meta ? this.front_page.yoast_meta.yoast_wpseo_metadesc : null}
-            image={this.front_page.featured_media ? this.front_page.featured_media.source_url : null}
-          />
-        }
+        <Seo 
+          title={this.props.data.site_options.title}
+          description={this.props.data.site_options.description}
+          image={this.props.data.site_options_acf.options.share_image ? this.props.data.site_options_acf.options.share_image.source_url : null}
+        />
 
         <section className={
           classNames(
@@ -100,7 +88,7 @@ class Landing extends React.Component {
           </div>
           
           {/* all projects */}
-          <Projects data={this.props.data.projects} projectTypes={this.props.data.projectTypes} locale={this.props.LocaleState.locale} animate={!this.props.IntroState.played} />          
+          <Projects data={this.props.data.projects} projectTypes={this.props.data.projectTypes} locale={this.props.LocaleState.locale} />          
         </section>
       </Layout>
     );
@@ -124,12 +112,19 @@ export default connect(
 export const query = graphql`
   query IndexQuery {
 
-    page_en : wordpressPage(slug : { eq: "home" }) {
-      ...pageFragment
+    site_options : wordpressWpSettings {
+      id
+      description
+      title
     }
 
-    page_fr : wordpressPage(slug : { eq: "accueil" }) {
-      ...pageFragment
+    site_options_acf :  wordpressAcfOptions {
+      options {
+        dummy
+        share_image {
+          source_url
+        }
+      }
     }
     
     projects : allWordpressWpProjects {
