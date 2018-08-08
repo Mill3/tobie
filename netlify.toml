@@ -12,7 +12,7 @@
   [build.environment]
     WORDPRESS_HOST = "admin.tobiemarierrobitaille.com"
     WORDPRESS_USER = "admin"
-    WORDPRESS_PASS = "admin"
+    WORDPRESS_PASS = "zDjxF9kSZk@IntVG5xRH!YY@"
     PROTOCOL = "https"
     SITE_URL="https://admin.tobiemarierrobitaille.com"
 
