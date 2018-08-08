@@ -45,15 +45,11 @@ class Landing extends React.Component {
 
     }
 
-    // force had intro after a few seconds
-    setTimeout( ()=> {
-      this.props.hadIntro()
-    }, 4000); 
   }
 
-  componentWillUnmount() {
-    this.props.hadIntro()
-  }
+  // componentWillUnmount() {
+  //   this.props.hadIntro()
+  // }
   
   render() { 
     return (

@@ -1,13 +1,25 @@
 @import "~style/base";
 
 
+// 
+// variables
+// 
+$logo-font-size: 92px;
+$logo-animation-duration: 2000ms;
+$logo-animation-delay: 2000ms;
+
+// this export to css module variables values
+:export { 
+  logoAnimationDuration: $logo-animation-duration;
+  logoAnimationDelay: $logo-animation-delay;
+}
+
 /// logo
 ///
 /// @name .logo
 ///
 /// @group logo
 
-$logo-font-size: 92px;
 
 @keyframes logoFadeInAnimation {
   0% { 
@@ -69,8 +81,8 @@ $logo-font-size: 92px;
   &__animated {
     @extend .logo;
     animation-name: logoFadeInAnimation;
-    animation-duration: 2s;
-    animation-delay: 2s;
+    animation-duration: $logo-animation-duration;
+    animation-delay: $logo-animation-delay;
     animation-fill-mode: backwards;
   }
 

@@ -6,10 +6,22 @@ import { Link } from 'gatsby'
 
 import LocaleString from '@utils/LocaleString'
 
+import { hadIntro } from '@reducers/actions'
+
 // styles
 import styles from './logo.module.scss'
 
 class Logo extends React.Component {
+  
+  componentDidMount() {
+    if (this.props.animated) {
+      // get timeout delay from variables in SCSS module exports
+      let timeoutAfter = parseInt(styles.logoAnimationDuration) + parseInt(styles.logoAnimationDelay)
+      setTimeout( ()=> {
+        this.props.hadIntro()
+      }, timeoutAfter); 
+    }
+  }
 
   render() {    
 
@@ -82,5 +94,5 @@ const mapStateToProps = store => {
 
 export default connect(
   mapStateToProps,
-  null
+  { hadIntro }
 )(Logo)

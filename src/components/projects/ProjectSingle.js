@@ -51,7 +51,7 @@ class ProjectSingle extends Component {
   }
 
   render() { 
-    // let isModal = false
+    let isModal = false
     // We don't want to show the modal if a user navigates
     // directly to a post so if this code is running on Gatsby's
     // initial render then we don't show the modal, otherwise we
