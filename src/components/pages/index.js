@@ -7,5 +7,13 @@ fragment pageFragment on wordpress__PAGE {
   slug
   language_slug
   content
+  featured_media {
+    source_url
+  }
+  yoast_meta {
+    yoast_wpseo_title
+    yoast_wpseo_metadesc
+    yoast_wpseo_canonical
+  }
 }
 `

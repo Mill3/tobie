@@ -8,6 +8,7 @@ import styles from './projects.module.scss'
 
 import Layout from '../layout'
 import Logo from '../logo/logo'
+import Seo from '@utils/Seo'
 
 import close from '../../svg/close.svg'
 
@@ -65,11 +66,10 @@ class ProjectSingle extends Component {
     return (
       <Layout location={this.props.location} isModal={false} hideHeader={true} inverted={true}>
 
-        <Helmet
+        <Seo 
           title={this.props.data.project.yoast_meta ? this.props.data.project.yoast_meta.yoast_wpseo_title : this.props.data.project.title}
-          meta={[
-            { name: 'description', content: this.props.data.project.yoast_meta ? this.props.data.project.yoast_meta.yoast_wpseo_metadesc : null }
-          ]}
+          description={this.props.data.project.yoast_meta ? this.props.data.project.yoast_meta.yoast_wpseo_metadesc : null}
+          image={this.props.data.project.featured_media ? this.props.data.project.featured_media.source_url : null}
         />
 
         <div className="container-fluid">
@@ -146,8 +146,6 @@ query projectSingle($slug: String!) {
     slug
     content
     featured_media {
-      id
-      media_type
       source_url
     }
     yoast_meta {

@@ -1,12 +1,14 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { graphql } from 'gatsby'
+import Helmet from 'react-helmet'
 import Fade from 'react-reveal/Fade'
 
 import { connect } from 'react-redux'
 // import { store } from '@reducers'
 
 import Layout from '@components/layout'
+import Seo from '@utils/Seo'
 
 import close from '../../svg/close.svg'
 
@@ -22,10 +24,16 @@ class Page extends React.Component {
     let {
       title,
       content
-    } = this.props.data.page
+    } = this.props.data.page    
 
     return (
       <Layout inverted={true} hideHeader={true}>
+
+        <Seo 
+          title={this.props.data.page.yoast_meta ? this.props.data.page.yoast_meta.yoast_wpseo_title : title}
+          description={this.props.data.page.yoast_meta ? this.props.data.page.yoast_meta.yoast_wpseo_metadesc : null}
+          image={this.props.data.page.featured_media ? this.props.data.page.featured_media.source_url : null}
+        />
 
         <Link to={`/${this.props.LocaleState.locale}/`} className={styles.btn__close}>
           <img src={close} alt="X" />
