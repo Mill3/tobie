@@ -7,6 +7,9 @@ import { detectLocale, alternateLocales } from '@utils/detect-locale'
 
 const Seo = (props) => {
 
+  // console.log(props.location.pathname)
+  
+
   const siteName = 'Tobie Marier Robitaille csc'
   const siteDescription = 'Cinematographer - Directeur photo'
   const sep = '|'
@@ -42,7 +45,7 @@ const Seo = (props) => {
       defaultTitle={`${defaultTitle()}`}
       title={title()}
     >
-      <html lang={detectLocale()} />
+      <html lang={props.languageSlug} />
       <meta name="description" content={description()} />
       {/* facebook */}
       <meta property="og:title" content={title()} />
@@ -54,19 +57,21 @@ const Seo = (props) => {
       <meta name="twitter:title" content={title()} />
       <meta name="twitter:description" content={description()} />
       <meta name="twitter:image" content={image()} />
-      <link rel="alternate" hreflang={alternateLocales()} href={`https://tobiemarierrobitaille.com/${alternateLocales()}/`} />
+      <link rel="alternate" hreflang={alternateLocales(props.languageSlug)} href={`https://tobiemarierrobitaille.com/${alternateLocales(props.languageSlug)}/`} />
     </Helmet>
   )
 }
 
 Seo.defaultProps = {
-  title: null
+  title: null,
+  languageSlug: null
 }
 
 Seo.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
-  image: PropTypes.string
+  image: PropTypes.string,
+  languageSlug: PropTypes.string
 };
 
 

@@ -60,6 +60,7 @@ class ProjectSingle extends Component {
           title={this.props.data.project.yoast_meta ? this.props.data.project.yoast_meta.yoast_wpseo_title : this.props.data.project.title}
           description={this.props.data.project.yoast_meta ? this.props.data.project.yoast_meta.yoast_wpseo_metadesc : null}
           image={this.props.data.project.featured_media ? this.props.data.project.featured_media.source_url : null}
+          languageSlug={this.props.pageContext.language_slug}
         />
 
         <div className="container-fluid">

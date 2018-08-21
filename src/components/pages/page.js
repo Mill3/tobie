@@ -33,6 +33,7 @@ class Page extends React.Component {
           title={this.props.data.page.yoast_meta ? this.props.data.page.yoast_meta.yoast_wpseo_title : title}
           description={this.props.data.page.yoast_meta ? this.props.data.page.yoast_meta.yoast_wpseo_metadesc : null}
           image={this.props.data.page.featured_media ? this.props.data.page.featured_media.source_url : null}
+          languageSlug={this.props.pageContext.language_slug}
         />
 
         <Link to={`/${this.props.LocaleState.locale}/`} className={styles.btn__close}>

@@ -25,6 +25,8 @@ class Landing extends React.Component {
     this.state = {
       isReady: false
     }    
+    // console.log(this.props);
+    
   }
 
   componentDidMount() { 
@@ -59,6 +61,7 @@ class Landing extends React.Component {
           title={this.props.data.site_options.title}
           description={this.props.data.site_options.description}
           image={this.props.data.site_options_acf.options.share_image ? this.props.data.site_options_acf.options.share_image.source_url : null}
+          languageSlug={this.props.pageContext.language_slug}
         />
 
         <section className={
