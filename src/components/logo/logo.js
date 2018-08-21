@@ -28,6 +28,10 @@ class Logo extends React.Component {
     // wrap with Div or Link depending on props
     let Wrapper = 'Div'
     let attributes = {}
+    // let Heading = 
+    let HeadingTag = `${this.props.headingWrapper}`
+    console.log(this.props, HeadingTag);
+    
 
     // Link to
     if (this.props.link) {
@@ -46,14 +50,15 @@ class Logo extends React.Component {
         })
       }>
         {/* base logo line */}
-        <h1 className={
+        <HeadingTag className={
           classNames({
+            [styles.logo__heading]: true,
             [`fade-in`]: this.props.fadeIn,
             [`is-hidden`]: this.props.hidden
           })
         }>
           Tobie <span>Marier</span> Robitaille <span className={styles.logo__title}>CSC</span>
-        </h1>
+        </HeadingTag>
         {/* byline */}
         {this.props.byLine &&
           <p className={
@@ -71,19 +76,21 @@ class Logo extends React.Component {
   }
 }
 
-Logo.propsDefault = {
+Logo.defaultProps = {
   inverted: false,
   animated: false,
-  byLine: true,
+  byLine: false,
   compact: false,
-  link: false
+  link: false,
+  headingWrapper: `h1`
 }
 
 Logo.propTypes = {
   inverted: PropTypes.bool,
   animated: PropTypes.bool,
   byLine: PropTypes.bool,
-  link: PropTypes.bool
+  link: PropTypes.bool,
+  headingWrapper: PropTypes.string
 }
 
 const mapStateToProps = store => {

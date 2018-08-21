@@ -1,6 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+import { connect } from 'react-redux'
+
+import { alternateLocales } from '@utils/detect-locale'
 
 const Seo = (props) => {
 
@@ -49,6 +52,7 @@ const Seo = (props) => {
       <meta name="twitter:title" content={title()} />
       <meta name="twitter:description" content={description()} />
       <meta name="twitter:image" content={image()} />
+      <link rel="alternate" hreflang={alternateLocales(props.LocaleState.locale)} href={`https://tobiemarierrobitaille.com/${alternateLocales(props.LocaleState.locale)}/`} />
     </Helmet>
   )
 }
@@ -63,4 +67,14 @@ Seo.propTypes = {
   image: PropTypes.string
 };
 
-export default Seo
+
+const mapStateToProps = store => {
+  return {
+    LocaleState: store.LocaleState,
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(Seo)

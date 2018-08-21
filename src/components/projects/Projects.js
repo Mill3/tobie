@@ -17,19 +17,6 @@ class Projects extends Component {
     }
     this.changeFilterSelection = this.changeFilterSelection.bind(this)
   }
-
-  componentDidUpdate(prevProps, prevState) {
-    // console.log(prevProps, prevState);
-    // if (prevState.filterByProjectTypeID != this.state.filterByProjectTypeID) {
-    //   this.setState({
-    //     hasChanged: true
-    //   })
-    // }
-  }
-
-  // componentWillUpdate() {
-  //   console.log('update coming up');
-  // }
   
   list() {
     if (this.props.data && this.props.data.edges) {

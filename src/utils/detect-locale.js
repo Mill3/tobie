@@ -1,4 +1,5 @@
 import indexOf from 'lodash/indexOf'
+import filter from 'lodash/filter'
 let getBrowserLanguage = null
 
 if (typeof window !== `undefined`) {
@@ -21,34 +22,19 @@ const detectLocale = () => {
   // check if current location has a prefix
   let prefix = getPrefix()
 
-  // no prefix, detect language
-  // if(!prefix) {
-
-  //   let languageCode = getBrowserLanguage().split('-')[0]
-
-  //   // check if detected code supported
-  //   // returns default if not found
-  //   if( indexOf(supportedLocales, languageCode) > 0 ) {
-  //     return languageCode
-  //   } else {
-  //     return defaultLocale
-  //   }
-
-  // // has prefix, return this
-  // } else if (prefix) {
-  //   return prefix
-
-  // // nothing else, return default
-  // } else {
-  //   return defaultLocale
-  // }
-
   if (prefix) {
     return prefix
   } else {
     return defaultLocale
   }
 
+}
+
+export const alternateLocales = (currentLocale) => {
+  // return currentLocale
+  return filter(supportedLocales, function(l) {
+    return l !== currentLocale;
+  });  
 }
 
 // module.exports = detectLocale

@@ -34,7 +34,7 @@ const Footer = ({ props }) => (
         <div className="row align-items-end">
           <aside className="col mb-4">
             <Fade bottom={true} delay={250}>
-              <Logo compact={true} byLine={false} />
+              <Logo compact={true} byLine={false} headingWrapper="p" />
               {data.contact &&
                 <div className="mt-4" dangerouslySetInnerHTML={{ __html : data.contact.content }} />
               }
