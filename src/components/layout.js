@@ -76,6 +76,7 @@ const Layout = ({ children, location, inverted, hideHeader }) => (
           <link rel="icon" type="image/png" sizes="32x32" href={favicon} />
           <meta name="msapplication-TileColor" content="#000000" />
           <meta name="theme-color" content="#000000" />
+          <meta name="ahrefs-site-verification" content="60731af8a710220fa57373aeca408f14e0fb65e8dc1322d66fb4e2c5621f9da1">
         </Helmet>    
         <div className={
           classNames({ 
