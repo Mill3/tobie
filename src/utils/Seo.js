@@ -45,6 +45,7 @@ const Seo = (props) => {
       <meta name="description" content={description()} />
       {/* facebook */}
       <meta property="og:title" content={title()} />
+      <meta property="og:type" content={'website'} />
       <meta property="og:description" content={description()} />
       <meta property="og:image" content={image()} />
       {/* twitter */}
