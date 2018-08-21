@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { connect } from 'react-redux'
 
-import { alternateLocales } from '@utils/detect-locale'
+import { detectLocale, alternateLocales } from '@utils/detect-locale'
 
 const Seo = (props) => {
 
@@ -42,6 +42,7 @@ const Seo = (props) => {
       defaultTitle={`${defaultTitle()}`}
       title={title()}
     >
+      <html lang={detectLocale()} />
       <meta name="description" content={description()} />
       {/* facebook */}
       <meta property="og:title" content={title()} />
@@ -53,7 +54,7 @@ const Seo = (props) => {
       <meta name="twitter:title" content={title()} />
       <meta name="twitter:description" content={description()} />
       <meta name="twitter:image" content={image()} />
-      <link rel="alternate" hreflang={alternateLocales(props.LocaleState.locale)} href={`https://tobiemarierrobitaille.com/${alternateLocales(props.LocaleState.locale)}/`} />
+      <link rel="alternate" hreflang={alternateLocales()} href={`https://tobiemarierrobitaille.com/${alternateLocales()}/`} />
     </Helmet>
   )
 }

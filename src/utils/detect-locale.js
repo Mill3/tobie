@@ -18,7 +18,7 @@ const getPrefix = () => {
   }
 }
 
-const detectLocale = () => {
+export const detectLocale = () => {
   // check if current location has a prefix
   let prefix = getPrefix()
 
@@ -30,13 +30,13 @@ const detectLocale = () => {
 
 }
 
-export const alternateLocales = (currentLocale) => {
+export const alternateLocales = () => {
+  let prefix = getPrefix()
+
   // return currentLocale
   return filter(supportedLocales, function(l) {
-    return l !== currentLocale;
+    return l !== prefix;
   });  
 }
-
-// module.exports = detectLocale
 
 export default detectLocale
