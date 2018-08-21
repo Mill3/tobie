@@ -31,8 +31,6 @@ export const detectLocale = () => {
 }
 
 export const alternateLocales = (currentLocale) => {
-  // let prefix = currentLocale ? currentLocale : getPrefix()
-
   // return currentLocale
   return filter(supportedLocales, function(l) {
     return l !== currentLocale;

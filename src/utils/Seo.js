@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { connect } from 'react-redux'
 
-import { detectLocale, alternateLocales } from '@utils/detect-locale'
+import {
+  supportedLocales
+} from '@utils/detect-locale'
 
-const Seo = (props) => {
 
-  // console.log(props.location.pathname)
-  
+const Seo = (props) => {  
 
   const siteName = 'Tobie Marier Robitaille csc'
   const siteDescription = 'Cinematographer - Directeur photo'
@@ -57,7 +57,9 @@ const Seo = (props) => {
       <meta name="twitter:title" content={title()} />
       <meta name="twitter:description" content={description()} />
       <meta name="twitter:image" content={image()} />
-      <link rel="alternate" hreflang={alternateLocales(props.languageSlug)} href={`https://tobiemarierrobitaille.com/${alternateLocales(props.languageSlug)}/`} />
+      {supportedLocales.map((locale) => 
+        <link rel="alternate" href={`https://tobiemarierrobitaille.com/${locale}/`} hrefLang={locale} />
+      )}
     </Helmet>
   )
 }
