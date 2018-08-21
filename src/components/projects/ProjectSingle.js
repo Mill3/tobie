@@ -34,10 +34,10 @@ class ProjectSingle extends Component {
 
   handleBack(event, isModal = false) {
     event.preventDefault()
-    console.log(isModal);
+    // console.log(isModal);
     
 
-    if (isModal) {
+    if (window.history.state) {
       window.history.back()
     } else {
       push(`/${this.props.LocaleState.locale}/`)
@@ -53,18 +53,6 @@ class ProjectSingle extends Component {
   }
 
   render() { 
-    let isModal = false
-    // We don't want to show the modal if a user navigates
-    // directly to a post so if this code is running on Gatsby's
-    // initial render then we don't show the modal, otherwise we
-    // do.
-    if (
-      typeof window !== `undefined` &&
-      window.___GATSBYGRAM_INITIAL_RENDER_COMPLETE
-    ) {
-      this.isModal = true
-    }
-    
     return (
       <Layout location={this.props.location} hideHeader={true} inverted={true}>
 
