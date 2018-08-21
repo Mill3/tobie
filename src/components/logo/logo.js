@@ -28,11 +28,8 @@ class Logo extends React.Component {
     // wrap with Div or Link depending on props
     let Wrapper = 'Div'
     let attributes = {}
-    // let Heading = 
     let HeadingTag = `${this.props.headingWrapper}`
-    console.log(this.props, HeadingTag);
     
-
     // Link to
     if (this.props.link) {
       Wrapper = Link

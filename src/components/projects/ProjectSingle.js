@@ -34,6 +34,8 @@ class ProjectSingle extends Component {
 
   handleBack(event, isModal = false) {
     event.preventDefault()
+    console.log(isModal);
+    
 
     if (isModal) {
       window.history.back()
@@ -64,7 +66,7 @@ class ProjectSingle extends Component {
     }
     
     return (
-      <Layout location={this.props.location} isModal={false} hideHeader={true} inverted={true}>
+      <Layout location={this.props.location} hideHeader={true} inverted={true}>
 
         <Seo 
           title={this.props.data.project.yoast_meta ? this.props.data.project.yoast_meta.yoast_wpseo_title : this.props.data.project.title}
