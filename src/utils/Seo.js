@@ -4,7 +4,8 @@ import Helmet from 'react-helmet'
 import { connect } from 'react-redux'
 
 import {
-  supportedLocales
+  supportedLocales,
+  defaultLocale
 } from '@utils/detect-locale'
 
 
@@ -45,7 +46,7 @@ const Seo = (props) => {
       defaultTitle={`${defaultTitle()}`}
       title={title()}
     >
-      <html lang={props.languageSlug} />
+      <html lang={props.languageSlug ? props.languageSlug : defaultLocale} />
       <meta name="description" content={description()} />
       {/* facebook */}
       <meta property="og:title" content={title()} />
@@ -60,6 +61,7 @@ const Seo = (props) => {
       {supportedLocales.map((locale) => 
         <link rel="alternate" href={`https://tobiemarierrobitaille.com/${locale}/`} hrefLang={locale} />
       )}
+      <link rel="alternate" href={`https://tobiemarierrobitaille.com/${defaultLocale}/`} hreflang="x-default" />
     </Helmet>
   )
 }
