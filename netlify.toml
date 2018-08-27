@@ -24,6 +24,11 @@
 #   command = "make feature"
 
 [[redirects]]
+  from = "https://marierrobitaille.com/*"
+  to = "https://tobiemarierrobitaille.com/:splat"
+  status = 301
+
+[[redirects]]
   from = "/admin"
   to = "https://admin.tobiemarierrobitaille.com/wp-admin/"
   status = 302
