@@ -27,3 +27,73 @@
   from = "/admin"
   to = "https://admin.tobiemarierrobitaille.com/wp-admin/"
   status = 302
+
+[[redirects]]
+  from = "/fr/accueil/"
+  to = "/fr/"
+  status = 301
+
+[[redirects]]
+  from = "/en/home/"
+  to = "/en/"
+  status = 301
+
+[[redirects]]
+  from = "/fr/contact/"
+  to = "/fr/a-propos/"
+  status = 301
+
+[[redirects]]
+  from = "/en/contact-20/"
+  to = "/en/about/"
+  status = 301
+
+[[redirects]]
+  from = "/en/photos/"
+  to = "/en/"
+  status = 301
+
+[[redirects]]
+  from = "/fr/photos/"
+  to = "/fr/"
+  status = 301
+
+[[redirects]]
+  from = "/en/demo/"
+  to = "/en/"
+  status = 301
+
+[[redirects]]
+  from = "/fr/demo/"
+  to = "/fr/"
+  status = 301
+
+[[redirects]]
+  from = "/fr/movie/"
+  to = "/fr/"
+  status = 301
+
+[[redirects]]
+  from = "/1/photo/paysages.html"
+  to = "/en/"
+  status = 301
+
+[[redirects]]
+  from = "/fr/photo/paysages.html"
+  to = "/fr/"
+  status = 301
+
+[[redirects]]
+  from = "/en/photos/selected-work.html"
+  to = "/en/"
+  status = 301
+
+[[redirects]]
+  from = "/fr/movie/article/documentaire.html"
+  to = "/fr/"
+  status = 301
+
+[[redirects]]
+  from = "/fr/movie/article/fiction.html"
+  to = "/fr/"
+  status = 301

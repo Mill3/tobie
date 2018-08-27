@@ -25,8 +25,7 @@ class Landing extends React.Component {
     this.state = {
       isReady: false
     }    
-    // console.log(this.props);
-    
+    console.log(this.props);
   }
 
   componentDidMount() { 
@@ -48,10 +47,6 @@ class Landing extends React.Component {
     }
 
   }
-
-  // componentWillUnmount() {
-  //   this.props.hadIntro()
-  // }
   
   render() { 
     return (
