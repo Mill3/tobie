@@ -24,6 +24,26 @@
 #   command = "make feature"
 
 [[redirects]]
+  from = "https://marierrobitaille.com"
+  to = "https://tobiemarierrobitaille.com"
+  status = 301
+
+[[redirects]]
+  from = "https://www.marierrobitaille.com"
+  to = "https://tobiemarierrobitaille.com"
+  status = 301
+
+[[redirects]]
+  from = "http://marierrobitaille.com"
+  to = "https://tobiemarierrobitaille.com"
+  status = 301
+
+[[redirects]]
+  from = "http://www.marierrobitaille.com"
+  to = "https://tobiemarierrobitaille.com"
+  status = 301
+
+[[redirects]]
   from = "https://marierrobitaille.com/*"
   to = "https://tobiemarierrobitaille.com/:splat"
   status = 301
