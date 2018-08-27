@@ -58,20 +58,11 @@ module.exports = {
 
           return entities.map((entity) => {        
 
-            if (typeof entity.__type === 'wordpress__wp_projects') {
-              console.log(entity);
-            }
-
-            if (typeof entity.__type === 'wordpress__wp_taxonomies') {
-              console.log(entity);
-            }
-            
             // 
             // Fix bug with ACF file fields
             // 
 
             if (typeof entity.__type !== 'undefined' && entity.acf) {
-              // console.log(entity.acf);
               var keys = Object.keys(entity.acf);
 
               _.forEach(keys, (key) => {
