@@ -4,7 +4,7 @@ const _ = require(`lodash`)
 
 dotenv.config()
 
-console.log(process.env.WORDPRESS_HOST, process.env.PROTOCOL);
+// console.log(process.env.WORDPRESS_HOST, process.env.PROTOCOL);
 
 
 module.exports = {
