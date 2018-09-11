@@ -17,7 +17,6 @@ class Logo extends React.Component {
     if (this.props.animated) {
       // get timeout delay from variables in SCSS module exports
       let timeoutAfter = (parseInt(styles.logoAnimationDuration) + parseInt(styles.logoAnimationDelay)) * 1000
-      // console.warn(styles.logoAnimationDuration, styles.logoAnimationDelay, timeoutAfter);
       setTimeout( ()=> {
         this.props.hadIntro()
       }, timeoutAfter);

@@ -1,5 +1,4 @@
 let dotenv = require('dotenv')
-let autoprefixer = require('autoprefixer')
 const _ = require(`lodash`)
 
 dotenv.config()
@@ -9,23 +8,24 @@ dotenv.config()
 
 module.exports = {
   siteMetadata: {
-    title: 'Tobie Marier Robitaille',
+    title: `Tobie Marier Robitaille`,
     siteUrl: `${process.env.SITE_URL}`,
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
-    {
-      resolve: 'gatsby-plugin-sitemap'
-    },
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-postcss`,
     {
       resolve: `gatsby-plugin-sass`,
       options: {
-          postCssPlugins: [autoprefixer()],
+          postCssPlugins: [
+            require('autoprefixer')
+          ],
           precision: 8
       }
     },
     {
-      resolve: "gatsby-source-wordpress",
+      resolve: `gatsby-source-wordpress`,
       options: {
         baseUrl: `${process.env.WORDPRESS_HOST}`,
         protocol: `${process.env.PROTOCOL}`,
@@ -52,28 +52,28 @@ module.exports = {
         // See: https://github.com/isaacs/minimatch
         // Example:  `["/*/*/comments", "/yoast/**"]` will exclude routes ending in `comments` and
         // all routes that begin with `yoast` from fetch.
-        excludedRoutes: ["/*/*/comments", "/yoast/**"],
+        excludedRoutes: [`/*/*/comments`, `/yoast/**`],
         // use a custom normalizer which is applied after the built-in ones.
-        normalizer: function({ entities }) {          
+        normalizer: function({ entities }) {
 
-          return entities.map((entity) => {        
+          return entities.map((entity) => {
 
-            // 
+            //
             // Fix bug with ACF file fields
-            // 
+            //
 
-            if (typeof entity.__type !== 'undefined' && entity.acf) {
+            if (typeof entity.__type !== `undefined` && entity.acf) {
               var keys = Object.keys(entity.acf);
 
               _.forEach(keys, (key) => {
                 let has___NODE = key.match(/___NODE/)
                 if (has___NODE) {
-                  
+
                   // find node
                   let node = entities.filter(e => e.id === entity.acf[key])
 
                   // if a node was found, attach to entry.acf object
-                  // slice '___NODE' from the original key name as the new key name 
+                  // slice '___NODE' from the original key name as the new key name
                   if(node[0]) entity.acf[key.slice(0, has___NODE.index)] = node[0]
                 }
               })
@@ -83,7 +83,7 @@ module.exports = {
 
             return entity
           })
-          
+
           return entities
         }
       },
