@@ -2,16 +2,16 @@
 @import "~style/base/type";
 
 
-// 
+//
 // variables
-// 
+//
 
 $logo-font-size: 92px;
-$logo-animation-duration: 2000ms;
-$logo-animation-delay: 2000ms;
+$logo-animation-duration: 2s;
+$logo-animation-delay: 2s;
 
 // this export to css module variables values
-:export { 
+:export {
   logoAnimationDuration: $logo-animation-duration;
   logoAnimationDelay: $logo-animation-delay;
 }
@@ -24,15 +24,15 @@ $logo-animation-delay: 2000ms;
 
 
 @keyframes logoFadeInAnimation {
-  0% { 
+  0% {
     color: $black;
   }
-  100% { 
+  100% {
     color: $white;
   }
 }
 
-.logo {    
+.logo {
   text-align: center;
   transition: color 0.25s;
   margin-left: auto;
@@ -44,11 +44,11 @@ $logo-animation-delay: 2000ms;
   }
 
   &__heading {
-    font-size: $logo-font-size;  
+    font-size: $logo-font-size;
     margin: 0;
     @extend .h1;
     @include media-breakpoint-down(lg) {
-      font-size: $logo-font-size/1.25;  
+      font-size: $logo-font-size/1.25;
     }
     @include media-breakpoint-down(xs) {
       font-size: $logo-font-size/2.25;
@@ -57,7 +57,7 @@ $logo-animation-delay: 2000ms;
       padding-right: $grid-gutter-width;
       margin-bottom: 12px;
     }
-  }  
+  }
 
   span {
     font-family: $font-family-sans-serif;
@@ -71,7 +71,7 @@ $logo-animation-delay: 2000ms;
       // font-size: $h6-font-size;
     }
   }
-  
+
   &__inverted {
     @extend .logo;
     color: $white;
@@ -93,8 +93,8 @@ $logo-animation-delay: 2000ms;
     @extend .logo;
     text-align: left;
     .logo__heading {
-      font-size: $h3-font-size; 
-      padding-left: 0; 
+      font-size: $h3-font-size;
+      padding-left: 0;
       padding-right: 0;
     }
     .logo__title {
@@ -114,10 +114,10 @@ $logo-animation-delay: 2000ms;
 
 
 @keyframes byLineFadeInAnimation {
-  from { 
+  from {
     opacity: 0;
   }
-  to { 
+  to {
     opacity: 1;
   }
 }
@@ -130,7 +130,7 @@ $logo-animation-delay: 2000ms;
   }
 
   &__animated {
-    @extend .byline; 
+    @extend .byline;
     animation-name: byLineFadeInAnimation;
     animation-duration: 2s;
     animation-delay: 3s;
