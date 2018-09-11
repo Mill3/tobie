@@ -34,7 +34,7 @@ export const alternateLocales = (currentLocale) => {
   // return currentLocale
   return filter(supportedLocales, function(l) {
     return l !== currentLocale;
-  });  
+  });
 }
 
 export default detectLocale

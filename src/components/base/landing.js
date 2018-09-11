@@ -19,22 +19,24 @@ import Seo from '@utils/Seo'
 import styles from './landing.module.scss'
 
 class Landing extends React.Component {
-  
+
   constructor(props) {
     super(props)
     this.state = {
       isReady: false
-    }    
+    }
   }
 
-  componentDidMount() { 
-       
+  componentDidMount() {
+    console.log(this.props.IntroState);
+
+
     if (this.props.IntroState.played) {
 
       this.setState({
         isReady: true
       })
-      
+
     } else {
 
       setTimeout( ()=> {
@@ -46,12 +48,12 @@ class Landing extends React.Component {
     }
 
   }
-  
-  render() { 
+
+  render() {
     return (
       <Layout location={this.props.location}>
 
-        <Seo 
+        <Seo
           title={this.props.data.site_options.title}
           description={this.props.data.site_options.description}
           image={this.props.data.site_options_acf.options.share_image ? this.props.data.site_options_acf.options.share_image.source_url : null}
@@ -60,14 +62,14 @@ class Landing extends React.Component {
 
         <section className={
           classNames(
-            { 
+            {
               [`${styles.landing}`]: this.props.IntroState.played,
               [`${styles.landing__withIntro}`]: !this.props.IntroState.played
             }
           )
         }>
           <header className={`${styles.landing__header}`}>
-              <Logo 
+              <Logo
                 byLine={true}
                 inverted={!this.props.IntroState.played ? false : true}
                 animated={this.props.IntroState.played ? false : true}
@@ -75,13 +77,13 @@ class Landing extends React.Component {
                 hidden={!this.state.isReady}
               />
           </header>
-          
+
           <div className="mb-6">
             <Reel data={this.props.data.homeVideo} />
           </div>
-          
+
           {/* all projects */}
-          <Projects data={this.props.data.projects} projectTypes={this.props.data.projectTypes} locale={this.props.LocaleState.locale} />          
+          <Projects data={this.props.data.projects} projectTypes={this.props.data.projectTypes} locale={this.props.LocaleState.locale} />
         </section>
       </Layout>
     );
@@ -119,7 +121,7 @@ export const query = graphql`
         }
       }
     }
-    
+
     projects : allWordpressWpProjects {
       edges {
         node {
