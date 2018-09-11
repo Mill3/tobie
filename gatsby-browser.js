@@ -16,23 +16,16 @@ import { setLocale } from '@reducers/actions'
 
 let store = createStoreMethod()
 
-export const wrapRootElement = ({ element }) => {
+const ConnectedRootElement = ({ element }) => <Provider store={store}>{element}</Provider>
 
-  const ConnectedRootElement = (
-    <Provider store={store}>
-      {element}
-    </Provider>
-  )
+export const wrapRootElement = ConnectedRootElement
 
-  return ConnectedRootElement
-}
-
-export const onInitialClientRender = () => {  
+export const onInitialClientRender = () => {
   window.___GATSBYGRAM_INITIAL_RENDER_COMPLETE = true
 
   let root = '/'
   let detectedLocale = detectLocale()
-  
+
   // dispatch detected locale
   store.dispatch({ type: 'SET_LOCALE', locale: detectedLocale })
 
@@ -40,5 +33,5 @@ export const onInitialClientRender = () => {
   if (window.location.pathname === root) {
     push(`${detectedLocale}/`)
   }
-  
+
 }
