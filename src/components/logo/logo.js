@@ -12,24 +12,25 @@ import { hadIntro } from '@reducers/actions'
 import styles from './logo.module.scss'
 
 class Logo extends React.Component {
-  
+
   componentDidMount() {
     if (this.props.animated) {
       // get timeout delay from variables in SCSS module exports
       let timeoutAfter = parseInt(styles.logoAnimationDuration) + parseInt(styles.logoAnimationDelay)
+      console.warn(styles.logoAnimationDuration, styles.logoAnimationDelay, timeoutAfter);
       setTimeout( ()=> {
         this.props.hadIntro()
-      }, timeoutAfter); 
+      }, timeoutAfter);
     }
   }
 
-  render() {    
+  render() {
 
     // wrap with Div or Link depending on props
     let Wrapper = 'Div'
     let attributes = {}
     let HeadingTag = `${this.props.headingWrapper}`
-    
+
     // Link to
     if (this.props.link) {
       Wrapper = Link
@@ -37,7 +38,7 @@ class Logo extends React.Component {
         to: `/${this.props.LocaleState.locale}/`
       }
     }
-    
+
     return (
       <Wrapper {...attributes} className={
         classNames({
@@ -63,7 +64,7 @@ class Logo extends React.Component {
               [`${styles.byline}`] : !this.props.animated,
               [`${styles.byline__animated}`] : this.props.animated,
             })
-            
+
           }>
             <LocaleString string='Cinematographer' />
           </p>
