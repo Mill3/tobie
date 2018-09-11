@@ -28,8 +28,6 @@ class Landing extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.IntroState);
-
     if (this.props.IntroState.played) {
 
       this.setState({
@@ -46,10 +44,6 @@ class Landing extends React.Component {
 
     }
 
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log(this.props);
   }
 
   render() {
