@@ -16,15 +16,15 @@ import { setLocale } from '@reducers/actions'
 
 let store = createStoreMethod()
 
-export const replaceRouterComponent = ({ history }) => {
+export const wrapRootElement = ({ element }) => {
 
-  const ConnectedRouterWrapper = ({ children }) => (
+  const ConnectedRootElement = (
     <Provider store={store}>
-      <Router history={history}>{children}</Router>
+      {element}
     </Provider>
   )
 
-  return ConnectedRouterWrapper
+  return ConnectedRootElement
 }
 
 export const onInitialClientRender = () => {  
