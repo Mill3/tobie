@@ -12,7 +12,7 @@ import Play from '../../svg/Play'
 import styles from './projects.module.scss'
 
 class ProjectPreview extends Component {
-  
+
   constructor(props) {
     super(props);
     this.videoRef = React.createRef();
@@ -20,7 +20,7 @@ class ProjectPreview extends Component {
     this.pauseVideo = this.pauseVideo.bind(this)
   }
 
-  componentDidMount() {    
+  componentDidMount() {
     this.setState({
       title: this.props.project.title
     })
@@ -39,14 +39,15 @@ class ProjectPreview extends Component {
     }
   }
 
-  render() { 
-  
+  render() {
+
     let {
       title,
       slug,
       featured_media,
-      project_types
     } = this.props.project
+
+    let { projectType } = this.props;
 
     let {
       hover
@@ -54,7 +55,7 @@ class ProjectPreview extends Component {
 
     let Wrapper = "span"
     let attributes = null
-    
+
     if (this.props.animate) {
       Wrapper = Fade
       attributes = {
@@ -63,14 +64,14 @@ class ProjectPreview extends Component {
         delay: 150 * this.props.index
       }
     }
-    
+
     return (
       <Wrapper {...attributes}>
-        <article 
+        <article
           className={`${styles.project_preview} mb-5`}
           onMouseEnter={(e) => this.startVideo()}
           onMouseLeave={(e) => this.pauseVideo()}
-        > 
+        >
           <Link to={`/${this.props.locale}/projects/${slug}`}>
             {(featured_media && featured_media.source_url) &&
               <FigureBox source={featured_media.source_url} format={boxFormats.sixteenByNine}>
@@ -98,10 +99,10 @@ class ProjectPreview extends Component {
               <div className="d-flex ">
                 <h4 className={styles.project_preview__title}>
                   <span>{title}</span>
-                  
+
                 </h4>
-                {project_types &&
-                  <h6 className={'ml-auto align-self-center is-sans-serif is-gray'}>{project_types[0].name}</h6>
+                {projectType &&
+                  <h6 className={'ml-auto align-self-center is-sans-serif is-gray'}>{projectType.name}</h6>
                 }
               </div>
             </footer>
@@ -111,6 +112,6 @@ class ProjectPreview extends Component {
     );
   }
 }
- 
+
 
 export default ProjectPreview

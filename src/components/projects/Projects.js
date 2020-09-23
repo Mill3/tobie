@@ -17,19 +17,25 @@ class Projects extends Component {
     }
     this.changeFilterSelection = this.changeFilterSelection.bind(this)
   }
-  
+
   list() {
     if (this.props.data && this.props.data.edges) {
 
       // filter by languages
-      let localeProjects = this.props.data.edges.filter(e => e.node.language_slug === this.props.locale)      
+      let localeProjects = this.props.data.edges.filter(e => e.node.language_slug === this.props.locale)
 
-      if (this.state.filterByProjectTypeID) {        
-        localeProjects = this.props.data.edges.filter(e => e.node.project_types[0].term_id === this.state.filterByProjectTypeID)      
+      if (this.state.filterByProjectTypeID) {
+        localeProjects = this.props.data.edges.filter(e => e.node.project_types[0] === this.state.filterByProjectTypeID)
+      }
+
+      const findProjectType = (node) => {
+        const wordpress_id = node.project_types[0];
+        const project_type = this.props.projectTypes.edges.filter((node => node.node.wordpress_id === wordpress_id))[0]
+        return project_type ? project_type.node : null;
       }
 
       return localeProjects.map((project, index) =>
-        <ProjectPreview locale={this.props.locale} project={project.node} key={random(0, 100000)} animate={true} index={index} />
+        <ProjectPreview locale={this.props.locale} project={project.node} projectType={findProjectType(project.node)} key={random(0, 100000)} animate={true} index={index} />
       )
     }
   }
@@ -51,8 +57,8 @@ class Projects extends Component {
       )
 
       // filter by languages
-      let localeProjectTypes = this.props.projectTypes.edges.filter(e => e.node.language_slug === this.props.locale)      
-      
+      let localeProjectTypes = this.props.projectTypes.edges.filter(e => e.node.language_slug === this.props.locale)
+
       localeProjectTypes.map((projectType, index) =>
         data.push(
           <a href="#" key={index} className={isActive(projectType.node.wordpress_id) ? styles.projects__filters__link_active : null} onClick={(e) => this.changeFilterSelection(e, projectType.node.wordpress_id)}>
@@ -64,21 +70,21 @@ class Projects extends Component {
 
     return data
   }
-  
+
   changeFilterSelection(e, ProjectTypeID) {
-    e.preventDefault()    
+    e.preventDefault()
     this.setState({
       filterByProjectTypeID : ProjectTypeID
     })
   }
 
-  render() { 
+  render() {
     // console.log(this.props);
-    
+
     return (
       <section id="projects-list" className={`container-fluid`}>
         <div className="row">
-         
+
           {/* sidebar */}
           <aside className={`col-12 col-md-4 mb-4 is-relative ${styles.projects_sidebar}`}>
             <div className="is-sticky">
@@ -107,5 +113,5 @@ class Projects extends Component {
     );
   }
 }
- 
+
 export default Projects;

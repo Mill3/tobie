@@ -32,7 +32,7 @@ module.exports = {
         useACF: true,
         // Set verboseOutput to true to display a verbose output on `npm run develop` or `npm run build`
         // It can help you debug specific API Endpoints problems.
-        verboseOutput: false,
+        verboseOutput: true,
         perPage: 100,
         auth: {
           // If auth.user and auth.pass are filled, then the source plugin will be allowed
@@ -52,9 +52,11 @@ module.exports = {
         // See: https://github.com/isaacs/minimatch
         // Example:  `["/*/*/comments", "/yoast/**"]` will exclude routes ending in `comments` and
         // all routes that begin with `yoast` from fetch.
-        excludedRoutes: [`/*/*/comments`, `/yoast/**`],
+        excludedRoutes: [`/*/*/comments`, `/yoast/**`, `/wordfence/**`, `/siteground-optimizer/**`, `/redirection/**`, `/themes/**`, `/block-directory/**`],
         // use a custom normalizer which is applied after the built-in ones.
         normalizer: function({ entities }) {
+
+          // console.log('entities:', entities)
 
           return entities.map((entity) => {
 
@@ -79,7 +81,6 @@ module.exports = {
               })
 
             }
-
 
             return entity
           })

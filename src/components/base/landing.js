@@ -126,11 +126,7 @@ export const query = graphql`
           slug
           language_id
           language_slug
-          project_types {
-            term_id
-            name
-            slug
-          }
+          project_types
           featured_media {
             id
             media_type
