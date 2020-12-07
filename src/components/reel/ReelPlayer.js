@@ -172,7 +172,7 @@ class ReelPlayer extends React.Component {
           onClick={(e) => this.setPreviewMode(e)}
           className={
             classNames({
-              [`${styles.btn__close} fade-in`] : !this.state.previewMode,
+              [`${styles.btn__close} fade-in is-hidden`] : !this.state.previewMode,
               [`is-hidden`] : this.state.previewMode,
             })
           }
