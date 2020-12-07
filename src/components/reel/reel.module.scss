@@ -5,7 +5,8 @@
   position: relative;
   overflow: hidden;
   height: 600px;
-  cursor: pointer;
+  // cursor: pointer;
+  pointer-events: none;
   background-color: $black;
   transition: height 1.25s;
 

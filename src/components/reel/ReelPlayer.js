@@ -19,7 +19,7 @@ import close from '../../svg/close.svg'
 import styles from './reel.module.scss'
 
 class ReelPlayer extends React.Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -83,7 +83,7 @@ class ReelPlayer extends React.Component {
     }
   }
 
-  setPreviewMode(event) {    
+  setPreviewMode(event) {
     if(event) event.preventDefault()
     this.setState({
       src: this.props.video_preview_src,
@@ -101,7 +101,7 @@ class ReelPlayer extends React.Component {
     if(event) event.preventDefault()
 
     if (this.props.video_full_src) {
-      
+
       this.setState({
         src: this.props.video_full_src,
         previewMode: false,
@@ -115,11 +115,11 @@ class ReelPlayer extends React.Component {
       // get fullscreen method
       let videoDOM = ReactDOM.findDOMNode(this.refs.player)
       var requestFullScreen = videoDOM.requestFullscreen || videoDOM.msRequestFullscreen || videoDOM.mozRequestFullScreen || videoDOM.webkitRequestFullscreen || videoDOM.webkitEnterFullScreen
-      
+
       // on mobile, toggle fullscreen
       if (isMobile) {
-        requestFullScreen.call(videoDOM)  
-      
+        requestFullScreen.call(videoDOM)
+
       // scroll down on desktop
       } else {
         // scroll to video
@@ -135,7 +135,7 @@ class ReelPlayer extends React.Component {
   videoTransformStyle() {
     let baseOpacity = 1
     let coeficient = 2.75
-    
+
     return {
       opacity: (this.state.previewMode && this.props.proximity) ? (baseOpacity - (this.props.proximity / coeficient)) : baseOpacity,
       height: "100%"
@@ -158,21 +158,22 @@ class ReelPlayer extends React.Component {
   //   return attributes
   // }
 
-  render() { 
+  render() {
     return (
       <div className={
         classNames({
-          [`${styles.reel}`]: this.state.previewMode,
-          [`${styles.reel__playing}`]: !this.state.previewMode
+          // 'd-none': true
+          [`${styles.reel}`]: this.state.previewMode
+          // [`${styles.reel__playing}`]: !this.state.previewMode
         })
       }>
 
         {/* close button */}
-        <a href="#" 
+        <a href="#"
           onClick={(e) => this.setPreviewMode(e)}
           className={
             classNames({
-              [`${styles.btn__close} fade-in is-hidden`] : !this.state.previewMode,
+              [`${styles.btn__close} fade-in`] : !this.state.previewMode,
               [`is-hidden`] : this.state.previewMode,
             })
           }
@@ -184,14 +185,14 @@ class ReelPlayer extends React.Component {
         <div className={
             classNames({
               [`${styles.reel__overlay}`] : true,
-              ['is-faded'] : !this.state.previewMode
+              ['is-faded'] : true
             })
           }
-          onClick={(e) => this.setFullVideo(e)}
+          // onClick={(e) => this.setFullVideo(e)}
         >
           <div className={styles.reel__overlay__inner} >
             {/* call to action with proximity detection */}
-            <h4 ref={this.props.proximityRef} className={`${styles.reel__label}`}>
+            <h4 ref={this.props.proximityRef} className={`${styles.reel__label} d-none`}>
               <Fade bottom delay={350} distance={"50%"}>
                 <div>
                   <img alt="play icon" src={playSVG} />
@@ -199,14 +200,14 @@ class ReelPlayer extends React.Component {
                   <hr />
                 </div>
               </Fade>
-            </h4> 
+            </h4>
           </div>
         </div>
 
         {/* the player */}
         <div ref="playerContainer" style={this.videoTransformStyle()} className={`${styles.reel__container}`}>
           <Lazy onLoad={() => this.videoHasLoaded()} cushion={'0% 0% 200% 0%'}>
-            <video 
+            <video
               ref="player"
               controls={this.state.controls}
               muted={this.state.muted}
@@ -231,5 +232,5 @@ ReelPlayer.propTypes = {
   video_preview_src: PropTypes.string.isRequired,
   video_full_src: PropTypes.string
 }
- 
+
 export default ReelPlayer;
