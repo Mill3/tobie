@@ -14,15 +14,8 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sitemap`,
-    `gatsby-plugin-postcss`,
     {
-      resolve: `gatsby-plugin-sass`,
-      options: {
-          postCssPlugins: [
-            require('autoprefixer')
-          ],
-          precision: 8
-      }
+      resolve: `gatsby-plugin-sass`
     },
     {
       resolve: `gatsby-source-wordpress`,
