@@ -4,6 +4,11 @@
       "source": "/wp-admin",
       "destination": "https://admin.tobiemarierrobitaille.com/wp-admin", 
       "permanent": false
+    },
+    { 
+      "source": "/admin",
+      "destination": "https://admin.tobiemarierrobitaille.com/wp-admin", 
+      "permanent": false
     }
   ]
 }
