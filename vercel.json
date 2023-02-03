@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    { 
+      "source": "/wp-admin",
+      "destination": "https://admin.tobiemarierrobitaille.com/wp-admin", 
+      "permanent": false
+    }
+  ]
+}
