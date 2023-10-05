@@ -35,7 +35,14 @@ class Projects extends Component {
       }
 
       return localeProjects.map((project, index) =>
-        <ProjectPreview locale={this.props.locale} project={project.node} projectType={findProjectType(project.node)} key={random(0, 100000)} animate={true} index={index} />
+        <ProjectPreview
+          locale={this.props.locale}
+          project={project.node}
+          projectType={findProjectType(project.node)}
+          key={random(0, 100000)}
+          animate={true}
+          index={index}
+        />
       )
     }
   }

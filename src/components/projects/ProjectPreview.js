@@ -61,7 +61,8 @@ class ProjectPreview extends Component {
       attributes = {
         bottom: true,
         distance: "15%",
-        delay: 150 * this.props.index
+        delay: 150 * (this.props.index % 2), // staggered delay for every 2 item
+        duration: 1250
       }
     }
 
