@@ -5,7 +5,6 @@
   position: relative;
   overflow: hidden;
   height: 600px;
-  // cursor: pointer;
   pointer-events: none;
   background-color: $black;
   transition: height 1.25s;
@@ -71,11 +70,17 @@
     }
   }
 
+
+  &__enabled {
+    @extend .reel;
+    cursor: pointer;
+    pointer-events: all;
+  }
+
   &__playing {
     @extend .reel;
     height: 100vh;
     video {
-      // display: contain;
       object-fit: contain !important;
     }
   }
@@ -96,7 +101,6 @@
       object-fit: cover;
     }
   }
-
 }
 
 

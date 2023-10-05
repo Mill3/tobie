@@ -17,11 +17,13 @@ import playSVG from '../../svg/play.svg'
 import close from '../../svg/close.svg'
 
 import styles from './reel.module.scss'
+console.log('styles:', styles)
 
 class ReelPlayer extends React.Component {
 
   constructor(props) {
     super(props);
+    console.log('props:', props)
     this.state = {
       src: this.props.video_preview_src,
       muted: true,
@@ -148,23 +150,13 @@ class ReelPlayer extends React.Component {
     }
   }
 
-  // videoAttributes() {
-  //   let attributes = {}
-
-  //   if (this.state.previewMode) {
-  //     attributes.playsInline = true
-  //   }
-
-  //   return attributes
-  // }
-
   render() {
     return (
       <div className={
         classNames({
-          // 'd-none': true
-          [`${styles.reel}`]: this.state.previewMode
-          // [`${styles.reel__playing}`]: !this.state.previewMode
+          [`${styles.reel}`]: this.state.previewMode,
+          [`${styles.reel__playing}`]: !this.state.previewMode,
+          [`${styles.reel__enabled}`] : this.props.enable_reel_player,
         })
       }>
 
@@ -182,17 +174,18 @@ class ReelPlayer extends React.Component {
         </a>
 
         {/* overlay with button and labels */}
-        <div className={
+        <section className={
             classNames({
               [`${styles.reel__overlay}`] : true,
-              ['is-faded'] : true
+              ['is-faded'] : !this.state.previewMode,
+              ['is-hidden'] : !this.props.enable_reel_player,
             })
           }
-          // onClick={(e) => this.setFullVideo(e)}
+          onClick={(e) => this.setFullVideo(e)}
         >
           <div className={styles.reel__overlay__inner} >
             {/* call to action with proximity detection */}
-            <h4 ref={this.props.proximityRef} className={`${styles.reel__label} d-none`}>
+            <h4 ref={this.props.proximityRef} className={`${styles.reel__label}`}>
               <Fade bottom delay={350} distance={"50%"}>
                 <div>
                   <img alt="play icon" src={playSVG} />
@@ -202,7 +195,7 @@ class ReelPlayer extends React.Component {
               </Fade>
             </h4>
           </div>
-        </div>
+        </section>
 
         {/* the player */}
         <div ref="playerContainer" style={this.videoTransformStyle()} className={`${styles.reel__container}`}>
@@ -228,9 +221,16 @@ class ReelPlayer extends React.Component {
   }
 }
 
+ReelPlayer.defaultProps = {
+  video_preview_src: null,
+  video_full_src: null,
+  enable_reel_player: false
+}
+
 ReelPlayer.propTypes = {
   video_preview_src: PropTypes.string.isRequired,
-  video_full_src: PropTypes.string
+  video_full_src: PropTypes.string,
+  enable_reel_player: PropTypes.bool
 }
 
 export default ReelPlayer;

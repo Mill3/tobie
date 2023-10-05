@@ -169,6 +169,7 @@ export const query = graphql`
         text_image {
           source_url
         }
+        enable_reel_player
       }
     }
 
