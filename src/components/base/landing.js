@@ -126,6 +126,7 @@ export const query = graphql`
           slug
           language_id
           language_slug
+          menu_order
           project_types
           date
           featured_media {

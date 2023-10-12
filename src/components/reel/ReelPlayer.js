@@ -17,7 +17,6 @@ import playSVG from '../../svg/play.svg'
 import close from '../../svg/close.svg'
 
 import styles from './reel.module.scss'
-console.log('styles:', styles)
 
 class ReelPlayer extends React.Component {
 

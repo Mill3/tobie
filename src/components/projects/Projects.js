@@ -20,6 +20,7 @@ class Projects extends Component {
 
   list() {
     if (this.props.data && this.props.data.edges) {
+      // console.log('this.props.data.edges:', this.props.data.edges)
 
       // filter by languages
       let localeProjects = this.props.data.edges.filter(e => e.node.language_slug === this.props.locale)
@@ -27,6 +28,9 @@ class Projects extends Component {
       if (this.state.filterByProjectTypeID) {
         localeProjects = this.props.data.edges.filter(e => e.node.project_types[0] === this.state.filterByProjectTypeID)
       }
+
+      // sort all projects by menu_order field
+      localeProjects = localeProjects.sort((a, b) => { return a.node.menu_order - b.node.menu_order });
 
       const findProjectType = (node) => {
         const wordpress_id = node.project_types[0];

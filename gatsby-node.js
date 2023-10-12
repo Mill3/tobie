@@ -102,7 +102,7 @@ return new Promise((resolve, reject) => {
               id
               title
               slug
-              language_id  
+              language_id
               language_slug
               acf {
                 show_in_nav
@@ -117,8 +117,9 @@ return new Promise((resolve, reject) => {
               id
               title
               slug
-              language_id  
-              language_slug 
+              language_id
+              language_slug
+              menu_order
             }
           }
         }
@@ -136,7 +137,7 @@ return new Promise((resolve, reject) => {
 
       // Each languages
       result.data.languages.edges.forEach(language => {
-        
+
         let id = language.node.id
         let language_id = language.node.wordpress_id
         let language_slug = language.node.slug
@@ -151,7 +152,7 @@ return new Promise((resolve, reject) => {
             language_slug: language_slug
           }
         })
-        
+
         // each posts
         // result.data.posts.edges.forEach(post => {
 
@@ -174,11 +175,11 @@ return new Promise((resolve, reject) => {
         //     })
         //   }
 
-            
+
         //   })
 
         // each pages
- 
+
         result.data.pages.edges.forEach(post => {
 
           // let id = post.node.id
@@ -201,7 +202,7 @@ return new Promise((resolve, reject) => {
           }
 
         })
-        
+
 
         // each projects
         result.data.projects.edges.forEach(post => {
@@ -234,7 +235,7 @@ return new Promise((resolve, reject) => {
           }
 
         })
-        
+
       })
 
       return
