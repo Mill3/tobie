@@ -41,21 +41,24 @@ const Layout = ({ children, location, inverted, hideHeader }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
-        siteSettings: wordpressWpSettings {
-          id
-          title
-          description
+        siteSettings: wp {
+          generalSettings {
+            title
+            description
+          }
         }
-        allPages: allWordpressPage {
+        allPages: allWpPage {
           edges {
             node {
               id
               title
               slug
-              language_id
-              language_slug
-              acf {
-                show_in_nav
+              language {
+                slug
+                code
+              }
+              pages {
+                showInNav
               }
             }
           }
@@ -65,9 +68,9 @@ const Layout = ({ children, location, inverted, hideHeader }) => (
     render={data => (
       <>
         <Helmet
-          title={data.siteSettings.title}
+          title={data.siteSettings.generalSettings.title}
           meta={[
-            { name: 'description', content: "data.siteSettings.description" }
+            { name: 'description', content: data.siteSettings.generalSettings.description }
           ]}
         >
           <link rel="apple-touch-icon" href={favicon} />

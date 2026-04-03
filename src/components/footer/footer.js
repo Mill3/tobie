@@ -12,18 +12,16 @@ const Footer = ({ props }) => (
   <StaticQuery
     query={graphql`
       query FooterQuery {
-        contact : wordpressWpTexts(slug : { eq: "contact" }) {
-          title
-          content
-        }
-        allPages: allWordpressPage {
+        allPages: allWpPage {
           edges {
             node {
               id
               title
               slug
-              language_id  
-              language_slug 
+              language {
+                slug
+                code
+              }
             }
           }
         }
@@ -35,10 +33,7 @@ const Footer = ({ props }) => (
           <aside className="col mb-4">
             <Fade bottom={true} delay={250}>
               <Logo compact={true} byLine={false} headingWrapper="p" />
-              {data.contact &&
-                <div className="mt-4" dangerouslySetInnerHTML={{ __html : data.contact.content }} />
-              }
-            </Fade>
+              </Fade>
           </aside>
           <aside className="col-12 col-md-auto ml-md-auto">
             <Nav pages={data.allPages} credits={true} social={true} />

@@ -23,18 +23,20 @@ class Projects extends Component {
       // console.log('this.props.data.edges:', this.props.data.edges)
 
       // filter by languages
-      let localeProjects = this.props.data.edges.filter(e => e.node.language_slug === this.props.locale)
+      let localeProjects = this.props.data.edges.filter(e => e.node.language?.slug === this.props.locale)
 
       if (this.state.filterByProjectTypeID) {
-        localeProjects = this.props.data.edges.filter(e => e.node.project_types[0] === this.state.filterByProjectTypeID)
+        localeProjects = this.props.data.edges.filter(e => (e.node.project_types || [])[0] === this.state.filterByProjectTypeID)
       }
 
-      // sort all projects by menu_order field
-      localeProjects = localeProjects.sort((a, b) => { return a.node.menu_order - b.node.menu_order });
+      // sort all projects by menuOrder field
+      localeProjects = localeProjects.sort((a, b) => { return (a.node.menuOrder || 0) - (b.node.menuOrder || 0) });
 
       const findProjectType = (node) => {
-        const wordpress_id = node.project_types[0];
-        const project_type = this.props.projectTypes.edges.filter((node => node.node.wordpress_id === wordpress_id))[0]
+        const databaseId = (node.project_types || [])[0];
+        const project_type = this.props.projectTypes && this.props.projectTypes.edges
+          ? this.props.projectTypes.edges.filter((n => n.node.databaseId === databaseId))[0]
+          : null;
         return project_type ? project_type.node : null;
       }
 
@@ -68,11 +70,11 @@ class Projects extends Component {
       )
 
       // filter by languages
-      let localeProjectTypes = this.props.projectTypes.edges.filter(e => e.node.language_slug === this.props.locale)
+      let localeProjectTypes = this.props.projectTypes.edges.filter(e => e.node.language?.slug === this.props.locale)
 
       localeProjectTypes.map((projectType, index) =>
         data.push(
-          <a href="#" key={index} className={isActive(projectType.node.wordpress_id) ? styles.projects__filters__link_active : null} onClick={(e) => this.changeFilterSelection(e, projectType.node.wordpress_id)}>
+          <a href="#" key={index} className={isActive(projectType.node.databaseId) ? styles.projects__filters__link_active : null} onClick={(e) => this.changeFilterSelection(e, projectType.node.databaseId)}>
             {projectType.node.name}
           </a>
         )

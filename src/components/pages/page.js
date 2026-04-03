@@ -29,10 +29,10 @@ class Page extends React.Component {
     return (
       <Layout inverted={true} hideHeader={true}>
 
-        <Seo 
-          title={this.props.data.page.yoast_meta ? this.props.data.page.yoast_meta.yoast_wpseo_title : title}
-          description={this.props.data.page.yoast_meta ? this.props.data.page.yoast_meta.yoast_wpseo_metadesc : null}
-          image={this.props.data.page.featured_media ? this.props.data.page.featured_media.source_url : null}
+        <Seo
+          title={title}
+          description={null}
+          image={this.props.data.page.featuredImage ? this.props.data.page.featuredImage.node.sourceUrl : null}
           languageSlug={this.props.pageContext.language_slug}
         />
 
@@ -78,8 +78,16 @@ export default connect(
 
 export const pageQuery = graphql`
 query pageSingle($slug: String!) {
-  page : wordpressPage(slug : { eq: $slug }) {
-    ...pageFragment
+  page : wpPage(slug : { eq: $slug }) {
+    id
+    title
+    slug
+    content
+    featuredImage {
+      node {
+        sourceUrl
+      }
+    }
   }
 }
 `
