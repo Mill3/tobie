@@ -14,6 +14,17 @@ module.exports = {
     `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-plugin-sass`,
+      options: {
+        sassOptions: {
+          includePaths: [require('path').resolve(__dirname, 'src/style')],
+        },
+        cssLoaderOptions: {
+          esModule: false,
+          modules: {
+            namedExport: false,
+          },
+        },
+      },
     },
     {
       resolve: `gatsby-source-wordpress`,
