@@ -1,0 +1,10 @@
+diff --git a/dist/steps/source-nodes/create-nodes/process-node.js b/dist/steps/source-nodes/create-nodes/process-node.js
+index 1234567..abcdefg 100644
+--- a/dist/steps/source-nodes/create-nodes/process-node.js
++++ b/dist/steps/source-nodes/create-nodes/process-node.js
+@@ -296,7 +296,7 @@ const getCheerioElementFromMatch = wpUrl => ({
+   match,
+   tag = `img`
+ }) => {
+-  const $ = _cheerio.default.load(parsedMatch, {
++  const $ = _cheerio.load(parsedMatch, {

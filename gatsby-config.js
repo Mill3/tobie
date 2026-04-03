@@ -9,6 +9,9 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sitemap`,
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-plugin-sass`,
     },
@@ -22,6 +25,9 @@ module.exports = {
         },
         production: {
           hardCacheMediaFiles: false,
+        },
+        debug: {
+          disableCompatibilityCheck: true,
         },
       },
     },

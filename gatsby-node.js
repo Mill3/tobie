@@ -26,16 +26,6 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const result = await graphql(`
     {
-      languages: allWpLanguage {
-        edges {
-          node {
-            id
-            slug
-            databaseId
-          }
-        }
-      }
-
       pages: allWpPage {
         edges {
           node {
@@ -45,26 +35,25 @@ exports.createPages = async ({ graphql, actions }) => {
             databaseId
             language {
               slug
-              locale
+              code
             }
-            acfPageFields {
+            pages {
               showInNav
             }
           }
         }
       }
 
-      projects: allWpProjects {
+      projects: allWpProject {
         edges {
           node {
             id
             title
             slug
             databaseId
-            menuOrder
             language {
               slug
-              locale
+              code
             }
           }
         }
@@ -76,21 +65,25 @@ exports.createPages = async ({ graphql, actions }) => {
     throw result.errors
   }
 
-  result.data.languages.edges.forEach(({ node: language }) => {
-    const language_id = language.databaseId
-    const language_slug = language.slug
+  // Derive unique language slugs from fetched content
+  const languageSlugs = [
+    ...new Set([
+      ...result.data.pages.edges.map(({ node }) => node.language?.slug).filter(Boolean),
+      ...result.data.projects.edges.map(({ node }) => node.language?.slug).filter(Boolean),
+    ]),
+  ]
 
+  languageSlugs.forEach(language_slug => {
+    // Create landing page for each language
     createPage({
       path: `/${language_slug}/`,
       component: landingTemplate,
-      context: { language_id, language_slug },
+      context: { language_slug },
     })
 
+    // Create pages filtered by language
     result.data.pages.edges.forEach(({ node: page }) => {
-      const page_language_slug = page.language?.slug
-      const showInNav = page.acfPageFields?.showInNav
-
-      if (page_language_slug === language_slug && showInNav === true) {
+      if (page.language?.slug === language_slug && page.pages?.showInNav === true) {
         createPage({
           path: `/${language_slug}/${page.slug}`,
           component: pageTemplate,
@@ -103,10 +96,9 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     })
 
+    // Create project pages filtered by language
     result.data.projects.edges.forEach(({ node: project }) => {
-      const project_language_slug = project.language?.slug
-
-      if (project_language_slug === language_slug) {
+      if (project.language?.slug === language_slug) {
         createPage({
           path: `/${language_slug}/projects/${project.slug}`,
           component: projectSingleTemplate,
