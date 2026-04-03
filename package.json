@@ -43,6 +43,10 @@
     "gatsby"
   ],
   "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0",
+    "yarn": ">=1.22.0"
+  },
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
