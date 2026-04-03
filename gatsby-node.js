@@ -1,14 +1,7 @@
-let path = require('path')
-let dotenv = require('dotenv')
+const path = require('path')
+require('dotenv').config()
 
-
-exports.onCreateWebpackConfig = ({
-  stage,
-  rules,
-  loaders,
-  plugins,
-  actions,
-}) => {
+exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
       alias: {
@@ -17,231 +10,113 @@ exports.onCreateWebpackConfig = ({
         '@utils': path.resolve(__dirname, 'src/utils/'),
         '@reducers': path.resolve(__dirname, 'src/reducers/'),
       },
-      modules: [path.resolve(__dirname, "src"), "node_modules"],
+      modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     },
   })
 }
 
+exports.createPages = async ({ graphql, actions }) => {
+  process.env.GATSBY_BUILD_TIME = Date.now()
 
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
+  const { createPage } = actions
 
-exports.createPages = ({ graphql, actions }) => {
+  const landingTemplate = path.resolve('./src/components/base/landing.js')
+  const pageTemplate = path.resolve('./src/components/pages/page.js')
+  const projectSingleTemplate = path.resolve('./src/components/projects/ProjectSingle.js')
 
-// ['COMMIT_REF',
-//  'BRANCH',
-//  'ALGOLIA_APPLICATION_ID',
-//  'ALGOLIA_API_KEY',
-//  'ALGOLIA_INDEX_PREFIX',
-//  'ALGOLIA_INDEX_NAME'].forEach((variableName) => {
-//   // only variables beginning with GATSBY_ are available client-side
-//   process.env[`GATSBY_${variableName}`] = process.env[variableName];
-// });
-
-// dotenv.config();
-// console.log(process.env);
-
-// add current time to process env
-// process.env.GATSBY_BRANCH = 'preview';
-process.env.GATSBY_BUILD_TIME = Date.now();
-
-const { createPage } = actions
-
-return new Promise((resolve, reject) => {
-
-  const landingTemplate = path.resolve(
-    `./src/components/base/landing.js`
-  )
-
-  const postTemplate = path.resolve(
-    `./src/pages/post.js`
-  )
-
-  const pageTemplate = path.resolve(
-    `./src/components/pages/page.js`
-  )
-
-  const projectSingleTemplate = path.resolve(
-    `./src/components/projects/ProjectSingle.js`
-  )
-
-  // const locale = "eu-US"
-
-  // Main graphql Query for all edges content
-  resolve(
-    graphql(
-    `
-      {
-
-        languages : allWordpressWpLanguage {
-          edges {
-            node {
-              id
-              slug
-              wordpress_id
-            }
+  const result = await graphql(`
+    {
+      languages: allWpLanguage {
+        edges {
+          node {
+            id
+            slug
+            databaseId
           }
         }
-
-        posts : allWordpressPost {
-          edges {
-            node {
-              id
-              title
-              slug
-            }
-          }
-        }
-
-        pages : allWordpressPage {
-          edges {
-            node {
-              id
-              title
-              slug
-              language_id
-              language_slug
-              acf {
-                show_in_nav
-              }
-            }
-          }
-        }
-
-        projects : allWordpressWpProjects {
-          edges {
-            node {
-              id
-              title
-              slug
-              language_id
-              language_slug
-              menu_order
-            }
-          }
-        }
-
-      }
-    `
-    ).then(result => {
-
-      // console.log(result.data)
-      // return
-
-      if (result.errors) {
-        reject(result.errors)
       }
 
-      // Each languages
-      result.data.languages.edges.forEach(language => {
-
-        let id = language.node.id
-        let language_id = language.node.wordpress_id
-        let language_slug = language.node.slug
-
-        // create landing for language
-        let path = `/${language_slug}/`;
-        createPage({
-          path: path,
-          component: landingTemplate,
-          context: {
-            language_id: language_id,
-            language_slug: language_slug
+      pages: allWpPage {
+        edges {
+          node {
+            id
+            title
+            slug
+            databaseId
+            language {
+              slug
+              locale
+            }
+            acfPageFields {
+              showInNav
+            }
           }
-        })
+        }
+      }
 
-        // each posts
-        // result.data.posts.edges.forEach(post => {
-
-        //   // let id = post.node.id
-        //   let post_id = post.node.wordpress_id
-        //   let post_slug = post.node.slug
-        //   let post_language_id = post.node.language_id
-        //   let post_language_slug = post.node.language_slug
-        //   let path = `/${language_slug}/post/${post_slug}`;
-
-        //   if (post_language_id == language_id) {
-        //     createPage({
-        //       path: path,
-        //       component: postTemplate,
-        //       context: {
-        //         post_id: post_id,
-        //         post_slug: post_slug,
-        //         language_slug: language_slug
-        //       }
-        //     })
-        //   }
-
-
-        //   })
-
-        // each pages
-
-        result.data.pages.edges.forEach(post => {
-
-          // let id = post.node.id
-          let post_id = post.node.wordpress_id
-          let post_slug = post.node.slug
-          let post_language_id = post.node.language_id
-          let post_language_slug = post.node.language_slug
-          let path = `/${language_slug}/${post_slug}`;
-
-          if ((post_language_id == language_id) && post.node.acf.show_in_nav === true) {
-            createPage({
-              path: path,
-              component: pageTemplate,
-              context: {
-                post_id: post_id,
-                slug: post_slug,
-                language_slug: language_slug
-              }
-            })
+      projects: allWpProjects {
+        edges {
+          node {
+            id
+            title
+            slug
+            databaseId
+            menuOrder
+            language {
+              slug
+              locale
+            }
           }
+        }
+      }
+    }
+  `)
 
-        })
+  if (result.errors) {
+    throw result.errors
+  }
 
+  result.data.languages.edges.forEach(({ node: language }) => {
+    const language_id = language.databaseId
+    const language_slug = language.slug
 
-        // each projects
-        result.data.projects.edges.forEach(post => {
-
-          let post_id = post.node.wordpress_id
-          let post_slug = post.node.slug
-          let post_language_id = post.node.language_id
-          let post_language_slug = post.node.language_slug
-          let path = `/${language_slug}/projects/${post_slug}`
-
-          // createPage({
-          //   path: path,
-          //   component: projectSingleTemplate,
-          //   context: {
-          //     post_id: post_id,
-          //     slug: post_slug
-          //   }
-          // })
-
-          if (post_language_id == language_id) {
-            createPage({
-              path: path,
-              component: projectSingleTemplate,
-              context: {
-                post_id: post_id,
-                slug: post_slug,
-                language_slug: language_slug
-              }
-            })
-          }
-
-        })
-
-      })
-
-      return
+    createPage({
+      path: `/${language_slug}/`,
+      component: landingTemplate,
+      context: { language_id, language_slug },
     })
-  )
-})
+
+    result.data.pages.edges.forEach(({ node: page }) => {
+      const page_language_slug = page.language?.slug
+      const showInNav = page.acfPageFields?.showInNav
+
+      if (page_language_slug === language_slug && showInNav === true) {
+        createPage({
+          path: `/${language_slug}/${page.slug}`,
+          component: pageTemplate,
+          context: {
+            post_id: page.databaseId,
+            slug: page.slug,
+            language_slug,
+          },
+        })
+      }
+    })
+
+    result.data.projects.edges.forEach(({ node: project }) => {
+      const project_language_slug = project.language?.slug
+
+      if (project_language_slug === language_slug) {
+        createPage({
+          path: `/${language_slug}/projects/${project.slug}`,
+          component: projectSingleTemplate,
+          context: {
+            post_id: project.databaseId,
+            slug: project.slug,
+            language_slug,
+          },
+        })
+      }
+    })
+  })
 }
-
-
