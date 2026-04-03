@@ -76,11 +76,11 @@ class Landing extends React.Component {
           </header>
 
           <div className="mb-6">
-            <Reel data={null} />
+            <Reel data={this.props.data.reelData?.nodes?.find(n => n.texts?.enableReelPlayer) || null} />
           </div>
 
           {/* all projects */}
-          <Projects data={this.props.data.projects} projectTypes={null} locale={this.props.LocaleState.locale} />
+          <Projects data={this.props.data.projects} projectTypes={this.props.data.projectTypes} locale={this.props.LocaleState.locale} />
         </section>
       </Layout>
     );
@@ -108,6 +108,41 @@ export const query = graphql`
       generalSettings {
         title
         description
+      }
+    }
+
+    reelData: allWpText {
+      nodes {
+        texts {
+          enableReelPlayer
+          textVideoPreview {
+            node {
+              sourceUrl
+            }
+          }
+          textVideoFull {
+            node {
+              sourceUrl
+            }
+          }
+          textImage {
+            node {
+              sourceUrl
+            }
+          }
+        }
+      }
+    }
+
+    projectTypes: allWpProjectType {
+      nodes {
+        id
+        name
+        slug
+        databaseId
+        language {
+          slug
+        }
       }
     }
 
