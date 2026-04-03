@@ -76,7 +76,7 @@ class Landing extends React.Component {
           </header>
 
           <div className="mb-6">
-            <Reel data={this.props.data.reelData?.nodes?.find(n => n.texts?.enableReelPlayer) || null} />
+            <Reel data={this.props.data.reelData} />
           </div>
 
           {/* all projects */}
@@ -111,24 +111,22 @@ export const query = graphql`
       }
     }
 
-    reelData: allWpText {
-      nodes {
-        texts {
-          enableReelPlayer
-          textVideoPreview {
-            node {
-              sourceUrl
-            }
+    reelData: wpText(slug: { eq: "home-video" }) {
+      texts {
+        enableReelPlayer
+        textVideoPreview {
+          node {
+            sourceUrl
           }
-          textVideoFull {
-            node {
-              sourceUrl
-            }
+        }
+        textVideoFull {
+          node {
+            sourceUrl
           }
-          textImage {
-            node {
-              sourceUrl
-            }
+        }
+        textImage {
+          node {
+            sourceUrl
           }
         }
       }
