@@ -56,10 +56,10 @@ class ProjectSingle extends Component {
     return (
       <Layout location={this.props.location} hideHeader={true} inverted={true}>
 
-        <Seo 
-          title={this.props.data.project.yoast_meta ? this.props.data.project.yoast_meta.yoast_wpseo_title : this.props.data.project.title}
-          description={this.props.data.project.yoast_meta ? this.props.data.project.yoast_meta.yoast_wpseo_metadesc : null}
-          image={this.props.data.project.featured_media ? this.props.data.project.featured_media.source_url : null}
+        <Seo
+          title={this.props.data.project.title}
+          description={null}
+          image={this.props.data.project.featuredImage ? this.props.data.project.featuredImage.node.sourceUrl : null}
           languageSlug={this.props.pageContext.language_slug}
         />
 
@@ -83,10 +83,10 @@ class ProjectSingle extends Component {
 
               <div className={`${styles.project_single__content}`}>
 
-                  {this.props.data.project.acf.video_embed &&
+                  {this.props.data.project.projectDetails?.videoEmbed &&
                     <ReactPlayer
                       ref="externalPlayer"
-                      url={this.props.data.project.acf.video_embed}
+                      url={this.props.data.project.projectDetails.videoEmbed}
                       width='100%'
                       height='100%'
                       autoPlay={true}
@@ -131,21 +131,18 @@ export default connect(
 
 export const projectQuery = graphql`
 query projectSingle($slug: String!) {
-  project : wordpressWpProjects(slug : { eq: $slug }) {
+  project : wpProject(slug : { eq: $slug }) {
     id
     title
     slug
     content
-    featured_media {
-      source_url
+    featuredImage {
+      node {
+        sourceUrl
+      }
     }
-    yoast_meta {
-      yoast_wpseo_title
-      yoast_wpseo_metadesc
-      yoast_wpseo_canonical
-    }
-    acf {
-      video_embed
+    projectDetails {
+      videoEmbed
     }
   }
 }

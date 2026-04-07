@@ -1,22 +1,22 @@
 import { graphql } from 'gatsby'
 
 export const workFragment = graphql`
-fragment pageFragment on wordpress__PAGE {
+fragment pageFragment on WpPage {
   id
   title
   slug
-  language_slug
+  language {
+    slug
+    code
+  }
   content
-  featured_media {
-    source_url
+  featuredImage {
+    node {
+      sourceUrl
+    }
   }
-  yoast_meta {
-    yoast_wpseo_title
-    yoast_wpseo_metadesc
-    yoast_wpseo_canonical
-  }
-  acf {
-    show_in_nav
+  pages {
+    showInNav
   }
 }
 `

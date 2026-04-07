@@ -28,6 +28,8 @@ class Landing extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props.data);
+
     if (this.props.IntroState.played) {
 
       this.setState({
@@ -51,9 +53,9 @@ class Landing extends React.Component {
       <Layout location={this.props.location}>
 
         <Seo
-          title={this.props.data.site_options.title}
-          description={this.props.data.site_options.description}
-          image={this.props.data.site_options_acf.options.share_image ? this.props.data.site_options_acf.options.share_image.source_url : null}
+          title={this.props.data.site_options?.generalSettings?.title}
+          description={this.props.data.site_options?.generalSettings?.description}
+          image={null}
           languageSlug={this.props.pageContext.language_slug}
         />
 
@@ -76,7 +78,7 @@ class Landing extends React.Component {
           </header>
 
           <div className="mb-6">
-            <Reel data={this.props.data.homeVideo} />
+            <Reel data={this.props.data.reelData} />
           </div>
 
           {/* all projects */}
@@ -104,73 +106,76 @@ export default connect(
 export const query = graphql`
   query IndexQuery {
 
-    site_options : wordpressWpSettings {
-      id
-      description
-      title
+    site_options: wp {
+      generalSettings {
+        title
+        description
+      }
     }
 
-    site_options_acf :  wordpressAcfOptions {
-      options {
-        dummy
-        share_image {
-          source_url
+    reelData: wpText(slug: { eq: "home-video" }) {
+      texts {
+        enableReelPlayer
+        textVideoPreview {
+          node {
+            sourceUrl
+          }
+        }
+        textVideoFull {
+          node {
+            sourceUrl
+          }
+        }
+        textImage {
+          node {
+            sourceUrl
+          }
         }
       }
     }
 
-    projects : allWordpressWpProjects {
+    projectTypes: allWpProjectType {
+      nodes {
+        id
+        name
+        slug
+        databaseId
+        language {
+          slug
+        }
+      }
+    }
+
+    projects: allWpProject {
       edges {
         node {
           title
           slug
-          language_id
-          language_slug
-          menu_order
-          project_types
-          date
-          featured_media {
-            id
-            media_type
-            source_url
+          language {
+            slug
+            code
           }
-          acf {
-            video_embed
+          date
+          featuredImage {
+            node {
+              sourceUrl
+            }
+          }
+          projectTypes {
+						nodes {
+							name
+              databaseId
+            }
+          }
+          projectDetails {
+            videoEmbed
             hover {
-              source_url
+              node {
+                sourceUrl
+              }
             }
           }
         }
-      }
-    }
-
-    projectTypes : allWordpressWpProjectTypes {
-      edges {
-        node {
-          id
-          wordpress_id
-          name
-          slug
-          language_id
-          language_slug
-        }
-      }
-    }
-
-    homeVideo : wordpressWpTexts(slug : { eq: "home-video" }) {
-      slug
-      title
-      acf {
-        text_video_preview {
-          source_url
-        }
-        text_video_full {
-          source_url
-        }
-        text_image {
-          source_url
-        }
-        enable_reel_player
       }
     }
 

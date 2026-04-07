@@ -95,10 +95,10 @@ class Nav extends React.Component {
     if (this.props.pages && this.props.pages.edges) {
       
       // filter only pages for current locale
-      let localePages = this.props.pages.edges.filter(e => e.node.language_slug === this.props.LocaleState.locale)      
+      let localePages = this.props.pages.edges.filter(e => e.node.language?.slug === this.props.LocaleState.locale)
 
-      // only in with option : show_in_nav
-      localePages = localePages.filter(e => e.node.acf.show_in_nav === true)            
+      // only in with option : showInNav
+      localePages = localePages.filter(e => e.node.pages?.showInNav === true)
       
       // loop filtered pages
       localePages.map((page, index) => {

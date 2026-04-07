@@ -20,22 +20,24 @@ class Projects extends Component {
 
   list() {
     if (this.props.data && this.props.data.edges) {
-      // console.log('this.props.data.edges:', this.props.data.edges)
 
       // filter by languages
-      let localeProjects = this.props.data.edges.filter(e => e.node.language_slug === this.props.locale)
+      let localeProjects = this.props.data.edges.filter(e => e.node.language?.slug === this.props.locale)
 
       if (this.state.filterByProjectTypeID) {
-        localeProjects = this.props.data.edges.filter(e => e.node.project_types[0] === this.state.filterByProjectTypeID)
+        localeProjects = this.props.data.edges.filter(e => (e.node.projectTypes.nodes || [])[0]?.databaseId === this.state.filterByProjectTypeID)
       }
 
-      // sort all projects by menu_order field
-      localeProjects = localeProjects.sort((a, b) => { return a.node.menu_order - b.node.menu_order });
+      // sort all projects by menuOrder field
+      localeProjects = localeProjects.sort((a, b) => { return (a.node.menuOrder || 0) - (b.node.menuOrder || 0) });
 
       const findProjectType = (node) => {
-        const wordpress_id = node.project_types[0];
-        const project_type = this.props.projectTypes.edges.filter((node => node.node.wordpress_id === wordpress_id))[0]
-        return project_type ? project_type.node : null;
+        if(!node.projectTypes?.nodes) return null;
+        const { databaseId } = (node.projectTypes.nodes || [])[0];
+        const project_type = this.props.projectTypes && this.props.projectTypes.nodes
+          ? this.props.projectTypes.nodes.filter((n => n.databaseId === databaseId))[0]
+          : null;
+        return project_type ? project_type : null;
       }
 
       return localeProjects.map((project, index) =>
@@ -58,7 +60,7 @@ class Projects extends Component {
       return ProjectTypeID === this.state.filterByProjectTypeID
     }
 
-    if (this.props.projectTypes && this.props.projectTypes.edges) {
+    if (this.props.projectTypes && this.props.projectTypes.nodes) {
 
       // reset link
       data.push(
@@ -68,12 +70,12 @@ class Projects extends Component {
       )
 
       // filter by languages
-      let localeProjectTypes = this.props.projectTypes.edges.filter(e => e.node.language_slug === this.props.locale)
+      let localeProjectTypes = this.props.projectTypes.nodes.filter(e => e.language?.slug === this.props.locale)
 
       localeProjectTypes.map((projectType, index) =>
         data.push(
-          <a href="#" key={index} className={isActive(projectType.node.wordpress_id) ? styles.projects__filters__link_active : null} onClick={(e) => this.changeFilterSelection(e, projectType.node.wordpress_id)}>
-            {projectType.node.name}
+          <a href="#" key={index} className={isActive(projectType.databaseId) ? styles.projects__filters__link_active : null} onClick={(e) => this.changeFilterSelection(e, projectType.databaseId)}>
+            {projectType.name}
           </a>
         )
       )

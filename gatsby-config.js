@@ -1,10 +1,5 @@
 let dotenv = require('dotenv')
-const _ = require(`lodash`)
-
 dotenv.config()
-
-// console.log(process.env.WORDPRESS_HOST, process.env.PROTOCOL);
-
 
 module.exports = {
   siteMetadata: {
@@ -14,73 +9,38 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sitemap`,
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     {
-      resolve: `gatsby-plugin-sass`
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        sassOptions: {
+          includePaths: [require('path').resolve(__dirname, 'src/style')],
+        },
+        cssLoaderOptions: {
+          esModule: false,
+          modules: {
+            namedExport: false,
+          },
+        },
+      },
     },
     {
       resolve: `gatsby-source-wordpress`,
       options: {
-        baseUrl: `${process.env.WORDPRESS_HOST}`,
-        protocol: `${process.env.PROTOCOL}`,
-        useACF: true,
-        // Set verboseOutput to true to display a verbose output on `npm run develop` or `npm run build`
-        // It can help you debug specific API Endpoints problems.
-        verboseOutput: true,
-        perPage: 100,
-        auth: {
-          // If auth.user and auth.pass are filled, then the source plugin will be allowed
-          // to access endpoints that are protected with .htaccess.
-          htaccess_user: `${process.env.WORDPRESS_USER}`,
-          htaccess_pass: `${process.env.WORDPRESS_PASS}`,
-          htaccess_sendImmediately: false
+        url: `${process.env.PROTOCOL}://${process.env.WORDPRESS_HOST}/graphql`,
+        verbose: true,
+        develop: {
+          hardCacheMediaFiles: true,
         },
-        // Search and Replace Urls across WordPress content.
-        // searchAndReplaceContentUrls: {
-        //   sourceUrl: "https://source-url.com",
-        //   replacementUrl: "https://replacement-url.com",
-        // },
-        // Set how many simultaneous requests are sent at once.
-        concurrentRequests: 10,
-        // Exclude specific routes using glob parameters
-        // See: https://github.com/isaacs/minimatch
-        // Example:  `["/*/*/comments", "/yoast/**"]` will exclude routes ending in `comments` and
-        // all routes that begin with `yoast` from fetch.
-        excludedRoutes: [`/*/*/comments`, `/yoast/**`, `/wordfence/**`, `/siteground-optimizer/**`, `/redirection/**`, `/themes/**`, `/block-directory/**`],
-        // use a custom normalizer which is applied after the built-in ones.
-        normalizer: function({ entities }) {
-
-          // console.log('entities:', entities)
-
-          return entities.map((entity) => {
-
-            //
-            // Fix bug with ACF file fields
-            //
-
-            if (typeof entity.__type !== `undefined` && entity.acf) {
-              var keys = Object.keys(entity.acf);
-
-              _.forEach(keys, (key) => {
-                let has___NODE = key.match(/___NODE/)
-                if (has___NODE) {
-
-                  // find node
-                  let node = entities.filter(e => e.id === entity.acf[key])
-
-                  // if a node was found, attach to entry.acf object
-                  // slice '___NODE' from the original key name as the new key name
-                  if(node[0]) entity.acf[key.slice(0, has___NODE.index)] = node[0]
-                }
-              })
-
-            }
-
-            return entity
-          })
-
-          return entities
-        }
+        production: {
+          hardCacheMediaFiles: false,
+        },
+        debug: {
+          disableCompatibilityCheck: true,
+        },
       },
-    }
-  ]
+    },
+  ],
 }

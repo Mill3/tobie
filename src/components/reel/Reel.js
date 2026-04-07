@@ -7,15 +7,16 @@ import ReelPlayer from './ReelPlayer'
 class Reel extends Component {
 
   render() {
+    const texts = this.props.data?.texts || {}
     return (
       <ProximityFeedback throttleInMs={5} threshold={600}>
         {({ ref, proximity, props }) => (
           <div>
             <ReelPlayer
-              video_preview_src={this.props.data.acf.text_video_preview ? this.props.data.acf.text_video_preview.source_url : null}
-              video_full_src={this.props.data.acf.text_video_full ? this.props.data.acf.text_video_full.source_url : null}
-              video_poster_src={this.props.data.acf.text_image ? this.props.data.acf.text_image.source_url : null}
-              enable_reel_player={this.props.data.acf.enable_reel_player}
+              video_preview_src={texts.textVideoPreview?.node?.sourceUrl || null}
+              video_full_src={texts.textVideoFull?.node?.sourceUrl || null}
+              video_poster_src={texts.textImage?.node?.sourceUrl || null}
+              enable_reel_player={texts.enableReelPlayer || false}
               proximityRef={ref}
               proximity={proximity}
             />

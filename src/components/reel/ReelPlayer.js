@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import scrollToElement from 'scroll-to-element'
@@ -32,6 +31,8 @@ class ReelPlayer extends React.Component {
     }
     this.setPreviewMode = this.setPreviewMode.bind(this)
     this.setFullVideo = this.setFullVideo.bind(this)
+    this.playerRef = React.createRef()
+    this.playerContainerRef = React.createRef()
   }
 
   componentDidMount() {
@@ -64,9 +65,9 @@ class ReelPlayer extends React.Component {
     // console.log(this.refs.player, this.refs.player.requestFullscreen);
 
     // start video through a promise
-    var promise = this.refs.player.play();
+    var promise = this.playerRef.current.play();
 
-    this.refs.player.addEventListener("webkitendfullscreen", () => {
+    this.playerRef.current.addEventListener("webkitendfullscreen", () => {
       if (!this.state.previewMode && isMobile) {
         this.setPreviewMode(null)
       }
@@ -94,8 +95,8 @@ class ReelPlayer extends React.Component {
       previewMode: true,
     })
 
-    this.refs.player.load()
-    this.refs.player.play()
+    this.playerRef.current.load()
+    this.playerRef.current.play()
   }
 
   setFullVideo(event) {
@@ -110,11 +111,11 @@ class ReelPlayer extends React.Component {
         controls: true
       })
 
-      this.refs.player.load()
-      this.refs.player.play()
+      this.playerRef.current.load()
+      this.playerRef.current.play()
 
       // get fullscreen method
-      let videoDOM = ReactDOM.findDOMNode(this.refs.player)
+      let videoDOM = this.playerRef.current
       var requestFullScreen = videoDOM.requestFullscreen || videoDOM.msRequestFullscreen || videoDOM.mozRequestFullScreen || videoDOM.webkitRequestFullscreen || videoDOM.webkitEnterFullScreen
 
       // on mobile, toggle fullscreen
@@ -124,7 +125,7 @@ class ReelPlayer extends React.Component {
       // scroll down on desktop
       } else {
         // scroll to video
-        scrollToElement(ReactDOM.findDOMNode(this.refs.playerContainer), {
+        scrollToElement(this.playerContainerRef.current, {
           duration: 1800,
           offset: 0,
           ease: 'inOutCirc'
@@ -197,10 +198,10 @@ class ReelPlayer extends React.Component {
         </section>
 
         {/* the player */}
-        <div ref="playerContainer" style={this.videoTransformStyle()} className={`${styles.reel__container}`}>
+        <div ref={this.playerContainerRef} style={this.videoTransformStyle()} className={`${styles.reel__container}`}>
           <Lazy onLoad={() => this.videoHasLoaded()} cushion={'0% 0% 200% 0%'}>
             <video
-              ref="player"
+              ref={this.playerRef}
               controls={this.state.controls}
               muted={this.state.muted}
               autoPlay

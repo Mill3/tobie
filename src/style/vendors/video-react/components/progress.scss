@@ -54,7 +54,7 @@
   @extend .video-react-icon;
 
   &:before {
-    @extend .video-react-icon-circle:before;
+    content: $video-react-icon-circle;
     display: none;
   }
 }

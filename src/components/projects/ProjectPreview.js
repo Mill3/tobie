@@ -44,14 +44,16 @@ class ProjectPreview extends Component {
     let {
       title,
       slug,
-      featured_media,
+      featuredImage,
     } = this.props.project
+
+    let featured_media = featuredImage?.node ? { source_url: featuredImage.node.sourceUrl } : null
 
     let { projectType } = this.props;
 
-    let {
-      hover
-    } = this.props.project.acf
+    let hover = this.props.project.projectDetails?.hover?.node
+      ? { source_url: this.props.project.projectDetails.hover.node.sourceUrl }
+      : null
 
     let Wrapper = "span"
     let attributes = null
