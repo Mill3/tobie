@@ -28,6 +28,8 @@ class Landing extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props.data);
+
     if (this.props.IntroState.played) {
 
       this.setState({
@@ -157,6 +159,12 @@ export const query = graphql`
           featuredImage {
             node {
               sourceUrl
+            }
+          }
+          projectTypes {
+						nodes {
+							name
+              databaseId
             }
           }
           projectDetails {
