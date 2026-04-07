@@ -1,9 +1,9 @@
 --- a/dist/steps/source-nodes/create-nodes/process-node.js
 +++ b/dist/steps/source-nodes/create-nodes/process-node.js
-@@ -296,7 +296,7 @@
+@@ -296,7 +296,7 @@ const getCheerioElementFromMatch = wpUrl => ({
    // unescape quotes
    const parsedMatch = JSON.parse(`"${match}"`); // load our matching img tag into cheerio
-
+ 
 -  const $ = _cheerio.default.load(parsedMatch, {
 +  const $ = _cheerio.load(parsedMatch, {
      xml: {
